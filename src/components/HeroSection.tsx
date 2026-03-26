@@ -268,7 +268,7 @@ export const HeroSection = () => {
                             <div style={{
                                 position:'absolute', top: LINE_TOP - 3, left:0, right:0, height:'7px',
                                 borderRadius: '4px',
-                                background:'linear-gradient(90deg, rgba(45,212,191,0.28) 0%, rgba(200,230,255,0.35) 35%, rgba(217,70,239,0.22) 70%, rgba(45,212,191,0.20) 100%)',
+                                background:'linear-gradient(90deg, rgba(45,212,191,0.55) 0%, rgba(200,230,255,0.65) 35%, rgba(217,70,239,0.48) 70%, rgba(45,212,191,0.45) 100%)',
                                 backdropFilter:'blur(8px)', WebkitBackdropFilter:'blur(8px)',
                                 border:'1px solid rgba(255,255,255,0.35)',
                                 boxShadow:'0 0 12px 2px rgba(255,255,255,0.18), 0 0 28px 4px rgba(200,225,255,0.12), inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(255,255,255,0.12)',

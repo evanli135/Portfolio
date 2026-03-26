@@ -11,6 +11,7 @@ interface ExpEntry {
     start: string;
     end: string;
     color: string;
+    logoColor?: string;   // dominant color in the logo image; falls back to color
     current?: boolean;
     type: string;
     Icon: LucideIcon;
@@ -24,6 +25,7 @@ const EXPERIENCES: ExpEntry[] = [
         org: 'MatrixOrigin',
         start: 'Jun 2024', end: 'Sep 2024',
         color: '#2DD4BF',
+        logoColor: '#0080FF',
         current: false,
         type: 'Co-op',
         Icon: Bot,
@@ -39,6 +41,7 @@ const EXPERIENCES: ExpEntry[] = [
         org: 'NEU Privacy & Security Lab',
         start: 'Jan 2025', end: 'Jul 2025',
         color: '#E8345C',
+        logoColor: '#CC2030',
         current: false,
         type: 'Research',
         Icon: Shield,
@@ -54,6 +57,7 @@ const EXPERIENCES: ExpEntry[] = [
         org: 'Vestmark',
         start: 'Jan 2026', end: 'Jul 2026',
         color: '#60A5FA',
+        logoColor: '#3AAFA9',
         current: true,
         type: 'Co-op',
         Icon: Briefcase,
@@ -69,6 +73,7 @@ const EXPERIENCES: ExpEntry[] = [
         org: 'Keysight Technologies',
         start: 'Jul 2026', end: 'Sep 2026',
         color: '#F97316',
+        logoColor: '#E8192C',
         current: false,
         type: 'Co-op',
         Icon: Cpu,
@@ -103,7 +108,9 @@ export const ExperienceSection = () => (
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                {EXPERIENCES.map(({ role, org, start, end, color, current, type, Icon, logo, bullets }) => (
+                {EXPERIENCES.map(({ role, org, start, end, color, logoColor: lc, current, type, Icon, logo, bullets }) => {
+                    const lclr = lc ?? color;
+                    return (
                     <div key={org + role} style={{
                         display: 'flex', alignItems: 'stretch',
                         borderRadius: '16px',
@@ -123,18 +130,19 @@ export const ExperienceSection = () => (
                             borderRight: `1px solid ${color}44`,
                             background: `linear-gradient(180deg, ${color}0a 0%, transparent 100%)`,
                         }}>
-                            {/* Logo / icon emblem */}
+                            {/* Logo / icon emblem — inky glass */}
                             <div style={{
-                                width: 64, height: 64, borderRadius: '13px',
+                                width: 68, height: 68, borderRadius: '15px',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                background: `linear-gradient(135deg, ${color}20 0%, ${color}0a 100%)`,
-                                border: `1px solid ${color}55`,
-                                boxShadow: `0 0 18px 4px ${color}20, inset 0 1px 0 ${color}33`,
-                                padding: logo ? '6px' : 0,
+                                background: `linear-gradient(145deg, ${lclr}48 0%, ${lclr}28 55%, ${lclr}18 100%)`,
+                                backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+                                border: `1px solid ${lclr}77`,
+                                boxShadow: `0 0 22px 6px ${lclr}35, inset 0 1px 0 ${lclr}66, inset 0 -1px 0 ${lclr}22, inset 0 0 16px ${lclr}18`,
+                                padding: logo ? '8px' : 0,
                             }}>
                                 {logo
-                                    ? <img src={logo} alt={org} style={{ width: '100%', height: '100%', objectFit: 'contain', filter: `drop-shadow(0 0 6px ${color}88)` }}/>
-                                    : <Icon size={26} style={{ color, filter: `drop-shadow(0 0 8px ${color}cc)` }}/>
+                                    ? <img src={logo} alt={org} style={{ width: '100%', height: '100%', objectFit: 'contain', filter: `drop-shadow(0 0 5px ${lclr}bb) saturate(1.1)` }}/>
+                                    : <Icon size={26} style={{ color: lclr, filter: `drop-shadow(0 0 8px ${lclr}cc)` }}/>
                                 }
                             </div>
 
@@ -199,7 +207,8 @@ export const ExperienceSection = () => (
                         </div>
 
                     </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     </section>
