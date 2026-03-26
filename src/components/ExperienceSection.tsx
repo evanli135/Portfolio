@@ -20,6 +20,36 @@ interface ExpEntry {
 
 const EXPERIENCES: ExpEntry[] = [
     {
+        role: 'NLP Engineer',
+        org: 'MatrixOrigin',
+        start: 'Jun 2024', end: 'Sep 2024',
+        color: '#2DD4BF',
+        current: false,
+        type: 'Co-op',
+        Icon: Bot,
+        logo: matrixLogo,
+        bullets: [
+            { label: 'NL → SQL',        detail: 'configured and evaluated a natural language to SQL LLM platform end-to-end' },
+            { label: 'Evaluation',       detail: 'designed benchmark suites to measure query accuracy and edge-case coverage' },
+            { label: 'Prompt Design',    detail: 'iterated on prompt strategies to improve schema-awareness and output reliability' },
+        ],
+    },
+    {
+        role: 'Distributed Systems Security Researcher',
+        org: 'NEU Privacy & Security Lab',
+        start: 'Jan 2025', end: 'Jul 2025',
+        color: '#E8345C',
+        current: false,
+        type: 'Research',
+        Icon: Shield,
+        logo: nuseal,
+        bullets: [
+            { label: 'First Author',    detail: 'authored ACE — a security architecture for LLM-integrated app systems, accepted to NDSS 2026' },
+            { label: 'Threat Modeling', detail: 'studied indirect prompt injection and denial-of-service attacks on multi-agent systems' },
+            { label: 'Framework',       detail: 'designed static analysis and secure information flow enforcement for agent pipelines' },
+        ],
+    },
+    {
         role: 'Software Engineer',
         org: 'Vestmark',
         start: 'Jan 2026', end: 'Jul 2026',
@@ -35,21 +65,6 @@ const EXPERIENCES: ExpEntry[] = [
         ],
     },
     {
-        role: 'Distributed Systems Security Researcher',
-        org: 'NEU Privacy & Security Lab',
-        start: 'Jan 2025', end: 'Jul 2025',
-        color: '#D946EF',
-        current: false,
-        type: 'Research',
-        Icon: Shield,
-        logo: nuseal,
-        bullets: [
-            { label: 'First Author',    detail: 'authored ACE — a security architecture for LLM-integrated app systems, accepted to NDSS 2026' },
-            { label: 'Threat Modeling', detail: 'studied indirect prompt injection and denial-of-service attacks on multi-agent systems' },
-            { label: 'Framework',       detail: 'designed static analysis and secure information flow enforcement for agent pipelines' },
-        ],
-    },
-    {
         role: 'R&D Test Systems Engineer',
         org: 'Keysight Technologies',
         start: 'Jul 2026', end: 'Sep 2026',
@@ -62,21 +77,6 @@ const EXPERIENCES: ExpEntry[] = [
             { label: 'Anomaly Detection', detail: 'prototyping AI-powered tooling to detect anomalies in hardware test systems' },
             { label: 'Stress Testing',    detail: 'building automated pipelines for load and stress testing of R&D instrumentation' },
             { label: 'Integration',       detail: 'bridging hardware telemetry with ML inference for real-time diagnostics' },
-        ],
-    },
-    {
-        role: 'NLP Engineer',
-        org: 'MatrixOrigin',
-        start: 'Jun 2024', end: 'Sep 2024',
-        color: '#2DD4BF',
-        current: false,
-        type: 'Co-op',
-        Icon: Bot,
-        logo: matrixLogo,
-        bullets: [
-            { label: 'NL → SQL',        detail: 'configured and evaluated a natural language to SQL LLM platform end-to-end' },
-            { label: 'Evaluation',       detail: 'designed benchmark suites to measure query accuracy and edge-case coverage' },
-            { label: 'Prompt Design',    detail: 'iterated on prompt strategies to improve schema-awareness and output reliability' },
         ],
     },
 ];
