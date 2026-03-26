@@ -54,9 +54,10 @@ const LANES: Lane[] = [
             { name: 'Redis',      Icon: SiRedis             },
         ],
         competencies: [
-            { name: 'Distributed Systems', Icon: Share2  },
-            { name: 'Operating Systems',   Icon: Server  },
-            { name: 'Computer Networks',   Icon: Network },
+            { name: 'Distributed Systems',     Icon: Share2   },
+            { name: 'Operating Systems',        Icon: Server   },
+            { name: 'Computer Networks',        Icon: Network  },
+            { name: 'Network Traffic Analysis', Icon: Network  },
         ],
     },
     {

@@ -1,4 +1,8 @@
 import { Bot, Shield, Briefcase, Cpu, type LucideIcon } from 'lucide-react';
+import vestmarkLogo    from '../assets/vestmarklogo.png';
+import nuseal          from '../assets/NUseal.png';
+import keysightLogo    from '../assets/KeysightLogo (2).png';
+import matrixLogo      from '../assets/matrixoriginlogo.png';
 
 interface Bullet   { label: string; detail: string }
 interface ExpEntry {
@@ -10,6 +14,7 @@ interface ExpEntry {
     current?: boolean;
     type: string;
     Icon: LucideIcon;
+    logo?: string;
     bullets: Bullet[];
 }
 
@@ -22,6 +27,7 @@ const EXPERIENCES: ExpEntry[] = [
         current: true,
         type: 'Co-op',
         Icon: Briefcase,
+        logo: vestmarkLogo,
         bullets: [
             { label: 'Wealth Agent',    detail: 'prototyping and maintaining an AI-powered financial advisor agent service' },
             { label: 'Feature Dev',     detail: 'patching and extending agent capabilities to improve efficiency and UX' },
@@ -36,6 +42,7 @@ const EXPERIENCES: ExpEntry[] = [
         current: false,
         type: 'Research',
         Icon: Shield,
+        logo: nuseal,
         bullets: [
             { label: 'First Author',    detail: 'authored ACE — a security architecture for LLM-integrated app systems, accepted to NDSS 2026' },
             { label: 'Threat Modeling', detail: 'studied indirect prompt injection and denial-of-service attacks on multi-agent systems' },
@@ -50,6 +57,7 @@ const EXPERIENCES: ExpEntry[] = [
         current: false,
         type: 'Co-op',
         Icon: Cpu,
+        logo: keysightLogo,
         bullets: [
             { label: 'Anomaly Detection', detail: 'prototyping AI-powered tooling to detect anomalies in hardware test systems' },
             { label: 'Stress Testing',    detail: 'building automated pipelines for load and stress testing of R&D instrumentation' },
@@ -64,6 +72,7 @@ const EXPERIENCES: ExpEntry[] = [
         current: false,
         type: 'Co-op',
         Icon: Bot,
+        logo: matrixLogo,
         bullets: [
             { label: 'NL → SQL',        detail: 'configured and evaluated a natural language to SQL LLM platform end-to-end' },
             { label: 'Evaluation',       detail: 'designed benchmark suites to measure query accuracy and edge-case coverage' },
@@ -94,7 +103,7 @@ export const ExperienceSection = () => (
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                {EXPERIENCES.map(({ role, org, start, end, color, current, type, Icon, bullets }) => (
+                {EXPERIENCES.map(({ role, org, start, end, color, current, type, Icon, logo, bullets }) => (
                     <div key={org + role} style={{
                         display: 'flex', alignItems: 'stretch',
                         borderRadius: '16px',
@@ -114,15 +123,19 @@ export const ExperienceSection = () => (
                             borderRight: `1px solid ${color}44`,
                             background: `linear-gradient(180deg, ${color}0a 0%, transparent 100%)`,
                         }}>
-                            {/* Icon emblem */}
+                            {/* Logo / icon emblem */}
                             <div style={{
-                                width: 54, height: 54, borderRadius: '13px',
+                                width: 64, height: 64, borderRadius: '13px',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 background: `linear-gradient(135deg, ${color}20 0%, ${color}0a 100%)`,
                                 border: `1px solid ${color}55`,
                                 boxShadow: `0 0 18px 4px ${color}20, inset 0 1px 0 ${color}33`,
+                                padding: logo ? '6px' : 0,
                             }}>
-                                <Icon size={26} style={{ color, filter: `drop-shadow(0 0 8px ${color}cc)` }}/>
+                                {logo
+                                    ? <img src={logo} alt={org} style={{ width: '100%', height: '100%', objectFit: 'contain', filter: `drop-shadow(0 0 6px ${color}88)` }}/>
+                                    : <Icon size={26} style={{ color, filter: `drop-shadow(0 0 8px ${color}cc)` }}/>
+                                }
                             </div>
 
                             {/* Org name */}
