@@ -268,10 +268,10 @@ export const HeroSection = () => {
                             <div style={{
                                 position:'absolute', top: LINE_TOP - 3, left:0, right:0, height:'7px',
                                 borderRadius: '4px',
-                                background:'linear-gradient(90deg, #2DD4BF99 0%, #60A5FAaa 40%, #D946EFaa 70%, #2DD4BF99 100%)',
-                                backdropFilter:'blur(6px)', WebkitBackdropFilter:'blur(6px)',
-                                border:'1px solid rgba(255,255,255,0.22)',
-                                boxShadow:'0 0 14px 3px rgba(96,165,250,0.45), 0 0 32px 6px rgba(45,212,191,0.25), inset 0 1px 0 rgba(255,255,255,0.40), inset 0 -1px 0 rgba(255,255,255,0.08)',
+                                background:'linear-gradient(90deg, rgba(255,255,255,0.12) 0%, rgba(220,235,255,0.28) 30%, rgba(255,255,255,0.22) 60%, rgba(210,240,255,0.14) 100%)',
+                                backdropFilter:'blur(8px)', WebkitBackdropFilter:'blur(8px)',
+                                border:'1px solid rgba(255,255,255,0.35)',
+                                boxShadow:'0 0 12px 2px rgba(255,255,255,0.18), 0 0 28px 4px rgba(200,225,255,0.12), inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(255,255,255,0.12)',
                                 zIndex:1,
                             }}/>
 
