@@ -2,6 +2,7 @@ import {cn} from "../lib/utils";
 import { Code, Microscope, Binary, CircuitBoard } from "lucide-react";
 import { FaUser } from "react-icons/fa";
 import portrait from '../assets/portrait.png'
+import { GlassText } from "./GlassText";
 
 
 export const AboutSection = () => {
@@ -72,6 +73,9 @@ export const AboutSection = () => {
 
                 {/* FOUR ICONS */}
                 <div className="grid grid-cols-1 gap-6">
+                    <div className="text-center mb-2">
+                        <GlassText style={{ fontSize: '1.05rem' }}>What I work on</GlassText>
+                    </div>
                     
                     <div className="card-hover" style={{ padding:'24px', borderRadius:'14px', background:'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(45,212,191,0.04) 100%)', backdropFilter:'blur(16px)', WebkitBackdropFilter:'blur(16px)', border:'1px solid rgba(255,255,255,0.10)', boxShadow:'0 0 28px rgba(45,212,191,0.07), inset 0 1px 0 rgba(255,255,255,0.12)' }}>
                         <div className="flex items-start gap-4">

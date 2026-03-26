@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ChevronLeft, ChevronRight, Brain, Cpu, Shield, Share2, Globe, GitBranch, Bot, Layers, Activity, Zap, Target, Crosshair, type LucideIcon } from "lucide-react";
+import { GlassText } from "./GlassText";
 
 // ── Geometry ───────────────────────────────────────────────────────
 const YEAR_W     = 820;
@@ -150,10 +151,13 @@ export const HeroSection = () => {
                 <p className="text-xs md:text-sm tracking-[0.3em] uppercase text-primary/60 mb-3 opacity-0 animate-fade-in">
                     Portfolio
                 </p>
-                <h1 className="text-7xl md:text-9xl font-black tracking-tight leading-none mb-10 opacity-0 animate-fade-in-delay-1">
+                <h1 className="text-7xl md:text-9xl font-black tracking-tight leading-none mb-6 opacity-0 animate-fade-in-delay-1">
                     <span className="text-gradient">Evan</span>
                     <span className="text-foreground"> Li</span>
                 </h1>
+                <div className="mb-10 opacity-0 animate-fade-in-delay-1">
+                    <GlassText style={{ fontSize: '1.15rem' }}>What I work on</GlassText>
+                </div>
                 {/* Discipline boxes — triangle by vertical offset, apex at center */}
                 {(() => {
                     type Cat = { name: string; Icon: LucideIcon };
