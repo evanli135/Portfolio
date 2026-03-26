@@ -15,6 +15,9 @@
   --accent-blue: #60A5FA;
   --accent-magenta: #D946EF;
 
+  /* Navbar contrast color */
+  --accent-contrast: #4338CA;
+
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
   --animate-fade-in: fade-in 0.7s ease-out forwards;
@@ -57,6 +60,9 @@
   @keyframes meteor {
     0% {
       transform: rotate(215deg) translateX(0);
+      opacity: 0;
+    }
+    10% {
       opacity: 1;
     }
     70% {

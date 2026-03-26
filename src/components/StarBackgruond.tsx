@@ -169,6 +169,7 @@ export const StarBackground = () => {
                     top: `${meteor.y}%`,
                     animationDelay: meteor.delay + "s",
                     animationDuration: `${meteor.animationDuration}s`,
+                    animationFillMode: 'backwards',
                     background: `linear-gradient(to right, ${meteor.colorFrom}, ${meteor.colorMid}, transparent)`,
                     boxShadow: `0 0 10px 4px ${meteor.colorFrom.replace('1)', '0.4)')}`,
                 }}/>

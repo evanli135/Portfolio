@@ -7,7 +7,6 @@ import { SkillsSection } from "../components/SkillsSection";
 import { ProjectsSection } from "../components/ProjectsSection";
 import { ContactSection } from "../components/ContactsSection"
 import { ResumeSection } from "../components/ResumeSection";
-import { RainBackround } from "../components/RainBackground";
 import { Footer } from "../components/Footer";
 import { CoursesSection } from "../components/CoursesSection";
 import { WritingSection } from "../components/WritingSection";
@@ -19,7 +18,6 @@ export const Home = () => {
 
         {/* Background Effects */}
         <StarBackground />
-        <RainBackround />
 
         {/* Navbar */}
         <Navbar />

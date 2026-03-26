@@ -1,4 +1,4 @@
-import { Star, Database } from "lucide-react";
+import { Database } from "lucide-react";
 import { SiHtml5, SiCss3, SiReact, SiJavascript, SiTypescript, SiTailwindcss, 
          SiNodedotjs, SiExpress, SiPython, SiDjango, SiFlask, SiSpringboot,
          SiGithub, SiDocker, SiPostman } from "react-icons/si";
@@ -12,69 +12,42 @@ import { useState } from "react";
 
 const skills = [
     // Frontend
-    {name: "HTML",  level: 5, category: "Frontend", icon: SiHtml5},
-    {name: "CSS", level: 5, category: "Frontend", icon: SiCss3},
-    {name: "React", level: 5, category: "Frontend", icon: SiReact},
-    {name: "JavaScript", level: 5, category: "Frontend", icon: SiJavascript},
-    {name: "TypeScript", level: 5, category: "Frontend", icon: SiTypescript},
-    {name: "Tailwind CSS", level: 5, category: "Frontend", icon: SiTailwindcss},
+    {name: "HTML",  category: "Frontend", icon: SiHtml5},
+    {name: "CSS", category: "Frontend", icon: SiCss3},
+    {name: "React", category: "Frontend", icon: SiReact},
+    {name: "JavaScript", category: "Frontend", icon: SiJavascript},
+    {name: "TypeScript", category: "Frontend", icon: SiTypescript},
+    {name: "Tailwind CSS", category: "Frontend", icon: SiTailwindcss},
 
     // Backend
-    {name: "SQL", level: 4, category: "Backend", icon: Database},
-    {name: "Node.js", level: 4, category: "Backend", icon: SiNodedotjs},
-    {name: "Express", level: 4, category: "Backend", icon: SiExpress},
-    {name: "Java", level: 5, category: "Backend", icon: FaJava},
-    {name: "Spring Boot", level: 4, category: "Backend", icon: SiSpringboot},
-    {name: "Python", level: 5, category: "Backend", icon: SiPython},
-    {name: "Django", level: 4, category: "Backend", icon: SiDjango},
-    {name: "Flask", level: 4, category: "Backend", icon: SiFlask},
-    {name: "C and C++", level: 4, category: "Backend", icon: PiFileCppBold },
+    {name: "SQL", category: "Backend", icon: Database},
+    {name: "Node.js", category: "Backend", icon: SiNodedotjs},
+    {name: "Express", category: "Backend", icon: SiExpress},
+    {name: "Java", category: "Backend", icon: FaJava},
+    {name: "Spring Boot", category: "Backend", icon: SiSpringboot},
+    {name: "Python", category: "Backend", icon: SiPython},
+    {name: "Django", category: "Backend", icon: SiDjango},
+    {name: "Flask", category: "Backend", icon: SiFlask},
+    {name: "C and C++", category: "Backend", icon: PiFileCppBold },
 
     // Tools
-    { name: "Git/Github", level: 5, category: "Dev Tools", icon: SiGithub },
-    { name: "Docker", level: 4, category: "Dev Tools", icon: SiDocker },
-    { name: "Postman", level: 4, category: "Dev Tools", icon: SiPostman },
-    { name: "VS Code", level: 5, category: "Dev Tools", icon: BiLogoVisualStudio },
-
-    // // Data Science
-    // { name: "Numpy"}
+    { name: "Git/Github", category: "Dev Tools", icon: SiGithub },
+    { name: "Docker", category: "Dev Tools", icon: SiDocker },
+    { name: "Postman", category: "Dev Tools", icon: SiPostman },
+    { name: "VS Code", category: "Dev Tools", icon: BiLogoVisualStudio },
 ]
-
 
 const categories = ["All", "Frontend", "Backend", "Dev Tools"]
 
 export const SkillsSection = () => {
     const [activeCategory, setActiveCategory] = useState("All");
-    const { isDarkMode } = useTheme(); // Get theme state
+    const { isDarkMode } = useTheme();
 
     const filteredSkills = skills.filter((skill) => 
         activeCategory === "All" || skill.category === activeCategory
     );
 
     const defaultTextColor = () => isDarkMode ? 'text-white' : 'text-black';
-    const defaultFillColor = () => isDarkMode ? 'fill-white' : 'fill-black';
-    
-    const renderStars = (level: number) => {
-        const stars = [];
-        const isPerfectScore = level === 5;
-        
-        for (let i = 1; i <= 5; i++) {
-            stars.push(
-                <Star 
-                    key={i}
-                    className={`h-5 w-5 ${
-                        i <= level 
-                            ? isPerfectScore 
-                                ? 'fill-primary text-primary' 
-                                : defaultFillColor() + " " + defaultTextColor()
-                            : 'text-gray-600'
-                    }`}
-                />
-            );
-        }
-        
-        return stars;
-    };
 
     return <section id="skills" className="py-24 px-4 relative bg-secondary/30">
         <div className="container mx-auto max-w-5xl">
@@ -98,14 +71,9 @@ export const SkillsSection = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredSkills.map((skill, key) => (
                     <div key={key} className="bg-card p-6 rounded-lg shadow-xs card-hover">
-                        <div className="text-center mb-3">
+                        <div className="text-center">
                             <h3 className="font-semibold text-lg mb-4"> {skill.name} </h3>
-                            <skill.icon className={`h-12 w-12 mx-auto mb-3 ${
-                                skill.level === 5 ? 'text-primary' : defaultTextColor()
-                            }`} />
-                        </div>
-                        <div className="flex gap-1 items-center justify-center">
-                            {renderStars(skill.level)}
+                            <skill.icon className={`h-12 w-12 mx-auto text-primary mb-2`} />
                         </div>
                     </div>
                 ))}
