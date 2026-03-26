@@ -39,7 +39,7 @@ const education = {
     org: 'Northeastern University',
     degree: 'B.S. in Computer Science  ·  2023 – 2027',
     gpa: 'GPA: 3.84',
-    color: '#60A5FA',
+    color: '#E8345C',
     startYear: 2023, startMonth: 9,
     endYear: 2027, endMonth: 5,
 };

@@ -152,6 +152,7 @@ export const ExperienceSection = () => (
                         {/* Middle: role + bullets */}
                         <div style={{ flex: 1, padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: 12, justifyContent: 'center' }}>
                             <span style={{
+                                display: 'block',
                                 fontSize: '19px', fontWeight: 800,
                                 letterSpacing: '-0.02em', lineHeight: 1.15,
                                 background: `linear-gradient(100deg, #ffffff 30%, ${color} 100%)`,
