@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowDown, ChevronLeft, ChevronRight, Brain, Cpu, Shield, Share2, Globe, GitBranch, Bot, Layers, Activity, Zap, Target, Crosshair, type LucideIcon } from "lucide-react";
 
 // ── Geometry ───────────────────────────────────────────────────────
-const YEAR_W     = 500;
-const PAD_X      = 70;
+const YEAR_W     = 680;
+const PAD_X      = 180;
 const START_YR   = 2022;
 const END_YR     = 2027;
-const CARD_W     = 185;
-const EDU_CARD_W = 230;
-const ABOVE_H    = 160;  // space above the line (cards + bars)
-const BELOW_H    = 145;  // space below the line (edu card + year ticks)
+const CARD_W     = 200;
+const EDU_CARD_W = 250;
+const ABOVE_H    = 210;  // space above the line (cards + bars)
+const BELOW_H    = 210;  // space below the line (edu card + year ticks)
 const BAR_H      = 2;    // thin bar height — matches timeline width
-const BAR_GAP    = 8;    // gap between bar bottom and line
+const BAR_GAP    = 10;   // gap between bar bottom and line
 const BAR_ROW_H  = BAR_H + 8;  // vertical spacing between stacked bar rows
-const CONN       = 28;   // connector length
+const CONN       = 38;   // connector length
 const NOTCH_H    = 10;
 const SCROLL_SPD = 2;
 const MONTHS     = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -35,8 +35,10 @@ const YEAR_TICKS = Array.from(
 
 // ── Data ───────────────────────────────────────────────────────────
 const education = {
-    role: 'CS Undergrad', org: 'Northeastern University',
-    detail: 'Sep 2023 – May 2027  ·  Systems Engineering',
+    role: 'Systems Engineering Undergraduate',
+    org: 'Northeastern University',
+    degree: 'B.S. in Computer Science  ·  2023 – 2027',
+    gpa: 'GPA: 3.84',
     color: '#60A5FA',
     startYear: 2023, startMonth: 9,
     endYear: 2027, endMonth: 5,
@@ -45,28 +47,28 @@ const education = {
 const internships = [
     {
         role: 'NLP Engineer', org: 'MatrixOrigin',
-        detail: 'Jun – Aug 2024  ·  NL → SQL LLM platform',
+        blurb: 'Configured and evaluated NL → NLP platform',
         color: '#2DD4BF', ongoing: false,
         startYear: 2024, startMonth: 6,
         endYear:   2024, endMonth: 9,
     },
     {
-        role: 'Security Researcher', org: 'NEU Privacy & Security Lab',
-        detail: 'Jan – Jun 2025  ·  NDSS paper, LLM security',
+        role: 'Distributed Systems Security Researcher', org: 'NEU Privacy & Security Lab',
+        blurb: 'First authored paper on LLM Security Systems',
         color: '#D946EF', ongoing: false,
         startYear: 2025, startMonth: 1,
         endYear:   2025, endMonth: 7,
     },
     {
         role: 'Software Engineer', org: 'Vestmark',
-        detail: 'Jan – Jun 2026  ·  Financial advisor AI agent',
+        blurb: 'Prototyping and maintaining wealth agent services',
         color: '#60A5FA', ongoing: false,
         startYear: 2026, startMonth: 1,
         endYear:   2026, endMonth: 7,
     },
     {
-        role: 'R&D Software Engineer', org: 'Keysight',
-        detail: 'Jul – Aug 2026  ·  Test software engineering',
+        role: 'R&D Test Systems', org: 'Keysight',
+        blurb: 'Prototyping AI powered tools for anomaly detection and stress testing',
         color: '#2DD4BF', ongoing: false,
         startYear: 2026, startMonth: 7,
         endYear:   2026, endMonth: 9,
@@ -148,13 +150,94 @@ export const HeroSection = () => {
                 <p className="text-xs md:text-sm tracking-[0.3em] uppercase text-primary/60 mb-3 opacity-0 animate-fade-in">
                     Portfolio
                 </p>
-                <h1 className="text-7xl md:text-9xl font-black tracking-tight leading-none mb-4 opacity-0 animate-fade-in-delay-1">
+                <h1 className="text-7xl md:text-9xl font-black tracking-tight leading-none mb-10 opacity-0 animate-fade-in-delay-1">
                     <span className="text-gradient">Evan</span>
                     <span className="text-foreground"> Li</span>
                 </h1>
-                <p className="text-base md:text-lg text-muted-foreground tracking-wide mb-14 opacity-0 animate-fade-in-delay-2">
-                    Systems Engineer &nbsp;·&nbsp; Security Researcher &nbsp;·&nbsp; Builder
-                </p>
+                {/* Discipline boxes — triangle by vertical offset, apex at center */}
+                {(() => {
+                    type Cat = { name: string; Icon: LucideIcon };
+                    const boxes: { label: string; color: string; Icon: LucideIcon; lift: number; categories: Cat[] }[] = [
+                        { label: 'AI', color: '#2DD4BF', Icon: Brain, lift: 0,
+                          categories: [
+                              { name: 'Agent Integration',   Icon: Bot      },
+                              { name: 'LLM Orchestration',   Icon: Layers   },
+                              { name: 'Anomaly Detection',   Icon: Activity },
+                          ],
+                        },
+                        { label: 'Systems',  color: '#60A5FA', Icon: Cpu,    lift: 130,
+                          categories: [
+                              { name: 'Distributed Systems', Icon: Share2    },
+                              { name: 'Network Systems',     Icon: Globe     },
+                              { name: 'Concurrent Systems',  Icon: GitBranch },
+                          ],
+                        },
+                        { label: 'Security', color: '#D946EF', Icon: Shield, lift: 0,
+                          categories: [
+                              { name: 'Adversarial AI',    Icon: Zap       },
+                              { name: 'Red Teaming',       Icon: Target    },
+                              { name: 'Attack Emulation',  Icon: Crosshair },
+                          ],
+                        },
+                    ];
+                    return (
+                        <div className="flex justify-center items-end gap-16 mb-14 opacity-0 animate-fade-in-delay-2">
+                            {boxes.map(({ label, color, Icon, lift, categories }) => (
+                                <div key={label} style={{
+                                    width: 210,
+                                    marginBottom: lift,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    padding: '22px 18px 20px',
+                                    gap: 16,
+                                    border: `1px solid ${color}66`,
+                                    borderBottom: `2px solid ${color}`,
+                                    background: `linear-gradient(160deg, ${color}32 0%, ${color}1a 100%)`,
+                                    backdropFilter: 'blur(18px)',
+                                    WebkitBackdropFilter: 'blur(18px)',
+                                    borderRadius: '16px',
+                                    boxShadow: `0 0 36px 6px ${color}30, inset 0 1px 0 ${color}44`,
+                                }}>
+                                    {/* Glassy icon emblem */}
+                                    <div style={{
+                                        width: 66, height: 66,
+                                        borderRadius: '14px',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        background: `linear-gradient(135deg, ${color}30 0%, ${color}12 100%)`,
+                                        border: `1px solid ${color}55`,
+                                        backdropFilter: 'blur(12px)',
+                                        WebkitBackdropFilter: 'blur(12px)',
+                                        boxShadow: `0 0 22px 6px ${color}28, inset 0 1px 0 ${color}44`,
+                                    }}>
+                                        <Icon size={30} style={{ stroke: color, opacity: 0.95, filter: `drop-shadow(0 0 8px ${color}aa)` }}/>
+                                    </div>
+
+                                    <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.16em', color, textTransform: 'uppercase' }}>
+                                        {label}
+                                    </span>
+
+                                    {/* Category rows */}
+                                    {categories.length > 0 && (
+                                        <div style={{
+                                            width: '100%',
+                                            borderTop: `1px solid ${color}30`,
+                                            paddingTop: 14,
+                                            display: 'flex', flexDirection: 'column', gap: 10,
+                                        }}>
+                                            {categories.map(({ name, Icon: CatIcon }) => (
+                                                <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '5px 8px', borderRadius: 8, background: `${color}0a` }}>
+                                                    <CatIcon size={14} style={{ stroke: color, opacity: 0.8, flexShrink: 0, filter: `drop-shadow(0 0 4px ${color}66)` }}/>
+                                                    <span style={{ fontSize: '11px', color: `${color}dd`, fontWeight: 500, whiteSpace: 'nowrap' }}>{name}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    );
+                })()}
 
                 {/* Timeline */}
                 <div className="opacity-0 animate-fade-in-delay-3 w-full" style={{ position:'relative' }}>
@@ -164,7 +247,11 @@ export const HeroSection = () => {
                     <ScrollBtn dir="right" faded={scrollX >= maxScroll} lineTop={LINE_TOP}
                         onMouseDown={() => startScroll(1)}  onMouseUp={stopScroll} onMouseLeave={stopScroll}/>
 
-                    <div ref={containerRef} style={{ overflow:'hidden', position:'relative', height:TOTAL_H }}>
+                    <div ref={containerRef} style={{
+                        overflow:'hidden', position:'relative', height:TOTAL_H,
+                        maskImage:'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+                        WebkitMaskImage:'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+                    }}>
                         <div style={{
                             width:CONTENT_W, height:TOTAL_H, position:'relative',
                             transform:`translateX(${-scrollX}px)`,
@@ -173,7 +260,7 @@ export const HeroSection = () => {
 
                             {/* Base gradient line */}
                             <div style={{
-                                position:'absolute', top: LINE_TOP, left:0, right:0, height:'2px',
+                                position:'absolute', top: LINE_TOP, left:0, right:0, height:'3px',
                                 background:'linear-gradient(90deg, #2DD4BF 0%, #60A5FA 40%, #D946EF 70%, #2DD4BF 100%)',
                                 boxShadow:'0 0 6px 2px rgba(45,212,191,0.25)',
                                 zIndex:1,
@@ -252,7 +339,7 @@ export const HeroSection = () => {
                                             top: barTop + BAR_H + CONN,
                                             width: EDU_CARD_W,
                                         }}>
-                                            <ExpCard role={education.role} org={education.org} color={education.color} accent="bottom"/>
+                                            <ExpCard role={education.role} org={education.org} degree={education.degree} gpa={education.gpa} color={education.color} accent="bottom"/>
                                         </div>
                                     </>
                                 );
@@ -295,7 +382,7 @@ export const HeroSection = () => {
                                             bottom: TOTAL_H - barTop + CONN,
                                             width: CARD_W,
                                         }}>
-                                            <ExpCard role={exp.role} org={exp.org} color={exp.color} accent="top"/>
+                                            <ExpCard role={exp.role} org={exp.org} blurb={exp.blurb} color={exp.color} accent="top"/>
                                         </div>
                                     </div>
                                 );
@@ -328,11 +415,12 @@ function ScrollBtn({ dir, faded, lineTop, onMouseDown, onMouseUp, onMouseLeave }
     return (
         <button onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseLeave={onMouseLeave}
             style={{
-                position:'absolute', top: lineTop, [dir]: -52, transform:'translateY(-50%)',
-                zIndex:10, width:42, height:42, borderRadius:'50%',
-                border:'1px solid rgba(255,255,255,0.15)',
-                background:'rgba(255,255,255,0.06)',
-                backdropFilter:'blur(8px)', WebkitBackdropFilter:'blur(8px)',
+                position:'absolute', top: lineTop, [dir]: -18, transform:'translateY(-50%)',
+                zIndex:20, width:42, height:42, borderRadius:'50%',
+                border:'1px solid rgba(255,255,255,0.22)',
+                background:'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)',
+                backdropFilter:'blur(20px)', WebkitBackdropFilter:'blur(20px)',
+                boxShadow:'0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.18)',
                 display:'flex', alignItems:'center', justifyContent:'center',
                 cursor:'pointer', color:'#2DD4BF',
                 opacity: faded ? 0.2 : 0.85,
@@ -343,8 +431,8 @@ function ScrollBtn({ dir, faded, lineTop, onMouseDown, onMouseUp, onMouseLeave }
     );
 }
 
-function ExpCard({ role, org, color, accent }: {
-    role: string; org: string; color: string; accent: 'top' | 'bottom';
+function ExpCard({ role, org, blurb, degree, gpa, color, accent }: {
+    role: string; org: string; blurb?: string; degree?: string; gpa?: string; color: string; accent: 'top' | 'bottom';
 }) {
     const borderAccent = accent === 'top'
         ? { borderTop: `2px solid ${color}` }
@@ -360,9 +448,24 @@ function ExpCard({ role, org, color, accent }: {
             <p style={{ fontSize:'12px', fontWeight:600, color:'var(--color-foreground)', marginBottom:'2px', lineHeight:1.3 }}>
                 {role}
             </p>
-            <p style={{ fontSize:'11px', color, fontWeight:500 }}>
+            <p style={{ fontSize:'11px', color, fontWeight:500, marginBottom: (blurb || degree) ? '5px' : 0 }}>
                 {org}
             </p>
+            {degree && (
+                <p style={{ fontSize:'10px', color:'rgba(180,190,210,0.85)', lineHeight:1.4, marginBottom:'3px' }}>
+                    {degree}
+                </p>
+            )}
+            {gpa && (
+                <p style={{ fontSize:'10px', color, opacity:0.75, fontWeight:600, marginBottom: blurb ? '4px' : 0 }}>
+                    {gpa}
+                </p>
+            )}
+            {blurb && (
+                <p style={{ fontSize:'10px', color:'rgba(180,190,210,0.8)', lineHeight:1.4, fontStyle:'italic' }}>
+                    {blurb}
+                </p>
+            )}
         </div>
     );
 }

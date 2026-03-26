@@ -32,8 +32,14 @@ export const ThemeToggle = () => {
 
             <div className="fixed max-sm:hidden top-2 right-5 z-50 flex flex-col items-center gap-1">
                 <button onClick={toggleTheme} className={cn(
-                    "p-2 rounded-full transition-colors duration-300 focus:outline-hidden"
-                )}>
+                    "p-2 rounded-full transition-all duration-300 focus:outline-hidden"
+                )} style={{
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)',
+                    border: '1px solid rgba(255,255,255,0.22)',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.18)',
+                }}>
                     {isDarkMode
                         ? <Sun  className="h-6 w-6" style={{ stroke: 'url(#icon-palette)' }}/>
                         : <Moon className="h-6 w-6" style={{ stroke: 'url(#icon-palette)' }}/>
