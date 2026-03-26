@@ -7,7 +7,14 @@ import portrait from '../assets/portrait.png'
 export const AboutSection = () => {
     return <section id="about" className="py-24 px-4 relative">
         {" "}
-        <div className="container mx-auto max-w-5xl">
+
+        {/* Color spill orbs */}
+        <div style={{ position:'absolute', inset:0, overflow:'hidden', pointerEvents:'none', zIndex:0 }}>
+            <div style={{ position:'absolute', top:'5%', right:'8%', width:'460px', height:'320px', borderRadius:'50%', filter:'blur(85px)', background:'radial-gradient(ellipse, rgba(96,165,250,0.18) 0%, transparent 70%)' }}/>
+            <div style={{ position:'absolute', bottom:'5%', left:'3%', width:'400px', height:'300px', borderRadius:'50%', filter:'blur(80px)', background:'radial-gradient(ellipse, rgba(45,212,191,0.16) 0%, transparent 70%)' }}/>
+        </div>
+
+        <div className="container mx-auto max-w-5xl" style={{ position:'relative', zIndex:1 }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
                 About <span className="text-primary"> Me </span>
             </h2>
@@ -66,7 +73,7 @@ export const AboutSection = () => {
                 {/* FOUR ICONS */}
                 <div className="grid grid-cols-1 gap-6">
                     
-                    <div className="gradient-border p-6 card-hover"> 
+                    <div className="card-hover" style={{ padding:'24px', borderRadius:'14px', background:'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(45,212,191,0.04) 100%)', backdropFilter:'blur(16px)', WebkitBackdropFilter:'blur(16px)', border:'1px solid rgba(255,255,255,0.10)', boxShadow:'0 0 28px rgba(45,212,191,0.07), inset 0 1px 0 rgba(255,255,255,0.12)' }}>
                         <div className="flex items-start gap-4">
                             <div className="p-3 rounded-full bg-primary/10">
                                 <Binary className="h-6 w-6 text-primary"/>
@@ -84,7 +91,7 @@ export const AboutSection = () => {
                         </div>
                     </div>
 
-                    <div className="gradient-border p-6 card-hover"> 
+                    <div className="card-hover" style={{ padding:'24px', borderRadius:'14px', background:'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(45,212,191,0.04) 100%)', backdropFilter:'blur(16px)', WebkitBackdropFilter:'blur(16px)', border:'1px solid rgba(255,255,255,0.10)', boxShadow:'0 0 28px rgba(45,212,191,0.07), inset 0 1px 0 rgba(255,255,255,0.12)' }}>
                         <div className="flex items-start gap-4">
                             <div className="p-3 rounded-full bg-primary/10">
                                 <Microscope className="h-6 w-6 text-primary"/>
@@ -104,7 +111,7 @@ export const AboutSection = () => {
                         </div>
                     </div>
 
-                    <div className="gradient-border p-6 card-hover"> 
+                    <div className="card-hover" style={{ padding:'24px', borderRadius:'14px', background:'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(45,212,191,0.04) 100%)', backdropFilter:'blur(16px)', WebkitBackdropFilter:'blur(16px)', border:'1px solid rgba(255,255,255,0.10)', boxShadow:'0 0 28px rgba(45,212,191,0.07), inset 0 1px 0 rgba(255,255,255,0.12)' }}>
                         <div className="flex items-start gap-4">
                             <div className="p-3 rounded-full bg-primary/10">
                                 <CircuitBoard className="h-6 w-6 text-primary"/>

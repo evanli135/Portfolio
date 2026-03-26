@@ -1,134 +1,309 @@
-import { 
-  Code, 
-  Binary, 
-  Cpu, 
-  Network, 
-  Database,   
-  Shield, 
-  BarChart4, 
-  Sigma, 
-  Wrench 
-} from "lucide-react";
-import type {JSX} from "react";
+import { Cpu, Network, Binary, Code, Database, Shield, BarChart4, Sigma, Wrench, type LucideIcon } from 'lucide-react';
+import NUseal from '../assets/NUseal.png';
 
-type Department = "Computer Science" | "Data Science" | "Cybersecurity" | "Mathematics" | "General Engineering";
-type Level = "Undergraduate" | "Graduate";
+const NU_COLOR = '#E8345C';
 
-interface Course {
+interface Bullet    { label: string; detail: string }
+interface CourseRow {
     title: string;
-    description: string;
-    inProgress: boolean;
-    subject: Department;
-    level: Level;
-    skills?: string[];
-    grade?: string;
     courseNum: string;
-    courseIcon: JSX.Element
+    level: 'Undergraduate' | 'Graduate';
+    color: string;
+    grade?: string;
+    inProgress?: boolean;
+    bullets: Bullet[];
+    Icon: LucideIcon;
 }
 
-const descriptions = {
-    "CS3500": "A Java course that covers the principles of object-oriented programming and design philosophy. Covers concepts such as encapsulation, inheritance, polymorphism, and design patterns such as Composition, Observer, Strategy, etc. Emphasizes writing clean, maintainable, and scalable code, as well as thorough and vigourous testing using JUnit.",
-    "CS3000": "A comprehensive course on fundamental data structures (arrays, linked lists, stacks, queues, trees, graphs) and algorithms (sorting, searching, graph traversal). Heavy emphasis on asymptotic behavior analysis as well as writing and analyzing pseudocode.",
-    "CS3650": "C and Assembly course that explores low-level programming, memory management, and operating systems. Covers file systems, virtual memory, interface between assembly and high level languages, parallel programming, and I/O control.",
-    "CS7610": "Core principles distributed systems, focusing on failure models, consensus, replication, synchronization, and fault tolerance, connecting theory to practice by studying real-world systems (GFS, HDFS, Spanner, and Spark) and modern applications such as blockchains, and distributed machine learning. Projects involve C, C++, Rust, and Docker.",
-    "CS3200": "Covers how to create and query databases using SQL while preserving ACID principles, as well as noSQL datbases such as MongoDB. Emphasizes writing complex SQL queries, designing databases with complex relationships, and boolean algebra",
-    "CY2550": "Introduces fundamental security concepts including cryptography (Asymmetric and Symmetric), hashing, bash scripting, proper password storage, as well as basic penetration methods, such as password cracking, SQL injections, and Cross-Site Scripting.",
-    "DS3000": "Introduction to linear algebra, web scraping, API usage, and python scripting with libraries such as Pandas, Numpy, Matplotlib, and Seaborn, as well as basic Artificial Intelligence and Machine Learning concepts.",
-    "MATH1365": "Covers limits, derivatives, integrals, and series with applications to real-world problems such as calculating volumes.",
-    "GE1501": "Focuses on the engineering design process, including problem identification, brainstorming, prototyping, testing, and iteration. Involves hands-on projects that included CAD design, electronics wiring, and C++ programming."
-};
-
-const courseIcons = {
-  "CS3500": <Code className="w-10 h-10" />,
-  "CS3000": <Binary className="w-10 h-10" />,
-  "CS3650": <Cpu className="w-10 h-10" />,
-  "CS7610": <Network className="w-10 h-10" />,
-  "CS3200": <Database className="w-10 h-10" />,
-  "CY2550": <Shield className="w-10 h-10" />,
-  "DS3000": <BarChart4 className="w-10 h-10" />,
-  "MATH1365": <Sigma className="w-10 h-10" />,
-  "GE1501": <Wrench className="w-10 h-10" />,
-};
-
-const courses: Array<Course> = [
-    { title: "Foundations in Distributed Systems", description: descriptions["CS7610"], inProgress: true, subject: "Computer Science", level: "Graduate", skills: ["Docker", "Go", "C"], courseNum: "CS7610", courseIcon: courseIcons["CS7610"] },
-    { title: "Data Structures and Algorithms", description: descriptions["CS3000"], inProgress: true, subject: "Computer Science", level: "Undergraduate", courseNum: "CS3000", courseIcon: courseIcons["CS3000"]},
-    { title: "Computer Systems", description: descriptions["CS3650"], inProgress: false, subject: "Computer Science", level: "Undergraduate", skills: ["C", "Assembly"], grade: "A", courseNum: "CS3650", courseIcon: courseIcons["CS3650"] },
-    { title: "Foundations in Cybersecurity", description: descriptions["CY2550"], inProgress: false, subject: "Cybersecurity", level: "Undergraduate", skills: ["Bash", "Cryptography", "Password Cracking", "Cross-Site Scripting"], grade: "A", courseNum: "CY2550", courseIcon: courseIcons["CY2550"]},
-    { title: "Object Oriented Design", description: descriptions["CS3500"], inProgress: false, subject: "Computer Science", level: "Undergraduate", skills: ["Java", "JUnit"], grade: "B+", courseNum: "CS3500", courseIcon: courseIcons["CS3500"] },
-    { title: "Introduction to Databases", description: descriptions["CS3200"], inProgress: false, subject: "Computer Science", level: "Undergraduate", skills: ["SQL", "MongoDB"], grade: "A-", courseNum: "CS3200", courseIcon: courseIcons["CS3200"] },
-    { title: "Foundations in Data Science", description: descriptions["DS3000"], inProgress: false, subject: "Data Science", level: "Undergraduate", skills: ["Python", "Pandas", "Numpy", "Matplotlib", "Seaborn", ], grade: "A", courseNum: "DS3000", courseIcon: courseIcons["DS3000"] },
-    { title: "Calculus I & II", description: descriptions["MATH1365"], inProgress: false, subject: "Mathematics", level: "Undergraduate", skills: ["Derivatives", "Integrals", "Series"], grade: "A", courseNum: "MATH1365", courseIcon: courseIcons["MATH1365"]},
-    { title: "Cornerstones in Engineering", description: descriptions["GE1501"], inProgress: false, subject: "General Engineering", level: "Undergraduate", skills: ["CAD", "Arduino", "C++"], grade: "A", courseNum: "GE1501", courseIcon: courseIcons["GE1501"] }
+const COURSES: CourseRow[] = [
+    {
+        title: 'Computer Systems',
+        courseNum: 'CS3650', level: 'Undergraduate', color: '#2DD4BF', grade: 'A', Icon: Cpu,
+        bullets: [
+            { label: 'Assembly & C',    detail: 'x86 Assembly from scratch, calling conventions, ABI, and linker internals' },
+            { label: 'Memory',          detail: 'stack frames, heap allocation, virtual memory, and page table management' },
+            { label: 'OS Interfaces',   detail: 'file systems, I/O control, and process scheduling at the kernel boundary' },
+            { label: 'Concurrency',     detail: 'pthreads, semaphores, mutexes, and systematic race-condition analysis' },
+        ],
+    },
+    {
+        title: 'Foundations in Distributed Systems',
+        courseNum: 'CS7610', level: 'Graduate', color: '#D946EF', grade: 'A-', Icon: Network,
+        bullets: [
+            { label: 'Consensus',          detail: 'Raft and Paxos algorithms, leader election, and failure detection' },
+            { label: 'Fault Tolerance',    detail: 'replication strategies, synchronization, and state machine recovery' },
+            { label: 'Real-World Systems', detail: 'GFS, HDFS, Spanner, and Spark dissected and analyzed' },
+            { label: 'Modern Apps',        detail: 'blockchains, distributed ML pipelines, and sharded databases' },
+            { label: 'Projects',           detail: 'implemented in C, C++, Rust, and Docker' },
+        ],
+    },
+    {
+        title: 'Object Oriented Design',
+        courseNum: 'CS3500', level: 'Undergraduate', color: '#818CF8', grade: 'B+', Icon: Code,
+        bullets: [
+            { label: 'OOP Principles',  detail: 'encapsulation, inheritance, polymorphism, and SOLID design principles' },
+            { label: 'Design Patterns', detail: 'Composition, Observer, Strategy, MVC, and Factory patterns in Java' },
+            { label: 'Testing',         detail: 'rigorous unit testing with JUnit and test-driven development workflows' },
+            { label: 'Java',            detail: 'generics, interfaces, lambdas, streams, and the Java standard library' },
+        ],
+    },
+    {
+        title: 'Data Structures and Algorithms',
+        courseNum: 'CS3000', level: 'Undergraduate', color: '#60A5FA', grade: 'A', Icon: Binary,
+        bullets: [
+            { label: 'Data Structures',  detail: 'arrays, linked lists, trees, heaps, hash tables, and graphs' },
+            { label: 'Design Paradigms', detail: 'divide & conquer, dynamic programming, and greedy strategies' },
+            { label: 'Analysis',         detail: 'Big-O, Theta, Omega notation, recurrence relations, and amortized bounds' },
+            { label: 'Graph Algorithms', detail: 'BFS, DFS, Dijkstra, Bellman-Ford, and minimum spanning trees' },
+        ],
+    },
+    {
+        title: 'Introduction to Databases',
+        courseNum: 'CS3200', level: 'Undergraduate', color: '#2DD4BF', grade: 'A-', Icon: Database,
+        bullets: [
+            { label: 'SQL',            detail: 'complex queries, joins, subqueries, aggregations, and window functions' },
+            { label: 'Schema Design',  detail: 'normalization, ER diagrams, and relational modeling with complex relationships' },
+            { label: 'ACID',           detail: 'transactions, isolation levels, concurrency control, and consistency guarantees' },
+            { label: 'NoSQL',          detail: 'MongoDB document model, indexing strategies, and when to prefer it over relational DBs' },
+        ],
+    },
+    {
+        title: 'Foundations in Cybersecurity',
+        courseNum: 'CY2550', level: 'Undergraduate', color: '#D946EF', grade: 'A', Icon: Shield,
+        bullets: [
+            { label: 'Cryptography',    detail: 'symmetric (AES), asymmetric (RSA), hashing, salting, and digital signatures' },
+            { label: 'Web Attacks',     detail: 'SQL injection, XSS, and CSRF — attack vectors and defensive countermeasures' },
+            { label: 'Penetration',     detail: 'password cracking, network scanning, and basic exploit techniques' },
+            { label: 'Scripting',       detail: 'Bash automation for security tooling and system hardening tasks' },
+        ],
+    },
+    {
+        title: 'Foundations in Data Science',
+        courseNum: 'DS3000', level: 'Undergraduate', color: '#F97316', grade: 'A', Icon: BarChart4,
+        bullets: [
+            { label: 'Python Libraries', detail: 'Pandas, NumPy, Matplotlib, and Seaborn for data manipulation and visualization' },
+            { label: 'Linear Algebra',   detail: 'matrix operations, eigenvalues, and their application in machine learning' },
+            { label: 'Data Collection',  detail: 'web scraping and REST API usage to build real-world datasets' },
+            { label: 'ML Fundamentals',  detail: 'supervised learning, regression, classification, and model evaluation metrics' },
+        ],
+    },
+    // {
+    //     title: 'Calculus I & II',
+    //     courseNum: 'MATH1365', level: 'Undergraduate', color: '#818CF8', grade: 'A', Icon: Sigma,
+    //     bullets: [
+    //         { label: 'Derivatives',   detail: 'formal limits, chain rule, implicit differentiation, and related rates' },
+    //         { label: 'Integration',   detail: 'Riemann sums, the fundamental theorem, substitution, and integration by parts' },
+    //         { label: 'Applications',  detail: 'optimization problems, curve sketching, and volume of revolution' },
+    //         { label: 'Series',        detail: 'convergence tests, Taylor and Maclaurin series, and power series expansions' },
+    //     ],
+    // },
+    // {
+    //     title: 'Cornerstones of Engineering',
+    //     courseNum: 'GE1501', level: 'Undergraduate', color: '#F97316', grade: 'A', Icon: Wrench,
+    //     bullets: [
+    //         { label: 'Design Process', detail: 'problem identification, brainstorming, prototyping, testing, and iteration' },
+    //         { label: 'Hardware',       detail: 'CAD design, 3D printing, and electronics wiring on Arduino platforms' },
+    //         { label: 'Firmware',       detail: 'C++ embedded programming for sensor integration and actuation control' },
+    //         { label: 'Collaboration',  detail: 'cross-disciplinary team project from concept to working physical prototype' },
+    //     ],
+    // },
 ];
 
-export const CoursesSection = () => {
-    return (
-        <section id="coursework" className="py-24 px-4 relative">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-                My <span className="text-primary">Coursework</span> at <span className="text-primary">Northeastern University</span>
+export const CoursesSection = () => (
+    <section id="coursework" className="py-24 px-6 relative">
+
+        {/* Color spill orbs */}
+        <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
+            <div style={{ position: 'absolute', top: '-5%', left: '5%', width: '500px', height: '360px', borderRadius: '50%', filter: 'blur(90px)', background: 'radial-gradient(ellipse, rgba(232,52,92,0.22) 0%, transparent 70%)' }}/>
+            <div style={{ position: 'absolute', top: '30%', right: '-2%', width: '420px', height: '320px', borderRadius: '50%', filter: 'blur(80px)', background: 'radial-gradient(ellipse, rgba(217,70,239,0.16) 0%, transparent 70%)' }}/>
+            <div style={{ position: 'absolute', bottom: '-5%', left: '25%', width: '580px', height: '300px', borderRadius: '50%', filter: 'blur(100px)', background: 'radial-gradient(ellipse, rgba(45,212,191,0.18) 0%, transparent 70%)' }}/>
+        </div>
+
+        <div className="container mx-auto max-w-7xl" style={{ position: 'relative', zIndex: 1 }}>
+
+            {/* Section heading */}
+            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
+                <span style={{
+                    background: 'linear-gradient(135deg, #ffffff 0%, #c8e8ff 20%, #a0f0e8 40%, #ffffff 55%, #e0c8ff 75%, #ffffff 100%)',
+                    WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                    filter: 'drop-shadow(0 0 12px rgba(255,255,255,0.25))',
+                }}>Coursework</span>
             </h2>
-            <p className="text-xl md:text-2xl font-bold mb-12 text-center">
-                B.S  in <span className="text-primary">  Computer Science</span> with a concentration in  
-                <span className="text-primary"> Systems</span>
-            </p>
 
-            {/* <a className="cosmic-button" href="#">
-                            {" "}
-                            See my trancsript
-            </a> */}
+            {/* ── Northeastern Banner ─────────────────────────────────── */}
+            <div style={{
+                display: 'flex', alignItems: 'stretch',
+                marginBottom: 32, borderRadius: '20px',
+                border: `1px solid ${NU_COLOR}55`,
+                borderLeft: `3px solid ${NU_COLOR}`,
+                background: `linear-gradient(100deg, ${NU_COLOR}18 0%, ${NU_COLOR}0a 40%, rgba(255,255,255,0.01) 100%)`,
+                backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+                boxShadow: `0 0 56px 8px ${NU_COLOR}1a, inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -1px 0 ${NU_COLOR}14`,
+                overflow: 'hidden',
+            }}>
+                {/* Left: seal + college name */}
+                <div style={{
+                    width: 170, flexShrink: 0,
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                    gap: 12, padding: '32px 18px',
+                    borderRight: `1px solid ${NU_COLOR}33`,
+                    background: `linear-gradient(180deg, ${NU_COLOR}18 0%, transparent 100%)`,
+                }}>
+                    <img src={NUseal} alt="Northeastern University Seal" style={{
+                        width: 90, height: 90,
+                        filter: `drop-shadow(0 0 16px rgba(232,52,92,0.60)) brightness(1.08)`,
+                        borderRadius: '50%',
+                    }}/>
+                    <span style={{
+                        fontSize: '11px', fontWeight: 700, color: `${NU_COLOR}cc`,
+                        textAlign: 'center', lineHeight: 1.4, letterSpacing: '0.04em',
+                    }}>
+                        Khoury College of<br/>Computer Sciences
+                    </span>
+                </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                {courses.map((course, key) => (
-                    <div key={key} className="bg-card rounded-lg shadow-xs card-hover flex flex-col">
-                        {/* Top Header Row */}
-                        <div className="flex justify-between items-center px-6 py-3 border-b border-border">
-                            <span className="text-sm font-medium text-muted-foreground">
-                                {course.subject}
-                            </span>
-                            <span className="text-sm font-bold text-primary">
-                                {course.courseNum}
-                            </span>
-                        </div>
+                {/* Middle: university info */}
+                <div style={{
+                    flex: 1, padding: '32px 32px',
+                    display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 10,
+                }}>
+                    <span style={{ fontSize: '28px', fontWeight: 900, color: '#ffffff', letterSpacing: '-0.01em', lineHeight: 1.1, filter: `drop-shadow(0 0 12px ${NU_COLOR}88)` }}>
+                        Northeastern University
+                    </span>
+                    <span style={{ fontSize: '17px', fontWeight: 700, color: NU_COLOR, filter: `drop-shadow(0 0 8px ${NU_COLOR}66)` }}>
+                        Systems Engineering Undergraduate
+                    </span>
+                    <div style={{ width: 160, height: 1, background: `linear-gradient(90deg, ${NU_COLOR}55, transparent)`, margin: '2px 0' }}/>
+                    <span style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,205,215,0.90)' }}>
+                        B.S. in Computer Science
+                    </span>
+                    <span style={{ fontSize: '14px', fontWeight: 600, color: 'rgba(255,205,215,0.90)' }}>
+                        2023 – 2027
+                    </span>
+                </div>
 
-                        {/* Middle Content */}
-                        <div className="flex gap-4 p-6 flex-grow">
-                            <div className="flex-shrink-0">
-                                <div className="p-3 rounded-full bg-primary/10 text-primary">
-                                    {course.courseIcon}
-                                </div>
-                            </div>
-                            <div className="flex-grow">
-                                <h3 className="font-semibold text-lg mb-1">
-                                    {course.title}
-                                </h3>
-                                <p className="text-xs text-primary mb-2 font-medium">
-                                    {course.level}
-                                </p>
-                                <p className="text-sm text-muted-foreground leading-relaxed">
-                                    {course.description}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Bottom Footer */}
-                        <div className="px-6 py-3 border-t border-border bg-secondary/20 rounded-b-lg">
-                            {course.inProgress ? (
-                                <span className="text-sm font-medium text-primary">
-                                    In Progress
-                                </span>
-                            ) : (
-                                <div className="flex items-center gap-2">
-                                    <span className="text-sm text-muted-foreground">Final Grade:</span>
-                                    <span className="text-sm font-bold text-primary">
-                                        {course.grade}
-                                    </span>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                ))}
+                {/* Right: GPA */}
+                <div style={{
+                    width: 100, flexShrink: 0,
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                    gap: 6, padding: '20px 14px',
+                    borderLeft: `1px solid ${NU_COLOR}28`,
+                    background: `linear-gradient(180deg, ${NU_COLOR}0e 0%, transparent 100%)`,
+                }}>
+                    <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.10em', color: `${NU_COLOR}99`, textTransform: 'uppercase' }}>GPA</span>
+                    <span style={{ fontSize: '30px', fontWeight: 900, color: NU_COLOR, lineHeight: 1, filter: `drop-shadow(0 0 12px ${NU_COLOR}bb)` }}>3.83</span>
+                </div>
             </div>
-        </section>
-    );
-};
+
+            {/* ── Course Rows ─────────────────────────────────────────── */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+                {COURSES.map(({ title, courseNum, level, color, grade, inProgress, bullets, Icon }) => {
+                    return (
+                        <div key={courseNum} style={{
+                            display: 'flex', alignItems: 'stretch',
+                            borderRadius: '16px',
+                            border: `1px solid ${color}66`,
+                            borderLeft: `3px solid ${color}`,
+                            background: `linear-gradient(100deg, ${color}05 0%, ${color}02 50%, transparent 100%)`,
+                            backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+                            boxShadow: `0 0 28px 6px ${color}1a, inset 0 1px 0 ${color}33, inset 0 -1px 0 ${color}18`,
+                            overflow: 'hidden',
+                        }}>
+
+                            {/* Left: icon + meta */}
+                            <div style={{
+                                width: 170, flexShrink: 0,
+                                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                                gap: 10, padding: '24px 18px',
+                                borderRight: `1px solid ${color}55`,
+                                background: `linear-gradient(180deg, ${color}06 0%, transparent 100%)`,
+                            }}>
+                                {/* Icon emblem */}
+                                <div style={{
+                                    width: 54, height: 54, borderRadius: '13px',
+                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                    background: `linear-gradient(135deg, ${color}0a 0%, ${color}04 100%)`,
+                                    border: `1px solid ${color}66`,
+                                    boxShadow: `0 0 16px 4px ${color}20, inset 0 1px 0 ${color}44, inset 0 -1px 0 ${color}18`,
+                                }}>
+                                    <Icon size={26} style={{ color, filter: `drop-shadow(0 0 8px ${color}cc)` }}/>
+                                </div>
+
+                                {/* Course number */}
+                                <span style={{ fontSize: '13px', fontWeight: 800, letterSpacing: '0.10em', color, textTransform: 'uppercase', textAlign: 'center', filter: `drop-shadow(0 0 6px ${color}77)` }}>
+                                    {courseNum}
+                                </span>
+
+                                {/* Level badge */}
+                                <span style={{
+                                    fontSize: '10px', fontWeight: 700, letterSpacing: '0.08em',
+                                    padding: '3px 8px', borderRadius: '10px',
+                                    background: `${color}18`, border: `1px solid ${color}44`,
+                                    color, textTransform: 'uppercase', textAlign: 'center',
+                                }}>
+                                    {level === 'Graduate' ? 'Grad' : 'Undergrad'}
+                                </span>
+                            </div>
+
+                            {/* Middle: title + bullets */}
+                            <div style={{ flex: 1, padding: '22px 28px', display: 'flex', flexDirection: 'column', gap: 14, justifyContent: 'center' }}>
+
+                                {/* Title — gradient white→color, wider tracking */}
+                                <span style={{
+                                    fontSize: '20px', fontWeight: 800,
+                                    letterSpacing: '-0.02em', lineHeight: 1.15,
+                                    background: `linear-gradient(100deg, #ffffff 30%, ${color} 100%)`,
+                                    WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
+                                    backgroundClip: 'text',
+                                }}>
+                                    {title}
+                                </span>
+
+                                {/* Bullets */}
+                                <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                                    {bullets.map(({ label, detail }, i) => (
+                                        <li key={i} style={{ display: 'flex', alignItems: 'baseline', gap: 9 }}>
+                                            <span style={{ color, fontSize: '13px', lineHeight: '20px', flexShrink: 0, filter: `drop-shadow(0 0 4px ${color}88)` }}>▸</span>
+                                            <span style={{ fontSize: '13px', lineHeight: '20px' }}>
+                                                <span style={{
+                                                    fontWeight: 700, color,
+                                                    filter: `drop-shadow(0 0 6px ${color}66)`,
+                                                    marginRight: 2,
+                                                }}>{label}:</span>
+                                                {' '}
+                                                <span style={{ color: 'rgba(215,230,248,0.90)', fontWeight: 400 }}>{detail}</span>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Right: grade */}
+                            <div style={{
+                                width: 100, flexShrink: 0,
+                                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                                gap: 6, padding: '20px 14px',
+                                borderLeft: `1px solid ${color}55`,
+                                background: `linear-gradient(180deg, ${color}04 0%, transparent 100%)`,
+                            }}>
+                                {inProgress ? (
+                                    <>
+                                        <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.10em', color: `${color}99`, textTransform: 'uppercase' }}>Status</span>
+                                        <span style={{ fontSize: '12px', fontWeight: 700, color, textAlign: 'center', filter: `drop-shadow(0 0 6px ${color}88)` }}>In Progress</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.10em', color: `${color}99`, textTransform: 'uppercase' }}>Grade</span>
+                                        <span style={{ fontSize: '32px', fontWeight: 800, color, lineHeight: 1, filter: `drop-shadow(0 0 12px ${color}bb)` }}>{grade}</span>
+                                    </>
+                                )}
+                            </div>
+
+                        </div>
+                    );
+                })}
+            </div>
+
+        </div>
+    </section>
+);

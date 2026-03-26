@@ -94,6 +94,14 @@
   }
 }
 
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.lane-scroll:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 @keyframes cloud-drift {
   0% {
     transform: translateX(-100%);

@@ -2,19 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowDown, ChevronLeft, ChevronRight, Brain, Cpu, Shield, Share2, Globe, GitBranch, Bot, Layers, Activity, Zap, Target, Crosshair, type LucideIcon } from "lucide-react";
 
 // ── Geometry ───────────────────────────────────────────────────────
-const YEAR_W     = 680;
-const PAD_X      = 180;
+const YEAR_W     = 820;
+const PAD_X      = 260;
 const START_YR   = 2022;
 const END_YR     = 2027;
-const CARD_W     = 200;
-const EDU_CARD_W = 250;
-const ABOVE_H    = 210;  // space above the line (cards + bars)
-const BELOW_H    = 210;  // space below the line (edu card + year ticks)
+const CARD_W     = 240;
+const EDU_CARD_W = 310;
+const ABOVE_H    = 270;  // space above the line (cards + bars)
+const BELOW_H    = 270;  // space below the line (edu card + year ticks)
 const BAR_H      = 2;    // thin bar height — matches timeline width
 const BAR_GAP    = 10;   // gap between bar bottom and line
 const BAR_ROW_H  = BAR_H + 8;  // vertical spacing between stacked bar rows
-const CONN       = 38;   // connector length
-const NOTCH_H    = 10;
+const CONN       = 68;   // connector length
+const NOTCH_H    = 14;
 const SCROLL_SPD = 2;
 const MONTHS     = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const EMPTY_CLR  = 'rgba(255,255,255,0.28)';
@@ -93,7 +93,7 @@ export const HeroSection = () => {
             maxScrollRef.current = max;
             setMaxScroll(max);
             if (!initialized.current) {
-                const centerX = toX(2024, 1);
+                const centerX = toX(2025, 1);
                 const init = Math.max(0, Math.min(max, centerX - w / 2));
                 scrollXRef.current = init;
                 setScrollX(init);
@@ -228,7 +228,7 @@ export const HeroSection = () => {
                                             {categories.map(({ name, Icon: CatIcon }) => (
                                                 <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '5px 8px', borderRadius: 8, background: `${color}0a` }}>
                                                     <CatIcon size={14} style={{ stroke: color, opacity: 0.8, flexShrink: 0, filter: `drop-shadow(0 0 4px ${color}66)` }}/>
-                                                    <span style={{ fontSize: '11px', color: `${color}dd`, fontWeight: 500, whiteSpace: 'nowrap' }}>{name}</span>
+                                                    <span style={{ fontSize: '12px', color, fontWeight: 600, whiteSpace: 'nowrap' }}>{name}</span>
                                                 </div>
                                             ))}
                                         </div>
@@ -239,8 +239,10 @@ export const HeroSection = () => {
                     );
                 })()}
 
-                {/* Timeline */}
-                <div className="opacity-0 animate-fade-in-delay-3 w-full" style={{ position:'relative' }}>
+            </div>{/* end max-w-5xl container */}
+
+            {/* Timeline — full viewport width */}
+            <div className="opacity-0 animate-fade-in-delay-3 w-full z-10" style={{ position:'relative', padding:'0 48px' }}>
 
                     <ScrollBtn dir="left"  faded={scrollX <= 0}         lineTop={LINE_TOP}
                         onMouseDown={() => startScroll(-1)} onMouseUp={stopScroll} onMouseLeave={stopScroll}/>
@@ -273,8 +275,8 @@ export const HeroSection = () => {
                                 const clr = dim ? EMPTY_CLR : 'rgba(255,255,255,0.5)';
                                 return (
                                     <div key={year} style={{ position:'absolute', left:x, top: LINE_TOP + 2, transform:'translateX(-50%)', zIndex:2 }}>
-                                        <div style={{ width:'1px', height:NOTCH_H, background:clr, opacity: dim ? 0.35 : 0.55, margin:'0 auto' }}/>
-                                        <p style={{ fontSize:'10px', fontWeight:600, letterSpacing:'0.08em', color:clr, opacity: dim ? 0.35 : 0.65, marginTop:3, whiteSpace:'nowrap' }}>
+                                        <div style={{ width:'2px', height:NOTCH_H, background:clr, opacity: dim ? 0.35 : 0.80, margin:'0 auto' }}/>
+                                        <p style={{ fontSize:'13px', fontWeight:700, letterSpacing:'0.08em', color:clr, opacity: dim ? 0.35 : 0.95, marginTop:4, whiteSpace:'nowrap' }}>
                                             {year}
                                         </p>
                                     </div>
@@ -299,10 +301,10 @@ export const HeroSection = () => {
                                     seen.push(p.x); return true;
                                 }).map((p, i) => {
                                     // above bar: label sits just above BAR_TOP_Y; below bar: just below edu bar
-                                    const top = p.below ? eduBarTop + BAR_H + 3 : BAR_TOP_Y - 14;
+                                    const top = p.below ? eduBarTop + BAR_H + 3 : BAR_TOP_Y - 22;
                                     return (
                                         <div key={i} style={{ position:'absolute', left: p.x, top, transform:'translateX(-50%)', zIndex:5, pointerEvents:'none' }}>
-                                            <p style={{ fontSize:'8px', fontWeight:600, color: p.color, opacity:0.85, whiteSpace:'nowrap', letterSpacing:'0.04em', margin:0 }}>
+                                            <p style={{ fontSize:'12px', fontWeight:700, color: p.color, opacity:1, whiteSpace:'nowrap', letterSpacing:'0.04em', margin:0 }}>
                                                 {p.label}
                                             </p>
                                         </div>
@@ -392,10 +394,9 @@ export const HeroSection = () => {
                     </div>
                 </div>
 
-                {/* CTA */}
-                <div className="mt-10 opacity-0 animate-fade-in-delay-4">
-                    <a href="#projects" className="cosmic-button">View My Work</a>
-                </div>
+            {/* CTA */}
+            <div className="mt-10 opacity-0 animate-fade-in-delay-4 z-10">
+                <a href="#projects" className="cosmic-button">View My Work</a>
             </div>
 
             <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
@@ -415,7 +416,7 @@ function ScrollBtn({ dir, faded, lineTop, onMouseDown, onMouseUp, onMouseLeave }
     return (
         <button onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseLeave={onMouseLeave}
             style={{
-                position:'absolute', top: lineTop, [dir]: -18, transform:'translateY(-50%)',
+                position:'absolute', top: lineTop, [dir]: 52, transform:'translateY(-50%)',
                 zIndex:20, width:42, height:42, borderRadius:'50%',
                 border:'1px solid rgba(255,255,255,0.22)',
                 background:'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)',
@@ -442,27 +443,27 @@ function ExpCard({ role, org, blurb, degree, gpa, color, accent }: {
             background:'rgba(255,255,255,0.04)',
             backdropFilter:'blur(10px)', WebkitBackdropFilter:'blur(10px)',
             border:`1px solid ${color}44`, ...borderAccent,
-            borderRadius:'10px', padding:'9px 11px', textAlign:'left',
-            boxShadow:`0 0 16px 2px ${color}18`,
+            borderRadius:'12px', padding:'13px 15px', textAlign:'left',
+            boxShadow:`0 0 20px 4px ${color}20`,
         }}>
-            <p style={{ fontSize:'12px', fontWeight:600, color:'var(--color-foreground)', marginBottom:'2px', lineHeight:1.3 }}>
+            <p style={{ fontSize:'14px', fontWeight:700, color:'var(--color-foreground)', marginBottom:'4px', lineHeight:1.3 }}>
                 {role}
             </p>
-            <p style={{ fontSize:'11px', color, fontWeight:500, marginBottom: (blurb || degree) ? '5px' : 0 }}>
+            <p style={{ fontSize:'13px', color, fontWeight:600, marginBottom: (blurb || degree) ? '6px' : 0 }}>
                 {org}
             </p>
             {degree && (
-                <p style={{ fontSize:'10px', color:'rgba(180,190,210,0.85)', lineHeight:1.4, marginBottom:'3px' }}>
+                <p style={{ fontSize:'12px', color:'rgba(210,225,245,0.95)', lineHeight:1.4, marginBottom:'4px' }}>
                     {degree}
                 </p>
             )}
             {gpa && (
-                <p style={{ fontSize:'10px', color, opacity:0.75, fontWeight:600, marginBottom: blurb ? '4px' : 0 }}>
+                <p style={{ fontSize:'12px', color, fontWeight:700, marginBottom: blurb ? '5px' : 0 }}>
                     {gpa}
                 </p>
             )}
             {blurb && (
-                <p style={{ fontSize:'10px', color:'rgba(180,190,210,0.8)', lineHeight:1.4, fontStyle:'italic' }}>
+                <p style={{ fontSize:'12px', color:'rgba(210,225,245,0.95)', lineHeight:1.4, fontStyle:'italic' }}>
                     {blurb}
                 </p>
             )}

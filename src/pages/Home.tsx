@@ -10,6 +10,7 @@ import { ResumeSection } from "../components/ResumeSection";
 import { Footer } from "../components/Footer";
 import { CoursesSection } from "../components/CoursesSection";
 import { WritingSection } from "../components/WritingSection";
+import { ExperienceSection } from "../components/ExperienceSection";
 
 export const Home = () => {
     return <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -26,6 +27,7 @@ export const Home = () => {
         <main>
             <HeroSection />
             <AboutSection />
+            <ExperienceSection />
             <SkillsSection />
             <ProjectsSection />
             <CoursesSection />

@@ -80,15 +80,30 @@ export const ProjectsSection = () => {
     };
 
     return <section id="projects" className="py-24 px-4 relative">
-        <div className="container mx-auto max-w-5xl">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center"> 
+
+        {/* Color spill orbs */}
+        <div style={{ position:'absolute', inset:0, overflow:'hidden', pointerEvents:'none', zIndex:0 }}>
+            <div style={{ position:'absolute', top:'5%', right:'5%', width:'480px', height:'340px', borderRadius:'50%', filter:'blur(90px)', background:'radial-gradient(ellipse, rgba(45,212,191,0.18) 0%, transparent 70%)' }}/>
+            <div style={{ position:'absolute', bottom:'10%', left:'0%', width:'420px', height:'300px', borderRadius:'50%', filter:'blur(80px)', background:'radial-gradient(ellipse, rgba(217,70,239,0.15) 0%, transparent 70%)' }}/>
+        </div>
+
+        <div className="container mx-auto max-w-5xl" style={{ position:'relative', zIndex:1 }}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
                 {" "}
                 My <span className="text-primary"> Works </span>
             </h2>
 
-            
+
             {projects.map((project) => (
-                <div className="my-12 py-6 bg-card p-6 rounded-2xl shadow-xs card-hover px-10">
+                <div className="my-12 card-hover" style={{
+                    padding: '24px 40px',
+                    borderRadius: '18px',
+                    background: 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(45,212,191,0.04) 50%, rgba(96,165,250,0.03) 100%)',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255,255,255,0.10)',
+                    boxShadow: '0 0 40px rgba(45,212,191,0.08), inset 0 1px 0 rgba(255,255,255,0.12), inset 0 -1px 0 rgba(45,212,191,0.06)',
+                }}>
                     
                     {/** ICON AND TITLE */}
                     <h3 className="text-primary font-bold text-2xl my-10">

@@ -10,6 +10,7 @@ const RAINBOW = 'linear-gradient(90deg, #2DD4BF, #60A5FA, #D946EF, #4338CA, #2DD
 const navItems = [
     {name: "Home",       href: "#hero"},
     {name: "About",      href: "#about"},
+    {name: "Experience", href: "#experience"},
     {name: "Skills",     href: "#skills"},
     {name: "Projects",   href: "#projects"},
     {name: "Coursework", href: "#coursework"},
