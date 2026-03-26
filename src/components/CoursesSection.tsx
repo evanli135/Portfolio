@@ -137,7 +137,7 @@ export const CoursesSection = () => (
                 border: `1px solid ${NU_COLOR}55`,
                 borderLeft: `3px solid ${NU_COLOR}`,
                 background: `linear-gradient(100deg, ${NU_COLOR}18 0%, ${NU_COLOR}0a 40%, rgba(255,255,255,0.01) 100%)`,
-                backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
+                backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
                 boxShadow: `0 0 56px 8px ${NU_COLOR}1a, inset 0 1px 0 rgba(255,255,255,0.16), inset 0 -1px 0 ${NU_COLOR}14`,
                 overflow: 'hidden',
             }}>
@@ -205,7 +205,7 @@ export const CoursesSection = () => (
                             border: `1px solid ${color}66`,
                             borderLeft: `3px solid ${color}`,
                             background: `linear-gradient(100deg, ${color}05 0%, ${color}02 50%, transparent 100%)`,
-                            backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+                            backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
                             boxShadow: `0 0 28px 6px ${color}1a, inset 0 1px 0 ${color}33, inset 0 -1px 0 ${color}18`,
                             overflow: 'hidden',
                         }}>

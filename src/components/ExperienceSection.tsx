@@ -117,7 +117,7 @@ export const ExperienceSection = () => (
                         border: `1px solid ${color}88`,
                         borderLeft: `3px solid ${color}`,
                         background: `linear-gradient(100deg, ${color}18 0%, ${color}0a 50%, transparent 100%)`,
-                        backdropFilter: 'blur(22px)', WebkitBackdropFilter: 'blur(22px)',
+                        backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
                         boxShadow: `0 0 40px 8px ${color}30, inset 0 1px 0 ${color}55, inset 0 -1px 0 ${color}22`,
                         overflow: 'hidden',
                     }}>
@@ -135,7 +135,7 @@ export const ExperienceSection = () => (
                                 width: 68, height: 68, borderRadius: '15px',
                                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                                 background: `linear-gradient(145deg, ${lclr}48 0%, ${lclr}28 55%, ${lclr}18 100%)`,
-                                backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+                                backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
                                 border: `1px solid ${lclr}77`,
                                 boxShadow: `0 0 22px 6px ${lclr}35, inset 0 1px 0 ${lclr}66, inset 0 -1px 0 ${lclr}22, inset 0 0 16px ${lclr}18`,
                                 padding: logo ? '8px' : 0,

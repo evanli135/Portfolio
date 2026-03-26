@@ -153,8 +153,8 @@ export const SkillsSection = () => (
                             border: `1px solid ${color}66`,
                             borderLeft: `3px solid ${color}`,
                             background: `linear-gradient(100deg, ${color}06 0%, ${color}03 60%, transparent 100%)`,
-                            backdropFilter: 'blur(24px)',
-                            WebkitBackdropFilter: 'blur(24px)',
+                            backdropFilter: 'blur(8px)',
+                            WebkitBackdropFilter: 'blur(8px)',
                             borderRadius: '16px',
                             boxShadow: `0 0 28px 6px ${color}20, inset 0 1px 0 ${color}33, inset 0 -1px 0 ${color}18`,
                             overflow: 'hidden',
@@ -198,8 +198,8 @@ export const SkillsSection = () => (
                                                 background: `linear-gradient(160deg, ${color}07 0%, ${color}03 50%, transparent 100%)`,
                                                 border: `1px solid ${color}55`,
                                                 boxShadow: `0 0 12px 2px ${color}18, inset 0 1px 0 ${color}33, inset 0 -1px 0 ${color}18`,
-                                                backdropFilter: 'blur(12px)',
-                                                WebkitBackdropFilter: 'blur(12px)',
+                                                backdropFilter: 'blur(5px)',
+                                                WebkitBackdropFilter: 'blur(5px)',
                                                 flexShrink: 0,
                                             }}>
                                                 <skill.Icon style={{ width: 26, height: 26, color, opacity: 1, filter: `drop-shadow(0 0 8px ${color}cc)` } as React.CSSProperties}/>
