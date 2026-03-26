@@ -195,13 +195,13 @@ export const HeroSection = () => {
                                     alignItems: 'center',
                                     padding: '22px 18px 20px',
                                     gap: 16,
-                                    border: `1px solid ${color}66`,
+                                    border: `1px solid ${color}88`,
                                     borderBottom: `2px solid ${color}`,
-                                    background: `linear-gradient(160deg, ${color}32 0%, ${color}1a 100%)`,
-                                    backdropFilter: 'blur(18px)',
-                                    WebkitBackdropFilter: 'blur(18px)',
+                                    background: `linear-gradient(160deg, ${color}18 0%, ${color}0a 100%)`,
+                                    backdropFilter: 'blur(22px)',
+                                    WebkitBackdropFilter: 'blur(22px)',
                                     borderRadius: '16px',
-                                    boxShadow: `0 0 36px 6px ${color}30, inset 0 1px 0 ${color}44`,
+                                    boxShadow: `0 0 40px 8px ${color}38, inset 0 1px 0 ${color}55, inset 0 -1px 0 ${color}22`,
                                 }}>
                                     {/* Glassy icon emblem */}
                                     <div style={{
@@ -264,11 +264,14 @@ export const HeroSection = () => {
                             transition: rafRef.current === null ? 'transform 0.15s ease-out' : 'none',
                         }}>
 
-                            {/* Base gradient line */}
+                            {/* Base gradient line — glass tube */}
                             <div style={{
-                                position:'absolute', top: LINE_TOP, left:0, right:0, height:'3px',
-                                background:'linear-gradient(90deg, #2DD4BF 0%, #60A5FA 40%, #D946EF 70%, #2DD4BF 100%)',
-                                boxShadow:'0 0 6px 2px rgba(45,212,191,0.25)',
+                                position:'absolute', top: LINE_TOP - 3, left:0, right:0, height:'7px',
+                                borderRadius: '4px',
+                                background:'linear-gradient(90deg, #2DD4BF99 0%, #60A5FAaa 40%, #D946EFaa 70%, #2DD4BF99 100%)',
+                                backdropFilter:'blur(6px)', WebkitBackdropFilter:'blur(6px)',
+                                border:'1px solid rgba(255,255,255,0.22)',
+                                boxShadow:'0 0 14px 3px rgba(96,165,250,0.45), 0 0 32px 6px rgba(45,212,191,0.25), inset 0 1px 0 rgba(255,255,255,0.40), inset 0 -1px 0 rgba(255,255,255,0.08)',
                                 zIndex:1,
                             }}/>
 

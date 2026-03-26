@@ -107,11 +107,11 @@ export const ExperienceSection = () => (
                     <div key={org + role} style={{
                         display: 'flex', alignItems: 'stretch',
                         borderRadius: '16px',
-                        border: `1px solid ${color}55`,
+                        border: `1px solid ${color}88`,
                         borderLeft: `3px solid ${color}`,
-                        background: `linear-gradient(100deg, ${color}0c 0%, ${color}05 50%, transparent 100%)`,
+                        background: `linear-gradient(100deg, ${color}18 0%, ${color}0a 50%, transparent 100%)`,
                         backdropFilter: 'blur(22px)', WebkitBackdropFilter: 'blur(22px)',
-                        boxShadow: `0 0 32px 6px ${color}18, inset 0 1px 0 ${color}28, inset 0 -1px 0 ${color}12`,
+                        boxShadow: `0 0 40px 8px ${color}30, inset 0 1px 0 ${color}55, inset 0 -1px 0 ${color}22`,
                         overflow: 'hidden',
                     }}>
 
