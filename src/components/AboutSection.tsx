@@ -5,25 +5,17 @@ import { GlassText } from "./GlassText";
 
 const TEAL = '#2DD4BF';
 
-// Scattered star configs for each box
-const STARS_LEFT: { top: string; left?: string; right?: string; size: number; opacity: number; rotate: number }[] = [
-    { top: '6%',  left:  '4%',  size: 18, opacity: 0.22, rotate: 15  },
-    { top: '12%', right: '6%',  size: 11, opacity: 0.15, rotate: 40  },
-    { top: '52%', left:  '2%',  size: 14, opacity: 0.18, rotate: 0   },
-    { top: '78%', right: '5%',  size: 10, opacity: 0.13, rotate: 25  },
-    { top: '88%', left:  '8%',  size: 8,  opacity: 0.16, rotate: 60  },
-    { top: '35%', right: '3%',  size: 20, opacity: 0.10, rotate: 5   },
-];
-const STARS_RIGHT: typeof STARS_LEFT = [
-    { top: '5%',  right: '4%',  size: 18, opacity: 0.22, rotate: 20  },
-    { top: '18%', left:  '5%',  size: 12, opacity: 0.16, rotate: 45  },
-    { top: '48%', right: '3%',  size: 16, opacity: 0.14, rotate: 10  },
-    { top: '72%', left:  '3%',  size: 9,  opacity: 0.18, rotate: 35  },
-    { top: '85%', right: '7%',  size: 11, opacity: 0.13, rotate: 55  },
-    { top: '30%', left:  '2%',  size: 22, opacity: 0.09, rotate: 0   },
+// Scattered star configs for the merged bottom box sides
+const STARS_BOTTOM: { top: string; left?: string; right?: string; size: number; opacity: number; rotate: number }[] = [
+    { top: '5%',  left:  '1%',  size: 16, opacity: 0.18, rotate: 15 },
+    { top: '20%', right: '1%',  size: 12, opacity: 0.14, rotate: 40 },
+    { top: '50%', left:  '0.5%',size: 20, opacity: 0.10, rotate: 0  },
+    { top: '70%', right: '1%',  size: 10, opacity: 0.15, rotate: 25 },
+    { top: '88%', left:  '2%',  size: 8,  opacity: 0.16, rotate: 60 },
+    { top: '40%', right: '0.8%',size: 14, opacity: 0.12, rotate: 5  },
 ];
 
-const StarDeco = ({ stars }: { stars: typeof STARS_LEFT }) => (
+const StarDeco = ({ stars }: { stars: typeof STARS_BOTTOM }) => (
     <>
         {stars.map((s, i) => (
             <Star
@@ -38,7 +30,6 @@ const StarDeco = ({ stars }: { stars: typeof STARS_LEFT }) => (
                     opacity: s.opacity,
                     transform: `rotate(${s.rotate}deg)`,
                     pointerEvents: 'none',
-                    flexShrink: 0,
                 }}
             />
         ))}
@@ -61,8 +52,73 @@ export const AboutSection = () => (
                 About <span className="text-primary"> Me </span>
             </h2>
 
-            {/* Glassified portrait */}
-            <div style={{ display:'flex', justifyContent:'center', marginBottom: 40 }}>
+            {/* ── Two bright callout boxes ── */}
+            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 20, marginBottom: 24 }}>
+
+                {/* Callout 1 */}
+                <div style={{
+                    position:'relative', overflow:'hidden',
+                    padding: '28px 26px 24px',
+                    borderRadius: '18px',
+                    background: `linear-gradient(135deg, #2DD4BF 0%, #18BDB3 100%)`,
+                    boxShadow: `0 0 40px 10px ${TEAL}44, 0 4px 24px rgba(0,0,0,0.25)`,
+                    border: `1px solid rgba(255,255,255,0.30)`,
+                }}>
+                    {/* Single top-left star */}
+                    <Star style={{
+                        position:'absolute', top: 12, left: 14,
+                        width: 22, height: 22,
+                        color: 'rgba(255,255,255,0.90)',
+                        filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.8))',
+                        pointerEvents: 'none',
+                    }}/>
+                    <div style={{ paddingTop: 8 }}>
+                        <p style={{ fontSize:'11px', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(0,60,55,0.75)', marginBottom: 6 }}>
+                            Published Researcher
+                        </p>
+                        <p style={{ fontSize:'20px', fontWeight:900, color:'#ffffff', lineHeight:1.2, marginBottom: 8 }}>
+                            First Author, NDSS 2026
+                        </p>
+                        <p style={{ fontSize:'13px', fontWeight:500, color:'rgba(255,255,255,0.82)', lineHeight:1.5 }}>
+                            ACE: A Security Architecture for LLM-Integrated App Systems — top-4 security venue, ~15% acceptance rate
+                        </p>
+                    </div>
+                </div>
+
+                {/* Callout 2 */}
+                <div style={{
+                    position:'relative', overflow:'hidden',
+                    padding: '28px 26px 24px',
+                    borderRadius: '18px',
+                    background: `linear-gradient(135deg, #2DD4BF 0%, #18BDB3 100%)`,
+                    boxShadow: `0 0 40px 10px ${TEAL}44, 0 4px 24px rgba(0,0,0,0.25)`,
+                    border: `1px solid rgba(255,255,255,0.30)`,
+                }}>
+                    {/* Single top-left star */}
+                    <Star style={{
+                        position:'absolute', top: 12, left: 14,
+                        width: 22, height: 22,
+                        color: 'rgba(255,255,255,0.90)',
+                        filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.8))',
+                        pointerEvents: 'none',
+                    }}/>
+                    <div style={{ paddingTop: 8 }}>
+                        <p style={{ fontSize:'11px', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(0,60,55,0.75)', marginBottom: 6 }}>
+                            Industry Engineer
+                        </p>
+                        <p style={{ fontSize:'20px', fontWeight:900, color:'#ffffff', lineHeight:1.2, marginBottom: 8 }}>
+                            3× Co-op Engineer
+                        </p>
+                        <p style={{ fontSize:'13px', fontWeight:500, color:'rgba(255,255,255,0.82)', lineHeight:1.5 }}>
+                            Vestmark (fintech) · MatrixOrigin (AI startup) · Keysight Technologies (R&D instrumentation)
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            {/* ── Glassified portrait ── */}
+            <div style={{ display:'flex', justifyContent:'center', marginBottom: 24 }}>
                 <div style={{
                     position: 'relative',
                     width: 200, height: 200,
@@ -86,110 +142,89 @@ export const AboutSection = () => (
                 </div>
             </div>
 
-            {/* Two large turquoise boxes */}
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 24, alignItems:'stretch' }}
-                 className="grid-cols-1 md:grid-cols-2">
+            {/* ── Merged bottom box ── */}
+            <div style={{
+                position:'relative', overflow:'hidden',
+                padding: '36px 36px',
+                borderRadius: '20px',
+                background: `linear-gradient(145deg, ${TEAL}14 0%, ${TEAL}08 60%, transparent 100%)`,
+                backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+                border: `1px solid ${TEAL}55`,
+                borderBottom: `2px solid ${TEAL}`,
+                boxShadow: `0 0 44px 10px ${TEAL}1a, inset 0 1px 0 ${TEAL}44, inset 0 -1px 0 ${TEAL}22`,
+            }}>
+                <StarDeco stars={STARS_BOTTOM} />
 
-                {/* Box 1: Bio */}
-                <div style={{
-                    position:'relative', overflow:'hidden',
-                    padding: '36px 30px',
-                    borderRadius: '20px',
-                    background: `linear-gradient(145deg, ${TEAL}14 0%, ${TEAL}08 60%, transparent 100%)`,
-                    backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
-                    border: `1px solid ${TEAL}55`,
-                    borderBottom: `2px solid ${TEAL}`,
-                    boxShadow: `0 0 44px 10px ${TEAL}1a, inset 0 1px 0 ${TEAL}44, inset 0 -1px 0 ${TEAL}22`,
-                    display:'flex', flexDirection:'column', gap: 16,
-                }}>
-                    <StarDeco stars={STARS_LEFT} />
+                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 40, position:'relative', zIndex:1 }}>
 
-                    <h3 style={{ fontSize:'17px', fontWeight:700, color:'rgba(255,255,255,0.92)', lineHeight:1.4, position:'relative', zIndex:1 }}>
-                        Third-year <span style={{ color: TEAL }}>CS</span> undergrad at Northeastern University,
-                        concentration in <span style={{ color: TEAL }}>Systems Engineering</span>
-                    </h3>
+                    {/* Left column: bio */}
+                    <div style={{ display:'flex', flexDirection:'column', gap: 14 }}>
+                        <h3 style={{ fontSize:'17px', fontWeight:700, color:'rgba(255,255,255,0.92)', lineHeight:1.4 }}>
+                            Third-year <span style={{ color: TEAL }}>CS</span> undergrad at Northeastern University,
+                            concentration in <span style={{ color: TEAL }}>Systems Engineering</span>
+                        </h3>
 
-                    <p style={{ fontSize:'14px', color:'rgba(200,220,240,0.80)', lineHeight:1.7, position:'relative', zIndex:1 }}>
-                        Armed with a strong technical foundation and a passion for research and engineering,
-                        I aim to explore the limits of AI and distributed systems and how they can be used to solve real problems.
-                    </p>
-
-                    <div style={{ display:'flex', flexDirection:'column', gap:10, fontSize:'14px', color:'rgba(190,215,235,0.75)', lineHeight:1.7, position:'relative', zIndex:1 }}>
-                        <p>
-                            Current software engineer at <span style={{ color: TEAL, fontWeight:600 }}>Vestmark</span>, a fintech firm,
-                            working on the financial advisor agent — patching and extending capabilities for efficiency, security, and UX.
+                        <p style={{ fontSize:'14px', color:'rgba(200,220,240,0.80)', lineHeight:1.7 }}>
+                            Armed with a strong technical foundation and a passion for research and engineering,
+                            I aim to explore the limits of AI and distributed systems and how they can be used to solve real problems.
                         </p>
-                        <p>
-                            Former distributed systems security researcher at Northeastern, first-authoring a paper on
-                            multi-agent LLM security at <span style={{ color: TEAL, fontWeight:600 }}>NDSS</span> (~15% acceptance rate).
-                        </p>
-                        <p>
-                            Former NLP engineer at <span style={{ color: TEAL, fontWeight:600 }}>MatrixOrigin</span>, working on a natural language to SQL platform.
-                        </p>
-                    </div>
 
-                    <p style={{ fontSize:'13px', color:`${TEAL}bb`, lineHeight:1.6, position:'relative', zIndex:1 }}>
-                        Looking for work in research, development, or engineering — especially roles involving LLMs or distributed systems.
-                    </p>
-
-                    <div style={{ display:'flex', gap:12, flexWrap:'wrap', paddingTop:8, position:'relative', zIndex:1 }}>
-                        <a className="cosmic-button" href="#contact" style={{ fontSize:'14px' }}>Contact Me</a>
-                        <a href="#resume" className={cn("px-6 py-2 rounded-full border border-primary",
-                            "text-primary hover:bg-primary/10 transition-colors duration-300")}
-                            style={{ fontSize:'14px' }}>
-                            See my Resume
-                        </a>
-                    </div>
-                </div>
-
-                {/* Box 2: What I work on */}
-                <div style={{
-                    position:'relative', overflow:'hidden',
-                    padding: '36px 30px',
-                    borderRadius: '20px',
-                    background: `linear-gradient(145deg, ${TEAL}14 0%, ${TEAL}08 60%, transparent 100%)`,
-                    backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
-                    border: `1px solid ${TEAL}55`,
-                    borderBottom: `2px solid ${TEAL}`,
-                    boxShadow: `0 0 44px 10px ${TEAL}1a, inset 0 1px 0 ${TEAL}44, inset 0 -1px 0 ${TEAL}22`,
-                    display:'flex', flexDirection:'column', gap: 20,
-                }}>
-                    <StarDeco stars={STARS_RIGHT} />
-
-                    <div style={{ position:'relative', zIndex:1 }}>
-                        <GlassText style={{ fontSize: '1.05rem' }}>What I work on</GlassText>
-                    </div>
-
-                    {/* Topic cards */}
-                    {[
-                        { Icon: Binary,       title: 'Programming', text: 'Proficient across high and low-level languages — Python, TypeScript, Java, C, C++, Rust, Elixir — with deep experience in data structures, algorithms, OOP, and parallel programming.' },
-                        { Icon: Microscope,   title: 'Research',    text: 'First-authored ACE, an LLM security architecture accepted to NDSS 2026. Studies focus on prompt injection, denial-of-service, and secure information flow in multi-agent systems.' },
-                        { Icon: CircuitBoard, title: 'Systems',     text: 'Experienced in distributed systems, OS internals, network communication, and systems security — spanning consensus protocols, memory management, and multi-agent threat modeling.' },
-                    ].map(({ Icon, title, text }) => (
-                        <div key={title} style={{
-                            display:'flex', alignItems:'flex-start', gap: 14,
-                            padding: '16px 18px',
-                            borderRadius: '14px',
-                            background: `rgba(45,212,191,0.06)`,
-                            border: `1px solid ${TEAL}33`,
-                            position:'relative', zIndex:1,
-                        }}>
-                            <div style={{
-                                width: 38, height: 38, flexShrink: 0, borderRadius: '10px',
-                                display:'flex', alignItems:'center', justifyContent:'center',
-                                background: `${TEAL}18`, border: `1px solid ${TEAL}44`,
-                            }}>
-                                <Icon size={18} style={{ color: TEAL, filter:`drop-shadow(0 0 5px ${TEAL}aa)` }}/>
-                            </div>
-                            <div>
-                                <h4 style={{ fontSize:'15px', fontWeight:700, color:'rgba(255,255,255,0.92)', marginBottom:4 }}>{title}</h4>
-                                <p style={{ fontSize:'13px', color:'rgba(190,215,235,0.76)', lineHeight:1.65 }}>{text}</p>
-                            </div>
+                        <div style={{ display:'flex', flexDirection:'column', gap:10, fontSize:'14px', color:'rgba(190,215,235,0.75)', lineHeight:1.7 }}>
+                            <p>Current software engineer at <span style={{ color: TEAL, fontWeight:600 }}>Vestmark</span>, working on the financial advisor agent.</p>
+                            <p>Former researcher at Northeastern's Privacy & Security Lab, first-authored a paper on multi-agent LLM security at <span style={{ color: TEAL, fontWeight:600 }}>NDSS</span>.</p>
+                            <p>Former NLP engineer at <span style={{ color: TEAL, fontWeight:600 }}>MatrixOrigin</span>, building a natural language to SQL platform.</p>
                         </div>
-                    ))}
-                </div>
 
+                        <p style={{ fontSize:'13px', color:`${TEAL}bb`, lineHeight:1.6 }}>
+                            Looking for roles in research, development, or engineering — especially LLMs or distributed systems.
+                        </p>
+
+                        <div style={{ display:'flex', gap:12, flexWrap:'wrap', paddingTop:4 }}>
+                            <a className="cosmic-button" href="#contact" style={{ fontSize:'14px' }}>Contact Me</a>
+                            <a href="#resume" className={cn("px-6 py-2 rounded-full border border-primary",
+                                "text-primary hover:bg-primary/10 transition-colors duration-300")}
+                                style={{ fontSize:'14px' }}>
+                                See my Resume
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Right column: what I work on */}
+                    <div style={{ display:'flex', flexDirection:'column', gap: 18 }}>
+                        <div>
+                            <GlassText style={{ fontSize: '1.05rem' }}>What I work on</GlassText>
+                        </div>
+
+                        {[
+                            { Icon: Binary,       title: 'Programming', text: 'Python, TypeScript, Java, C, C++, Rust, Elixir — with deep experience in data structures, algorithms, OOP, and parallel programming.' },
+                            { Icon: Microscope,   title: 'Research',    text: 'First-authored ACE, accepted to NDSS 2026. Research focuses on prompt injection, DoS, and secure information flow in multi-agent systems.' },
+                            { Icon: CircuitBoard, title: 'Systems',     text: 'Distributed systems, OS internals, network communication, and systems security — consensus protocols, memory management, threat modeling.' },
+                        ].map(({ Icon, title, text }) => (
+                            <div key={title} style={{
+                                display:'flex', alignItems:'flex-start', gap: 14,
+                                padding: '14px 16px',
+                                borderRadius: '14px',
+                                background: `rgba(45,212,191,0.06)`,
+                                border: `1px solid ${TEAL}33`,
+                            }}>
+                                <div style={{
+                                    width: 36, height: 36, flexShrink: 0, borderRadius: '10px',
+                                    display:'flex', alignItems:'center', justifyContent:'center',
+                                    background: `${TEAL}18`, border: `1px solid ${TEAL}44`,
+                                }}>
+                                    <Icon size={17} style={{ color: TEAL, filter:`drop-shadow(0 0 5px ${TEAL}aa)` }}/>
+                                </div>
+                                <div>
+                                    <h4 style={{ fontSize:'15px', fontWeight:700, color:'rgba(255,255,255,0.92)', marginBottom:4 }}>{title}</h4>
+                                    <p style={{ fontSize:'13px', color:'rgba(190,215,235,0.76)', lineHeight:1.65 }}>{text}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
             </div>
+
         </div>
     </section>
 );
