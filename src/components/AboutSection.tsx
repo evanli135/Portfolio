@@ -4,6 +4,7 @@ import portrait from '../assets/portrait.png';
 import { GlassText } from "./GlassText";
 
 const TEAL = '#2DD4BF';
+const REDORANGE = '#E8345C';
 
 // Scattered star configs for the merged bottom box sides
 const STARS_BOTTOM: { top: string; left?: string; right?: string; size: number; opacity: number; rotate: number }[] = [
@@ -94,26 +95,26 @@ export const AboutSection = () => (
                 ].map(({ label, headline, body }) => (
                     <div key={label} style={{
                         position:'relative', overflow:'hidden',
-                        padding: '44px 32px 40px',
+                        padding: '68px 32px 64px',
                         borderRadius: '18px',
-                        background: `linear-gradient(160deg, ${TEAL}18 0%, ${TEAL}0a 60%, transparent 100%)`,
+                        background: `linear-gradient(160deg, ${REDORANGE}18 0%, ${REDORANGE}0a 60%, transparent 100%)`,
                         backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
-                        border: `1px solid ${TEAL}88`,
-                        borderBottom: `2px solid ${TEAL}`,
-                        boxShadow: `0 0 44px 10px ${TEAL}30, inset 0 1px 0 ${TEAL}55, inset 0 -1px 0 ${TEAL}22`,
+                        border: `1px solid ${REDORANGE}88`,
+                        borderBottom: `2px solid ${REDORANGE}`,
+                        boxShadow: `0 0 44px 10px ${REDORANGE}30, inset 0 1px 0 ${REDORANGE}55, inset 0 -1px 0 ${REDORANGE}22`,
                         display:'flex', flexDirection:'column', gap: 14,
                     }}>
                         {/* Solid-filled glowing star */}
                         <Star style={{
                             position:'absolute', top: 16, left: 18,
                             width: 20, height: 20,
-                            color: TEAL,
-                            fill: TEAL,
-                            filter: `drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}bb)`,
+                            color: REDORANGE,
+                            fill: REDORANGE,
+                            filter: `drop-shadow(0 0 6px ${REDORANGE}) drop-shadow(0 0 14px ${REDORANGE}bb)`,
                             pointerEvents: 'none',
                         }}/>
 
-                        <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${TEAL}cc`, paddingTop: 4 }}>
+                        <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${REDORANGE}cc`, paddingTop: 4 }}>
                             {label}
                         </p>
                         <p style={{ fontSize:'21px', fontWeight:800, letterSpacing:'-0.02em', color:'rgba(255,255,255,0.95)', lineHeight:1.2 }}>
