@@ -1,5 +1,5 @@
 import { cn } from "../lib/utils";
-import { Microscope, Binary, CircuitBoard, Star } from "lucide-react";
+import { Microscope, Binary, CircuitBoard, Star, Cpu } from "lucide-react";
 import portrait from '../assets/portrait.png';
 import { GlassText } from "./GlassText";
 
@@ -81,57 +81,91 @@ export const AboutSection = () => (
             {/* ── Sleek glass callout boxes ── */}
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 20, marginBottom: 24 }}>
 
-                {[
-                    {
-                        label: 'Published Researcher',
-                        headline: 'First Author · NDSS 2026',
-                        body: 'ACE: A Security Architecture for LLM-Integrated App Systems — top-4 security venue, ~15% acceptance rate',
-                    },
-                    {
-                        label: 'Industry Engineer',
-                        headline: '3× Co-op Engineer',
-                        body: 'Vestmark (fintech AI) · MatrixOrigin (NLP startup) · Keysight Technologies (R&D instrumentation)',
-                    },
-                ].map(({ label, headline, body }) => (
-                    <div key={label} style={{
-                        position:'relative', overflow:'hidden',
-                        padding: '68px 32px 64px',
-                        borderRadius: '18px',
-                        background: `linear-gradient(160deg, ${REDORANGE}18 0%, ${REDORANGE}0a 60%, transparent 100%)`,
-                        backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
-                        border: `1px solid ${REDORANGE}88`,
-                        borderBottom: `2px solid ${REDORANGE}`,
-                        boxShadow: `0 0 44px 10px ${REDORANGE}30, inset 0 1px 0 ${REDORANGE}55, inset 0 -1px 0 ${REDORANGE}22`,
-                        display:'flex', flexDirection:'column', gap: 14,
-                    }}>
-                        {/* Color splash orbs */}
-                        <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
-                            <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(249,115,22,0.55) 0%, transparent 70%)' }}/>
-                            <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(234,88,12,0.45) 0%, transparent 70%)' }}/>
-                            <div style={{ position:'absolute', top:'40%', left:'30%', width:'160px', height:'120px', borderRadius:'50%', filter:'blur(55px)', background:'radial-gradient(ellipse, rgba(251,146,60,0.35) 0%, transparent 70%)' }}/>
-                            <div style={{ position:'absolute', top:'10%', left:'15%', width:'100px', height:'80px', borderRadius:'50%', filter:'blur(35px)', background:'radial-gradient(ellipse, rgba(255,200,100,0.25) 0%, transparent 70%)' }}/>
-                        </div>
-                        {/* Solid-filled glowing star */}
-                        <Star style={{
-                            position:'absolute', top: 16, left: 18,
-                            width: 20, height: 20,
-                            color: REDORANGE,
-                            fill: REDORANGE,
-                            filter: `drop-shadow(0 0 6px ${REDORANGE}) drop-shadow(0 0 14px ${REDORANGE}bb)`,
-                            pointerEvents: 'none',
-                        }}/>
-
-                        <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${REDORANGE}cc`, paddingTop: 4 }}>
-                            {label}
-                        </p>
-                        <p style={{ fontSize:'21px', fontWeight:800, letterSpacing:'-0.02em', color:'rgba(255,255,255,0.95)', lineHeight:1.2 }}>
-                            {headline}
-                        </p>
-                        <p style={{ fontSize:'13px', color:'rgba(190,215,235,0.78)', lineHeight:1.65 }}>
-                            {body}
-                        </p>
+                {/* Box 1 — Research */}
+                <div style={{
+                    position:'relative', overflow:'hidden',
+                    padding: '56px 28px 40px',
+                    borderRadius: '18px',
+                    background: `linear-gradient(160deg, ${REDORANGE}18 0%, ${REDORANGE}0a 60%, transparent 100%)`,
+                    backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+                    border: `1px solid ${REDORANGE}88`,
+                    borderBottom: `2px solid ${REDORANGE}`,
+                    boxShadow: `0 0 44px 10px ${REDORANGE}30, inset 0 1px 0 ${REDORANGE}55, inset 0 -1px 0 ${REDORANGE}22`,
+                    display:'flex', flexDirection:'column', gap: 16,
+                }}>
+                    {/* Color splash orbs */}
+                    <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
+                        <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(249,115,22,0.55) 0%, transparent 70%)' }}/>
+                        <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(234,88,12,0.45) 0%, transparent 70%)' }}/>
+                        <div style={{ position:'absolute', top:'40%', left:'30%', width:'160px', height:'120px', borderRadius:'50%', filter:'blur(55px)', background:'radial-gradient(ellipse, rgba(251,146,60,0.35) 0%, transparent 70%)' }}/>
+                        <div style={{ position:'absolute', top:'10%', left:'15%', width:'100px', height:'80px', borderRadius:'50%', filter:'blur(35px)', background:'radial-gradient(ellipse, rgba(255,200,100,0.25) 0%, transparent 70%)' }}/>
                     </div>
-                ))}
+                    <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:REDORANGE, fill:REDORANGE, filter:`drop-shadow(0 0 6px ${REDORANGE}) drop-shadow(0 0 14px ${REDORANGE}bb)`, pointerEvents:'none' }}/>
+
+                    {/* Icon + header */}
+                    <div style={{ display:'flex', flexDirection:'column', gap:10, position:'relative', zIndex:1 }}>
+                        <div style={{ width:44, height:44, borderRadius:'12px', display:'flex', alignItems:'center', justifyContent:'center', background:`${REDORANGE}20`, border:`1px solid ${REDORANGE}55` }}>
+                            <Microscope size={22} style={{ color:REDORANGE, filter:`drop-shadow(0 0 6px ${REDORANGE}aa)` }}/>
+                        </div>
+                        <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${REDORANGE}cc` }}>Published Researcher</p>
+                        <p style={{ fontSize:'21px', fontWeight:800, letterSpacing:'-0.02em', color:'rgba(255,255,255,0.95)', lineHeight:1.2 }}>First Author · NDSS 2026</p>
+                    </div>
+
+                    {/* Three subsections */}
+                    {[
+                        { label: 'Paper',  text: 'ACE: A Security Architecture for LLM-Integrated App Systems' },
+                        { label: 'Venue',  text: 'NDSS 2026 — top-4 security venue, ~15% acceptance rate' },
+                        { label: 'Focus',  text: 'Prompt injection, denial-of-service, and secure information flow in multi-agent systems' },
+                    ].map(({ label, text }) => (
+                        <div key={label} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${REDORANGE}0c`, border:`1px solid ${REDORANGE}33` }}>
+                            <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:`${REDORANGE}cc`, marginBottom:4 }}>{label}</p>
+                            <p style={{ fontSize:'13px', color:'rgba(200,215,235,0.80)', lineHeight:1.55 }}>{text}</p>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Box 2 — Industry */}
+                <div style={{
+                    position:'relative', overflow:'hidden',
+                    padding: '56px 28px 40px',
+                    borderRadius: '18px',
+                    background: `linear-gradient(160deg, ${REDORANGE}18 0%, ${REDORANGE}0a 60%, transparent 100%)`,
+                    backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+                    border: `1px solid ${REDORANGE}88`,
+                    borderBottom: `2px solid ${REDORANGE}`,
+                    boxShadow: `0 0 44px 10px ${REDORANGE}30, inset 0 1px 0 ${REDORANGE}55, inset 0 -1px 0 ${REDORANGE}22`,
+                    display:'flex', flexDirection:'column', gap: 16,
+                }}>
+                    {/* Color splash orbs */}
+                    <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
+                        <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(249,115,22,0.55) 0%, transparent 70%)' }}/>
+                        <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(234,88,12,0.45) 0%, transparent 70%)' }}/>
+                        <div style={{ position:'absolute', top:'40%', left:'30%', width:'160px', height:'120px', borderRadius:'50%', filter:'blur(55px)', background:'radial-gradient(ellipse, rgba(251,146,60,0.35) 0%, transparent 70%)' }}/>
+                        <div style={{ position:'absolute', top:'10%', left:'15%', width:'100px', height:'80px', borderRadius:'50%', filter:'blur(35px)', background:'radial-gradient(ellipse, rgba(255,200,100,0.25) 0%, transparent 70%)' }}/>
+                    </div>
+                    <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:REDORANGE, fill:REDORANGE, filter:`drop-shadow(0 0 6px ${REDORANGE}) drop-shadow(0 0 14px ${REDORANGE}bb)`, pointerEvents:'none' }}/>
+
+                    {/* Icon + header */}
+                    <div style={{ display:'flex', flexDirection:'column', gap:10, position:'relative', zIndex:1 }}>
+                        <div style={{ width:44, height:44, borderRadius:'12px', display:'flex', alignItems:'center', justifyContent:'center', background:`${REDORANGE}20`, border:`1px solid ${REDORANGE}55` }}>
+                            <Cpu size={22} style={{ color:REDORANGE, filter:`drop-shadow(0 0 6px ${REDORANGE}aa)` }}/>
+                        </div>
+                        <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${REDORANGE}cc` }}>Industry Engineer</p>
+                        <p style={{ fontSize:'21px', fontWeight:800, letterSpacing:'-0.02em', color:'rgba(255,255,255,0.95)', lineHeight:1.2 }}>3× Co-op Engineer</p>
+                    </div>
+
+                    {/* Three subsections */}
+                    {[
+                        { label: 'Current',   text: 'Vestmark — AI-powered financial advisor agent (fintech)' },
+                        { label: 'Previous',  text: 'MatrixOrigin (NLP/SQL platform) · NEU Privacy & Security Lab (LLM security research)' },
+                        { label: 'Upcoming',  text: 'Keysight Technologies — R&D instrumentation and anomaly detection' },
+                    ].map(({ label, text }) => (
+                        <div key={label} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${REDORANGE}0c`, border:`1px solid ${REDORANGE}33` }}>
+                            <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:`${REDORANGE}cc`, marginBottom:4 }}>{label}</p>
+                            <p style={{ fontSize:'13px', color:'rgba(200,215,235,0.80)', lineHeight:1.55 }}>{text}</p>
+                        </div>
+                    ))}
+                </div>
 
             </div>
 
