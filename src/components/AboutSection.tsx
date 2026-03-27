@@ -79,7 +79,7 @@ export const AboutSection = () => (
             </div>
 
             {/* ── Sleek glass callout boxes ── */}
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 40, marginBottom: 24 }}>
+            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 100, marginBottom: 24 }}>
 
                 {/* Box 1 — Research */}
                 <div style={{
