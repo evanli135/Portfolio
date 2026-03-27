@@ -12,7 +12,7 @@ interface ExpEntry {
     end: string;
     color: string;
     logoColor?: string;   // dominant color in the logo image; falls back to color
-    current?: boolean;
+    status: 'completed' | 'current' | 'upcoming';
     type: string;
     Icon: LucideIcon;
     logo?: string;
@@ -26,7 +26,7 @@ const EXPERIENCES: ExpEntry[] = [
         start: 'Jun 2024', end: 'Sep 2024',
         color: '#2DD4BF',
         logoColor: '#0080FF',
-        current: false,
+        status: 'completed',
         type: 'Co-op',
         Icon: Bot,
         logo: matrixLogo,
@@ -42,7 +42,7 @@ const EXPERIENCES: ExpEntry[] = [
         start: 'Jan 2025', end: 'Jul 2025',
         color: '#E8345C',
         logoColor: '#CC2030',
-        current: false,
+        status: 'completed',
         type: 'Research',
         Icon: Shield,
         logo: nuseal,
@@ -58,7 +58,7 @@ const EXPERIENCES: ExpEntry[] = [
         start: 'Jan 2026', end: 'Jul 2026',
         color: '#60A5FA',
         logoColor: '#3AAFA9',
-        current: true,
+        status: 'current',
         type: 'Co-op',
         Icon: Briefcase,
         logo: vestmarkLogo,
@@ -74,6 +74,7 @@ const EXPERIENCES: ExpEntry[] = [
         start: 'Jul 2026', end: 'Sep 2026',
         color: '#F97316',
         logoColor: '#E8192C',
+        status: 'upcoming',
         current: false,
         type: 'Co-op',
         Icon: Cpu,
@@ -108,8 +109,11 @@ export const ExperienceSection = () => (
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                {EXPERIENCES.map(({ role, org, start, end, color, logoColor: lc, current, type, Icon, logo, bullets }) => {
+                {EXPERIENCES.map(({ role, org, start, end, color, logoColor: lc, status, type, Icon, logo, bullets }) => {
                     const lclr = lc ?? color;
+                    const statusLabel = status === 'current' ? 'Current' : status === 'upcoming' ? 'Upcoming' : 'Completed';
+                    const statusColor = status === 'current' ? '#2DD4BF' : status === 'upcoming' ? '#818CF8' : `${color}99`;
+                    const statusGlow  = status === 'current' ? 'drop-shadow(0 0 6px rgba(45,212,191,0.7))' : status === 'upcoming' ? 'drop-shadow(0 0 6px rgba(129,140,248,0.7))' : 'none';
                     return (
                     <div key={org + role} style={{
                         display: 'flex', alignItems: 'stretch',
@@ -199,10 +203,10 @@ export const ExperienceSection = () => (
                             <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.10em', color: `${color}88`, textTransform: 'uppercase' }}>Status</span>
                             <span style={{
                                 fontSize: '11px', fontWeight: 700, textAlign: 'center',
-                                color: current ? '#2DD4BF' : `${color}99`,
-                                filter: current ? 'drop-shadow(0 0 6px rgba(45,212,191,0.7))' : 'none',
+                                color: statusColor,
+                                filter: statusGlow,
                             }}>
-                                {current ? 'Current' : 'Completed'}
+                                {statusLabel}
                             </span>
                         </div>
 
