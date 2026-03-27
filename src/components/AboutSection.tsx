@@ -79,7 +79,7 @@ export const AboutSection = () => (
             </div>
 
             {/* ── Sleek glass callout boxes ── */}
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 20, marginBottom: 24 }}>
+            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 40, marginBottom: 24 }}>
 
                 {/* Box 1 — Research */}
                 <div style={{
@@ -103,9 +103,9 @@ export const AboutSection = () => (
                     <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:REDORANGE, fill:REDORANGE, filter:`drop-shadow(0 0 6px ${REDORANGE}) drop-shadow(0 0 14px ${REDORANGE}bb)`, pointerEvents:'none' }}/>
 
                     {/* Icon + header */}
-                    <div style={{ display:'flex', flexDirection:'column', gap:10, position:'relative', zIndex:1 }}>
-                        <div style={{ width:44, height:44, borderRadius:'12px', display:'flex', alignItems:'center', justifyContent:'center', background:`${REDORANGE}20`, border:`1px solid ${REDORANGE}55` }}>
-                            <Microscope size={22} style={{ color:REDORANGE, filter:`drop-shadow(0 0 6px ${REDORANGE}aa)` }}/>
+                    <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
+                        <div style={{ width:68, height:68, borderRadius:'16px', display:'flex', alignItems:'center', justifyContent:'center', background:`${REDORANGE}20`, border:`1px solid ${REDORANGE}55`, boxShadow:`0 0 20px 4px ${REDORANGE}25` }}>
+                            <Microscope size={32} style={{ color:REDORANGE, filter:`drop-shadow(0 0 8px ${REDORANGE}cc)` }}/>
                         </div>
                         <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${REDORANGE}cc` }}>Published Researcher</p>
                         <p style={{ fontSize:'21px', fontWeight:800, letterSpacing:'-0.02em', color:'rgba(255,255,255,0.95)', lineHeight:1.2 }}>First Author · NDSS 2026</p>
@@ -146,9 +146,9 @@ export const AboutSection = () => (
                     <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:REDORANGE, fill:REDORANGE, filter:`drop-shadow(0 0 6px ${REDORANGE}) drop-shadow(0 0 14px ${REDORANGE}bb)`, pointerEvents:'none' }}/>
 
                     {/* Icon + header */}
-                    <div style={{ display:'flex', flexDirection:'column', gap:10, position:'relative', zIndex:1 }}>
-                        <div style={{ width:44, height:44, borderRadius:'12px', display:'flex', alignItems:'center', justifyContent:'center', background:`${REDORANGE}20`, border:`1px solid ${REDORANGE}55` }}>
-                            <Cpu size={22} style={{ color:REDORANGE, filter:`drop-shadow(0 0 6px ${REDORANGE}aa)` }}/>
+                    <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
+                        <div style={{ width:68, height:68, borderRadius:'16px', display:'flex', alignItems:'center', justifyContent:'center', background:`${REDORANGE}20`, border:`1px solid ${REDORANGE}55`, boxShadow:`0 0 20px 4px ${REDORANGE}25` }}>
+                            <Cpu size={32} style={{ color:REDORANGE, filter:`drop-shadow(0 0 8px ${REDORANGE}cc)` }}/>
                         </div>
                         <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${REDORANGE}cc` }}>Industry Engineer</p>
                         <p style={{ fontSize:'21px', fontWeight:800, letterSpacing:'-0.02em', color:'rgba(255,255,255,0.95)', lineHeight:1.2 }}>3× Co-op Engineer</p>
