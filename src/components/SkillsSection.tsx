@@ -1,13 +1,13 @@
-import { Terminal, Cloud, DatabaseZap, Bot, Cpu, Layers, HardDrive, Share2, Server, Network, Plug, Database, Monitor, GitBranch, MessageSquare, ShieldAlert, BookOpen } from 'lucide-react';
+import { Terminal, Bot, Cpu, Layers, HardDrive, Share2, Server, Network, Plug, Database, Monitor, GitBranch, MessageSquare, ShieldAlert, BookOpen } from 'lucide-react';
 import { TbTopologyComplex } from 'react-icons/tb';
 import {
     SiPython, SiTypescript, SiJavascript, SiRust, SiRuby, SiC, SiCplusplus, SiElixir,
     SiDocker, SiKubernetes, SiPostgresql, SiLinux, SiAmazonwebservices,
     SiReact, SiNodedotjs, SiTailwindcss, SiExpress, SiDjango, SiFastapi, SiRubyonrails,
-    SiGit, SiPostman, SiFigma, SiRailway, SiDynatrace, SiWireshark, SiCircleci,
+    SiGit, SiPostman, SiFigma, SiDynatrace, SiWireshark, SiJira, SiIntellijidea,
     SiMongodb, SiRedis,
     SiPhoenixframework, SiSpring,
-    SiPytorch, SiPandas, SiNumpy, SiScikitlearn, SiLangchain, SiWebflow
+    SiPytorch, SiPandas, SiNumpy, SiScikitlearn, SiLangchain
 } from 'react-icons/si';
 import { FaJava, FaCodeCompare } from 'react-icons/fa6';
 import { LiaLaptopCodeSolid } from 'react-icons/lia';
@@ -57,7 +57,6 @@ const LANES: Lane[] = [
             { name: 'Distributed Systems',     Icon: Share2   },
             { name: 'Operating Systems',        Icon: Server   },
             { name: 'Computer Networks',        Icon: Network  },
-            { name: 'Network Traffic Analysis', Icon: Network  },
         ],
     },
     {
@@ -82,15 +81,19 @@ const LANES: Lane[] = [
     {
         label: 'Dev Tools', color: '#818CF8', Icon: FaCodeCompare, reverse: true,
         skills: [
-            { name: 'Git',       Icon: SiGit              },
-            { name: 'VS Code',   Icon: BiLogoVisualStudio },
-            { name: 'Postman',   Icon: SiPostman          },
-            { name: 'Figma',     Icon: SiFigma            },
-            { name: 'Dynatrace', Icon: SiDynatrace        },
-            { name: 'Wireshark', Icon: SiWireshark        },
+            { name: 'Git',          Icon: SiGit              },
+            { name: 'VS Code',      Icon: BiLogoVisualStudio },
+            { name: 'IntelliJ',     Icon: SiIntellijidea     },
+            { name: 'Postman',      Icon: SiPostman          },
+            { name: 'Figma',        Icon: SiFigma            },
+            { name: 'Dynatrace',    Icon: SiDynatrace        },
+            { name: 'Wireshark',    Icon: SiWireshark        },
+            { name: 'Jira',         Icon: SiJira             },
+            { name: 'Claude Code',  Icon: Bot                },
         ],
         competencies: [
-            { name: 'CI/CD Pipelines', Icon: GitBranch },
+            { name: 'CI/CD Pipelines',   Icon: GitBranch },
+            { name: 'Network Analysis',  Icon: Network   },
         ],
     },
     {
@@ -113,12 +116,6 @@ const LANES: Lane[] = [
     },
 ];
 
-// Repeat skills enough times so the track always overflows the container for seamless looping.
-// Must be an even number so translateX(-50%) lands on an identical frame.
-function buildTrack(skills: Skill[]): Skill[] {
-    const reps = skills.length <= 4 ? 6 : skills.length <= 6 ? 4 : 2;
-    return Array.from({ length: reps }, () => skills).flat();
-}
 
 export const SkillsSection = () => (
     <section id="skills" className="py-24 px-6 relative">
@@ -158,7 +155,13 @@ export const SkillsSection = () => (
                             borderRadius: '16px',
                             boxShadow: `0 0 28px 6px ${color}20, inset 0 1px 0 ${color}33, inset 0 -1px 0 ${color}18`,
                             overflow: 'hidden',
+                            position: 'relative',
                         }}>
+                            {/* Internal color splash orbs */}
+                            <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
+                                <div style={{ position:'absolute', top:'-40%', right:'-5%', width:'280px', height:'200px', borderRadius:'50%', filter:'blur(55px)', background:`radial-gradient(ellipse, ${color}40 0%, transparent 70%)` }}/>
+                                <div style={{ position:'absolute', bottom:'-40%', left:'-5%', width:'240px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:`radial-gradient(ellipse, ${color}30 0%, transparent 70%)` }}/>
+                            </div>
                             {/* Lane label */}
                             <div style={{
                                 width: 175, flexShrink: 0,

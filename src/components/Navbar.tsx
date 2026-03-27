@@ -3,8 +3,6 @@ import { cn } from "../lib/utils";
 import { Menu, X } from "lucide-react";
 import { useTheme } from "./ThemeContext";
 
-// Contrast color — #4338CA (deep indigo)
-const CONTRAST = '#4338CA';
 const RAINBOW = 'linear-gradient(90deg, #2DD4BF, #60A5FA, #D946EF, #4338CA, #2DD4BF)';
 
 const navItems = [
@@ -15,7 +13,6 @@ const navItems = [
     {name: "Projects",   href: "#projects"},
     {name: "Coursework", href: "#coursework"},
     {name: "Resume",     href: "#resume"},
-    {name: "Contact",    href: "#contact"},
 ];
 
 export const Navbar = () => {

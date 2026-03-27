@@ -45,7 +45,7 @@ const education = {
     endYear: 2027, endMonth: 5,
 };
 
-const internships = [
+const internships: { role: string; org: string; blurb: string; color: string; ongoing: boolean; startYear: number; startMonth: number; endYear: number; endMonth: number; cardOffset?: number; barRow?: number }[] = [
     {
         role: 'NLP Engineer', org: 'MatrixOrigin',
         blurb: 'Configured and evaluated NL → NLP platform',

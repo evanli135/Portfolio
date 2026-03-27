@@ -1,13 +1,16 @@
-import { Bot, Shield, Briefcase, Cpu, type LucideIcon } from 'lucide-react';
+import { Bot, Shield, Briefcase, Cpu, MessageSquare, Cog, Database, type LucideIcon } from 'lucide-react';
 import vestmarkLogo    from '../assets/vestmarklogo.png';
 import nuseal          from '../assets/NUseal.png';
 import keysightLogo    from '../assets/KeysightLogo (2).png';
 import matrixLogo      from '../assets/matrixoriginlogo.png';
 
-interface Bullet   { label: string; detail: string }
+interface Bullet        { label: string; detail: string }
+interface PipelineNode  { Icon: LucideIcon; label: string; sub: string; desc: string }
 interface ExpEntry {
+    blurb?: string;
     role: string;
     org: string;
+    industry: string;
     start: string;
     end: string;
     color: string;
@@ -17,33 +20,38 @@ interface ExpEntry {
     Icon: LucideIcon;
     logo?: string;
     bullets: Bullet[];
+    pipeline?: PipelineNode[];
 }
 
 const EXPERIENCES: ExpEntry[] = [
     {
         role: 'NLP Engineer',
         org: 'MatrixOrigin',
+        industry: 'Tech',
         start: 'Jun 2024', end: 'Sep 2024',
         color: '#2DD4BF',
         logoColor: '#0080FF',
         status: 'completed',
-        type: 'Co-op',
+        type: 'Internship',
         Icon: Bot,
         logo: matrixLogo,
-        bullets: [
-            { label: 'NL → SQL',        detail: 'configured and evaluated a natural language to SQL LLM platform end-to-end' },
-            { label: 'Evaluation',       detail: 'designed benchmark suites to measure query accuracy and edge-case coverage' },
-            { label: 'Prompt Design',    detail: 'iterated on prompt strategies to improve schema-awareness and output reliability' },
+        blurb: 'Engineered end-to-end Natural Language to SQL platform',
+        bullets: [],
+        pipeline: [
+            { Icon: MessageSquare, label: 'Input',   sub: 'Natural Language', desc: 'Used JavaScript to parse ' },
+            { Icon: Cog,           label: 'Process', sub: 'Transform with Schema aware LLM',     desc: 'Schema-aware prompt fed to LLM with context injection' },
+            { Icon: Database,      label: 'Output',  sub: 'Final SQL Query',        desc: 'Validated thousands of SQL queries executed against target database' },
         ],
     },
     {
         role: 'Distributed Systems Security Researcher',
         org: 'NEU Privacy & Security Lab',
+        industry: 'Acadamia',
         start: 'Jan 2025', end: 'Jul 2025',
         color: '#E8345C',
         logoColor: '#CC2030',
         status: 'completed',
-        type: 'Research',
+        type: 'Co-op',
         Icon: Shield,
         logo: nuseal,
         bullets: [
@@ -55,6 +63,7 @@ const EXPERIENCES: ExpEntry[] = [
     {
         role: 'Software Engineer',
         org: 'Vestmark',
+        industry: 'Finance',
         start: 'Jan 2026', end: 'Jul 2026',
         color: '#60A5FA',
         logoColor: '#3AAFA9',
@@ -71,12 +80,12 @@ const EXPERIENCES: ExpEntry[] = [
     {
         role: 'R&D Test Systems Engineer',
         org: 'Keysight Technologies',
+        industry: 'Electronics',
         start: 'Jul 2026', end: 'Sep 2026',
         color: '#F97316',
         logoColor: '#E8192C',
         status: 'upcoming',
-        current: false,
-        type: 'Co-op',
+        type: 'Internship',
         Icon: Cpu,
         logo: keysightLogo,
         bullets: [
@@ -109,7 +118,7 @@ export const ExperienceSection = () => (
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                {EXPERIENCES.map(({ role, org, start, end, color, logoColor: lc, status, type, Icon, logo, bullets }) => {
+                {EXPERIENCES.map(({ role, org, industry, start, end, color, logoColor: lc, status, type, Icon, logo, blurb, bullets, pipeline }) => {
                     const lclr = lc ?? color;
                     const statusLabel = status === 'current' ? 'Current' : status === 'upcoming' ? 'Upcoming' : 'Completed';
                     const statusColor = status === 'current' ? '#2DD4BF' : status === 'upcoming' ? '#818CF8' : `${color}99`;
@@ -155,6 +164,11 @@ export const ExperienceSection = () => (
                                 {org}
                             </span>
 
+                            {/* Industry */}
+                            <span style={{ fontSize: '10px', fontWeight: 600, color: `${color}88`, textAlign: 'center', letterSpacing: '0.10em', textTransform: 'uppercase' }}>
+                                {industry}
+                            </span>
+
                             {/* Date range */}
                             <span style={{ fontSize: '11px', fontWeight: 500, color: `${color}bb`, textAlign: 'center', lineHeight: 1.4 }}>
                                 {start} – {end}
@@ -162,7 +176,7 @@ export const ExperienceSection = () => (
                         </div>
 
                         {/* Middle: role + bullets */}
-                        <div style={{ flex: 1, padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: 12, justifyContent: 'center' }}>
+                        <div style={{ flex: 1, padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: 12, justifyContent: pipeline ? 'flex-start' : 'center' }}>
                             <span style={{
                                 display: 'block',
                                 fontSize: '19px', fontWeight: 800,
@@ -173,18 +187,66 @@ export const ExperienceSection = () => (
                             }}>
                                 {role}
                             </span>
-                            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                                {bullets.map(({ label, detail }, i) => (
-                                    <li key={i} style={{ display: 'flex', alignItems: 'baseline', gap: 9 }}>
-                                        <span style={{ color, fontSize: '13px', lineHeight: '20px', flexShrink: 0, filter: `drop-shadow(0 0 4px ${color}88)` }}>▸</span>
-                                        <span style={{ fontSize: '13px', lineHeight: '20px' }}>
-                                            <span style={{ fontWeight: 700, color, filter: `drop-shadow(0 0 6px ${color}55)`, marginRight: 2 }}>{label}:</span>
-                                            {' '}
-                                            <span style={{ color: 'rgba(215,230,248,0.90)', fontWeight: 400 }}>{detail}</span>
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
+                            {blurb
+                                ? <p style={{ fontSize: '13px', color: 'rgba(215,230,248,0.85)', lineHeight: 1.65, fontStyle: 'italic' }}>{blurb}</p>
+                                : <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                                    {bullets.map(({ label, detail }, i) => (
+                                        <li key={i} style={{ display: 'flex', alignItems: 'baseline', gap: 9 }}>
+                                            <span style={{ color, fontSize: '13px', lineHeight: '20px', flexShrink: 0, filter: `drop-shadow(0 0 4px ${color}88)` }}>▸</span>
+                                            <span style={{ fontSize: '13px', lineHeight: '20px' }}>
+                                                <span style={{ fontWeight: 700, color, filter: `drop-shadow(0 0 6px ${color}55)`, marginRight: 2 }}>{label}:</span>
+                                                {' '}
+                                                <span style={{ color: 'rgba(215,230,248,0.90)', fontWeight: 400 }}>{detail}</span>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            }
+
+                            {/* Pipeline diagram */}
+                            {pipeline && (
+                                <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${color}33` }}>
+                                    <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+
+                                        {/* Connecting line */}
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '38px',
+                                            left: 'calc(16.66% )',
+                                            right: 'calc(16.66%)',
+                                            height: '2px',
+                                            background: `linear-gradient(90deg, ${color}99, ${color}ff, ${color}99)`,
+                                            boxShadow: `0 0 6px 1px ${color}66`,
+                                        }}/>
+
+                                        {pipeline.map(({ Icon: NIcon, label, sub, desc }, i) => (
+                                            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, flex: 1, padding: '0 8px' }}>
+                                                {/* Icon above node */}
+                                                <div style={{
+                                                    width: 36, height: 36, borderRadius: '10px',
+                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                    background: `linear-gradient(135deg, ${color}22 0%, ${color}0e 100%)`,
+                                                    border: `1px solid ${color}55`,
+                                                    boxShadow: `0 0 12px 2px ${color}30`,
+                                                }}>
+                                                    <NIcon size={16} style={{ color, filter: `drop-shadow(0 0 5px ${color}cc)` }}/>
+                                                </div>
+                                                {/* Node dot */}
+                                                <div style={{
+                                                    width: 12, height: 12, borderRadius: '50%',
+                                                    background: color,
+                                                    boxShadow: `0 0 8px 2px ${color}88`,
+                                                    zIndex: 1,
+                                                }}/>
+                                                {/* Labels */}
+                                                <span style={{ fontSize: '11px', fontWeight: 700, color, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{label}</span>
+                                                <span style={{ fontSize: '10px', color: `${color}bb`, fontWeight: 600, whiteSpace: 'nowrap' }}>{sub}</span>
+                                                <span style={{ fontSize: '10px', color: 'rgba(190,210,235,0.65)', fontWeight: 400, textAlign: 'center', lineHeight: 1.5 }}>{desc}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         {/* Right: type + status */}

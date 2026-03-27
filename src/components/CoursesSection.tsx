@@ -1,4 +1,4 @@
-import { Cpu, Network, Binary, Code, Database, Shield, BarChart4, Sigma, Wrench, type LucideIcon } from 'lucide-react';
+import { Cpu, Network, Binary, Code, Database, Shield, BarChart4, type LucideIcon } from 'lucide-react';
 import NUseal from '../assets/NUseal.png';
 
 const NU_COLOR = '#E8345C';
