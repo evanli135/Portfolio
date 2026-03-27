@@ -4,7 +4,7 @@ import portrait from '../assets/portrait.png';
 import { GlassText } from "./GlassText";
 
 const TEAL = '#2DD4BF';
-const REDORANGE = '#E8345C';
+const REDORANGE = '#F97316';
 
 // Scattered star configs for the merged bottom box sides
 const STARS_BOTTOM: { top: string; left?: string; right?: string; size: number; opacity: number; rotate: number }[] = [
