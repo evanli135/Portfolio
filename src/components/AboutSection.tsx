@@ -107,19 +107,13 @@ export const AboutSection = () => (
                         <div style={{ width:68, height:68, borderRadius:'16px', display:'flex', alignItems:'center', justifyContent:'center', background:`${REDORANGE}20`, border:`1px solid ${REDORANGE}55`, boxShadow:`0 0 20px 4px ${REDORANGE}25` }}>
                             <Microscope size={32} style={{ color:REDORANGE, filter:`drop-shadow(0 0 8px ${REDORANGE}cc)` }}/>
                         </div>
-                        <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${REDORANGE}cc` }}>Published Researcher</p>
-                        <p style={{ fontSize:'21px', fontWeight:800, letterSpacing:'-0.02em', color:'rgba(255,255,255,0.95)', lineHeight:1.2 }}>First Author · NDSS 2026</p>
+                        <p style={{ fontSize:'15px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${REDORANGE}ee` }}>Published Researcher</p>
                     </div>
 
-                    {/* Three subsections */}
-                    {[
-                        { label: 'Paper',  text: 'ACE: A Security Architecture for LLM-Integrated App Systems' },
-                        { label: 'Venue',  text: 'NDSS 2026 — top-4 security venue, ~15% acceptance rate' },
-                        { label: 'Focus',  text: 'Prompt injection, denial-of-service, and secure information flow in multi-agent systems' },
-                    ].map(({ label, text }) => (
-                        <div key={label} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${REDORANGE}0c`, border:`1px solid ${REDORANGE}33` }}>
-                            <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:`${REDORANGE}cc`, marginBottom:4 }}>{label}</p>
-                            <p style={{ fontSize:'13px', color:'rgba(200,215,235,0.80)', lineHeight:1.55 }}>{text}</p>
+                    {/* Three subsections — label only */}
+                    {['Paper', 'Venue', 'Focus'].map(label => (
+                        <div key={label} style={{ position:'relative', zIndex:1, padding:'14px 16px', borderRadius:'12px', background:`${REDORANGE}0c`, border:`1px solid ${REDORANGE}33` }}>
+                            <p style={{ fontSize:'12px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:`${REDORANGE}cc` }}>{label}</p>
                         </div>
                     ))}
                 </div>
@@ -150,19 +144,13 @@ export const AboutSection = () => (
                         <div style={{ width:68, height:68, borderRadius:'16px', display:'flex', alignItems:'center', justifyContent:'center', background:`${REDORANGE}20`, border:`1px solid ${REDORANGE}55`, boxShadow:`0 0 20px 4px ${REDORANGE}25` }}>
                             <Cpu size={32} style={{ color:REDORANGE, filter:`drop-shadow(0 0 8px ${REDORANGE}cc)` }}/>
                         </div>
-                        <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${REDORANGE}cc` }}>Industry Engineer</p>
-                        <p style={{ fontSize:'21px', fontWeight:800, letterSpacing:'-0.02em', color:'rgba(255,255,255,0.95)', lineHeight:1.2 }}>3× Co-op Engineer</p>
+                        <p style={{ fontSize:'15px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${REDORANGE}ee` }}>Industry Engineer</p>
                     </div>
 
-                    {/* Three subsections */}
-                    {[
-                        { label: 'Current',   text: 'Vestmark — AI-powered financial advisor agent (fintech)' },
-                        { label: 'Previous',  text: 'MatrixOrigin (NLP/SQL platform) · NEU Privacy & Security Lab (LLM security research)' },
-                        { label: 'Upcoming',  text: 'Keysight Technologies — R&D instrumentation and anomaly detection' },
-                    ].map(({ label, text }) => (
-                        <div key={label} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${REDORANGE}0c`, border:`1px solid ${REDORANGE}33` }}>
-                            <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:`${REDORANGE}cc`, marginBottom:4 }}>{label}</p>
-                            <p style={{ fontSize:'13px', color:'rgba(200,215,235,0.80)', lineHeight:1.55 }}>{text}</p>
+                    {/* Three subsections — label only */}
+                    {['Current', 'Previous', 'Upcoming'].map(label => (
+                        <div key={label} style={{ position:'relative', zIndex:1, padding:'14px 16px', borderRadius:'12px', background:`${REDORANGE}0c`, border:`1px solid ${REDORANGE}33` }}>
+                            <p style={{ fontSize:'12px', fontWeight:700, letterSpacing:'0.12em', textTransform:'uppercase', color:`${REDORANGE}cc` }}>{label}</p>
                         </div>
                     ))}
                 </div>
