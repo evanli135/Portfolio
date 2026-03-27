@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from "../lib/utils";
 import { Star, Cpu, Microscope, Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
-import portrait from '../assets/portrait.png';
+// import portrait from '../assets/portrait.png';
 
 const TEAL = '#2DD4BF';
 
@@ -102,15 +102,13 @@ export const AboutSection = () => (
 
                     {/* Icon + header */}
                     <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
-                        <div style={{ width:68, height:68, borderRadius:'16px', display:'flex', alignItems:'center', justifyContent:'center', background:`${TEAL}20`, border:`1px solid ${TEAL}55`, boxShadow:`0 0 20px 4px ${TEAL}25` }}>
-                            <Microscope size={32} style={{ color:TEAL, filter:`drop-shadow(0 0 8px ${TEAL}cc)` }}/>
-                        </div>
-                        <p style={{ fontSize:'15px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>Published Security Researcher</p>
+                        <Microscope size={64} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
+                        <p style={{ fontSize:'15px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>Published Systems Researcher</p>
                     </div>
 
                     {/* Subsections with bolded keywords */}
                     {([
-                        <><strong style={{ color: TEAL }}>First Authored</strong> Paper on LLM Security Systems</>,
+                        <><strong style={{ color: TEAL }}>First Authored</strong> Paper on Distributed LLM Security Systems</>,
                         <>Accepted into <strong style={{ color: TEAL }}>NDSS</strong> — <strong style={{ color: TEAL }}>Top 4</strong> Security Venue (<strong style={{ color: TEAL }}>16%</strong> acceptance rate)</>,
                         <><strong style={{ color: TEAL }}>14 Citations</strong></>,
                     ] as React.ReactNode[]).map((content, i) => (
@@ -143,9 +141,7 @@ export const AboutSection = () => (
 
                     {/* Icon + header */}
                     <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
-                        <div style={{ width:68, height:68, borderRadius:'16px', display:'flex', alignItems:'center', justifyContent:'center', background:`${TEAL}20`, border:`1px solid ${TEAL}55`, boxShadow:`0 0 20px 4px ${TEAL}25` }}>
-                            <Cpu size={32} style={{ color:TEAL, filter:`drop-shadow(0 0 8px ${TEAL}cc)` }}/>
-                        </div>
+                        <Cpu size={64} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
                         <p style={{ fontSize:'15px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>1.5 Years of Professional Experience</p>
                     </div>
 

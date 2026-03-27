@@ -1,3 +1,4 @@
+import React from 'react';
 import { Bot, Shield, Briefcase, Cpu, MessageSquare, Cog, Database, type LucideIcon } from 'lucide-react';
 import vestmarkLogo    from '../assets/vestmarklogo.png';
 import nuseal          from '../assets/NUseal.png';
@@ -5,7 +6,7 @@ import keysightLogo    from '../assets/KeysightLogo (2).png';
 import matrixLogo      from '../assets/matrixoriginlogo.png';
 
 interface Bullet        { label: string; detail: string }
-interface PipelineNode  { Icon: LucideIcon; label: string; sub: string; desc: string }
+interface PipelineNode  { Icon: LucideIcon; label: string; desc: React.ReactNode; sub?: never }
 interface ExpEntry {
     blurb?: string;
     role: string;
@@ -38,9 +39,9 @@ const EXPERIENCES: ExpEntry[] = [
         blurb: 'Engineered end-to-end Natural Language to SQL platform',
         bullets: [],
         pipeline: [
-            { Icon: MessageSquare, label: 'Input',   sub: 'Natural Language', desc: 'Used JavaScript to parse ' },
-            { Icon: Cog,           label: 'Process', sub: 'Transform with Schema aware LLM',     desc: 'Schema-aware prompt fed to LLM with context injection' },
-            { Icon: Database,      label: 'Output',  sub: 'Final SQL Query',        desc: 'Validated thousands of SQL queries executed against target database' },
+            { Icon: MessageSquare, label: 'Natural Text Input',  desc: <><strong>Python</strong> interface with iterated <strong>prompt strategies</strong></> },
+            { Icon: Cog,           label: 'LLM Transformation', desc: <>Improved accuracy by <strong>40%</strong> via <strong>prompt engineering</strong> and few-shot examples</> },
+            { Icon: Database,      label: 'SQL Execution',       desc: <>Wired LLM to live <strong>DB services</strong> for <strong>schema-aware</strong> generation and automated <strong>data fetching</strong></> },
         ],
     },
     {
@@ -206,42 +207,40 @@ export const ExperienceSection = () => (
                             {/* Pipeline diagram */}
                             {pipeline && (
                                 <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${color}33` }}>
-                                    <div style={{ position: 'relative', display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+                                    <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignItems: 'start' }}>
 
-                                        {/* Connecting line */}
+                                        {/* Connecting line — top = icon(48) + marginBottom(16) + dot_half(8) = 72px */}
                                         <div style={{
                                             position: 'absolute',
-                                            top: '38px',
-                                            left: 'calc(16.66% )',
+                                            top: '72px',
+                                            left: 'calc(16.66%)',
                                             right: 'calc(16.66%)',
                                             height: '2px',
                                             background: `linear-gradient(90deg, ${color}99, ${color}ff, ${color}99)`,
                                             boxShadow: `0 0 6px 1px ${color}66`,
                                         }}/>
 
-                                        {pipeline.map(({ Icon: NIcon, label, sub, desc }, i) => (
-                                            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, flex: 1, padding: '0 8px' }}>
-                                                {/* Icon above node */}
-                                                <div style={{
-                                                    width: 36, height: 36, borderRadius: '10px',
-                                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                                    background: `linear-gradient(135deg, ${color}22 0%, ${color}0e 100%)`,
-                                                    border: `1px solid ${color}55`,
-                                                    boxShadow: `0 0 12px 2px ${color}30`,
-                                                }}>
-                                                    <NIcon size={16} style={{ color, filter: `drop-shadow(0 0 5px ${color}cc)` }}/>
-                                                </div>
+                                        {pipeline.map(({ Icon: NIcon, label, desc }, i) => (
+                                            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 12px' }}>
+                                                {/* Icon — glassified directly */}
+                                                <NIcon size={48} style={{
+                                                    marginBottom: 16,
+                                                    color: `${color}dd`,
+                                                    filter: `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}99) drop-shadow(0 0 28px ${color}44)`,
+                                                }}/>
                                                 {/* Node dot */}
                                                 <div style={{
-                                                    width: 12, height: 12, borderRadius: '50%',
+                                                    width: 16, height: 16, borderRadius: '50%', marginBottom: 12,
                                                     background: color,
-                                                    boxShadow: `0 0 8px 2px ${color}88`,
+                                                    boxShadow: `0 0 10px 3px ${color}88`,
                                                     zIndex: 1,
                                                 }}/>
-                                                {/* Labels */}
-                                                <span style={{ fontSize: '11px', fontWeight: 700, color, letterSpacing: '0.06em', textTransform: 'uppercase' }}>{label}</span>
-                                                <span style={{ fontSize: '10px', color: `${color}bb`, fontWeight: 600, whiteSpace: 'nowrap' }}>{sub}</span>
-                                                <span style={{ fontSize: '10px', color: 'rgba(190,210,235,0.65)', fontWeight: 400, textAlign: 'center', lineHeight: 1.5 }}>{desc}</span>
+                                                {/* Label */}
+                                                <span style={{ fontSize: '13px', fontWeight: 700, color, letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 5, textAlign: 'center' }}>
+                                                    {label}
+                                                </span>
+                                                {/* Desc */}
+                                                <span style={{ fontSize: '12px', color: `${color}bb`, fontWeight: 600, textAlign: 'center', lineHeight: 1.6 }}>{desc}</span>
                                             </div>
                                         ))}
                                     </div>
