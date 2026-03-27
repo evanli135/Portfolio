@@ -104,6 +104,13 @@ export const AboutSection = () => (
                         boxShadow: `0 0 44px 10px ${REDORANGE}30, inset 0 1px 0 ${REDORANGE}55, inset 0 -1px 0 ${REDORANGE}22`,
                         display:'flex', flexDirection:'column', gap: 14,
                     }}>
+                        {/* Color splash orbs */}
+                        <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
+                            <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(249,115,22,0.55) 0%, transparent 70%)' }}/>
+                            <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(234,88,12,0.45) 0%, transparent 70%)' }}/>
+                            <div style={{ position:'absolute', top:'40%', left:'30%', width:'160px', height:'120px', borderRadius:'50%', filter:'blur(55px)', background:'radial-gradient(ellipse, rgba(251,146,60,0.35) 0%, transparent 70%)' }}/>
+                            <div style={{ position:'absolute', top:'10%', left:'15%', width:'100px', height:'80px', borderRadius:'50%', filter:'blur(35px)', background:'radial-gradient(ellipse, rgba(255,200,100,0.25) 0%, transparent 70%)' }}/>
+                        </div>
                         {/* Solid-filled glowing star */}
                         <Star style={{
                             position:'absolute', top: 16, left: 18,
