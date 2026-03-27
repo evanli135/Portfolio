@@ -52,71 +52,6 @@ export const AboutSection = () => (
                 About <span className="text-primary"> Me </span>
             </h2>
 
-            {/* ── Two bright callout boxes ── */}
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 20, marginBottom: 24 }}>
-
-                {/* Callout 1 */}
-                <div style={{
-                    position:'relative', overflow:'hidden',
-                    padding: '28px 26px 24px',
-                    borderRadius: '18px',
-                    background: `linear-gradient(135deg, #2DD4BF 0%, #18BDB3 100%)`,
-                    boxShadow: `0 0 40px 10px ${TEAL}44, 0 4px 24px rgba(0,0,0,0.25)`,
-                    border: `1px solid rgba(255,255,255,0.30)`,
-                }}>
-                    {/* Single top-left star */}
-                    <Star style={{
-                        position:'absolute', top: 12, left: 14,
-                        width: 22, height: 22,
-                        color: 'rgba(255,255,255,0.90)',
-                        filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.8))',
-                        pointerEvents: 'none',
-                    }}/>
-                    <div style={{ paddingTop: 8 }}>
-                        <p style={{ fontSize:'11px', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(0,60,55,0.75)', marginBottom: 6 }}>
-                            Published Researcher
-                        </p>
-                        <p style={{ fontSize:'20px', fontWeight:900, color:'#ffffff', lineHeight:1.2, marginBottom: 8 }}>
-                            First Author, NDSS 2026
-                        </p>
-                        <p style={{ fontSize:'13px', fontWeight:500, color:'rgba(255,255,255,0.82)', lineHeight:1.5 }}>
-                            ACE: A Security Architecture for LLM-Integrated App Systems — top-4 security venue, ~15% acceptance rate
-                        </p>
-                    </div>
-                </div>
-
-                {/* Callout 2 */}
-                <div style={{
-                    position:'relative', overflow:'hidden',
-                    padding: '28px 26px 24px',
-                    borderRadius: '18px',
-                    background: `linear-gradient(135deg, #2DD4BF 0%, #18BDB3 100%)`,
-                    boxShadow: `0 0 40px 10px ${TEAL}44, 0 4px 24px rgba(0,0,0,0.25)`,
-                    border: `1px solid rgba(255,255,255,0.30)`,
-                }}>
-                    {/* Single top-left star */}
-                    <Star style={{
-                        position:'absolute', top: 12, left: 14,
-                        width: 22, height: 22,
-                        color: 'rgba(255,255,255,0.90)',
-                        filter: 'drop-shadow(0 0 6px rgba(255,255,255,0.8))',
-                        pointerEvents: 'none',
-                    }}/>
-                    <div style={{ paddingTop: 8 }}>
-                        <p style={{ fontSize:'11px', fontWeight:800, letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(0,60,55,0.75)', marginBottom: 6 }}>
-                            Industry Engineer
-                        </p>
-                        <p style={{ fontSize:'20px', fontWeight:900, color:'#ffffff', lineHeight:1.2, marginBottom: 8 }}>
-                            3× Co-op Engineer
-                        </p>
-                        <p style={{ fontSize:'13px', fontWeight:500, color:'rgba(255,255,255,0.82)', lineHeight:1.5 }}>
-                            Vestmark (fintech) · MatrixOrigin (AI startup) · Keysight Technologies (R&D instrumentation)
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
             {/* ── Glassified portrait ── */}
             <div style={{ display:'flex', justifyContent:'center', marginBottom: 24 }}>
                 <div style={{
@@ -140,6 +75,56 @@ export const AboutSection = () => (
                         background:'linear-gradient(160deg, rgba(255,255,255,0.08) 0%, transparent 55%, rgba(45,212,191,0.06) 100%)',
                     }}/>
                 </div>
+            </div>
+
+            {/* ── Sleek glass callout boxes ── */}
+            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 20, marginBottom: 24 }}>
+
+                {[
+                    {
+                        label: 'Published Researcher',
+                        headline: 'First Author · NDSS 2026',
+                        body: 'ACE: A Security Architecture for LLM-Integrated App Systems — top-4 security venue, ~15% acceptance rate',
+                    },
+                    {
+                        label: 'Industry Engineer',
+                        headline: '3× Co-op Engineer',
+                        body: 'Vestmark (fintech AI) · MatrixOrigin (NLP startup) · Keysight Technologies (R&D instrumentation)',
+                    },
+                ].map(({ label, headline, body }) => (
+                    <div key={label} style={{
+                        position:'relative', overflow:'hidden',
+                        padding: '44px 32px 40px',
+                        borderRadius: '18px',
+                        background: `linear-gradient(160deg, ${TEAL}18 0%, ${TEAL}0a 60%, transparent 100%)`,
+                        backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+                        border: `1px solid ${TEAL}88`,
+                        borderBottom: `2px solid ${TEAL}`,
+                        boxShadow: `0 0 44px 10px ${TEAL}30, inset 0 1px 0 ${TEAL}55, inset 0 -1px 0 ${TEAL}22`,
+                        display:'flex', flexDirection:'column', gap: 14,
+                    }}>
+                        {/* Solid-filled glowing star */}
+                        <Star style={{
+                            position:'absolute', top: 16, left: 18,
+                            width: 20, height: 20,
+                            color: TEAL,
+                            fill: TEAL,
+                            filter: `drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}bb)`,
+                            pointerEvents: 'none',
+                        }}/>
+
+                        <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:`${TEAL}cc`, paddingTop: 4 }}>
+                            {label}
+                        </p>
+                        <p style={{ fontSize:'21px', fontWeight:800, letterSpacing:'-0.02em', color:'rgba(255,255,255,0.95)', lineHeight:1.2 }}>
+                            {headline}
+                        </p>
+                        <p style={{ fontSize:'13px', color:'rgba(190,215,235,0.78)', lineHeight:1.65 }}>
+                            {body}
+                        </p>
+                    </div>
+                ))}
+
             </div>
 
             {/* ── Merged bottom box ── */}
