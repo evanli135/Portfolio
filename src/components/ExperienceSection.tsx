@@ -1,12 +1,14 @@
 import React from 'react';
-import { Bot, Shield, Briefcase, Cpu, MessageSquare, Cog, Database, type LucideIcon } from 'lucide-react';
+import { Bot, Shield, Briefcase, Cpu, MessageSquare, Database, ChevronRight, ShieldAlert, Layers, Code2, CheckCheck, BookOpen, type LucideIcon } from 'lucide-react';
+import { TbAbc, TbSql, TbBrain, TbStack2, TbRocket, TbReportAnalytics, TbRoute, TbRadar, TbFlame, TbPlugConnected, TbHeartbeat } from 'react-icons/tb';
 import vestmarkLogo    from '../assets/vestmarklogo.png';
 import nuseal          from '../assets/NUseal.png';
 import keysightLogo    from '../assets/KeysightLogo (2).png';
 import matrixLogo      from '../assets/matrixoriginlogo.png';
 
 interface Bullet        { label: string; detail: string }
-interface PipelineNode  { Icon: LucideIcon; label: string; desc: React.ReactNode; sub?: never }
+interface PipelineNode  { Icon: React.ElementType; label: string; desc: React.ReactNode; connector?: React.ElementType; }
+
 interface ExpEntry {
     blurb?: string;
     role: string;
@@ -22,6 +24,7 @@ interface ExpEntry {
     logo?: string;
     bullets: Bullet[];
     pipeline?: PipelineNode[];
+    pipelineLayout?: 'horizontal' | 'vertical' | 'grid';
 }
 
 const EXPERIENCES: ExpEntry[] = [
@@ -40,14 +43,14 @@ const EXPERIENCES: ExpEntry[] = [
         bullets: [],
         pipeline: [
             { Icon: MessageSquare, label: 'Natural Text Input',  desc: <><strong>Python</strong> interface with iterated <strong>prompt strategies</strong></> },
-            { Icon: Cog,           label: 'LLM Transformation', desc: <>Improved accuracy by <strong>40%</strong> via <strong>prompt engineering</strong> and few-shot examples</> },
-            { Icon: Database,      label: 'SQL Execution',       desc: <>Wired LLM to live <strong>DB services</strong> for <strong>schema-aware</strong> generation and automated <strong>data fetching</strong></> },
+            { Icon: TbBrain,       label: 'LLM Transformation', desc: <>Improved accuracy by <strong>40%</strong> via <strong>prompt engineering</strong> and few-shot examples</>, connector: TbAbc },
+            { Icon: Database,      label: 'SQL Execution',       desc: <>Wired LLM to live <strong>DB services</strong> for <strong>schema-aware</strong> generation and automated <strong>data fetching</strong></>, connector: TbSql },
         ],
     },
     {
         role: 'Distributed Systems Security Researcher',
         org: 'NEU Privacy & Security Lab',
-        industry: 'Acadamia',
+        industry: 'Academia',
         start: 'Jan 2025', end: 'Jul 2025',
         color: '#E8345C',
         logoColor: '#CC2030',
@@ -55,11 +58,16 @@ const EXPERIENCES: ExpEntry[] = [
         type: 'Co-op',
         Icon: Shield,
         logo: nuseal,
-        bullets: [
-            { label: 'First Author',    detail: 'authored ACE — a security architecture for LLM-integrated app systems, accepted to NDSS 2026' },
-            { label: 'Threat Modeling', detail: 'studied indirect prompt injection and denial-of-service attacks on multi-agent systems' },
-            { label: 'Framework',       detail: 'designed static analysis and secure information flow enforcement for agent pipelines' },
+        blurb: 'Authored ACE — a novel security architecture for LLM-integrated multi-agent systems, accepted to NDSS 2026',
+        bullets: [],
+        pipeline: [
+            { Icon: ShieldAlert,  label: 'Threat Analysis',  desc: <> <strong> Red teamed </strong> existing multi-agent LLM systems with <strong> prompt injection</strong> and <strong> denial-of-service </strong> attacks to expose architectural vulnerabilities</> },
+            { Icon: Layers,       label: 'System Design',    desc: <>Designed <strong>ACE,</strong> a layered system architecture for an <strong>agentic security system</strong></> },
+            { Icon: Code2,        label: 'Prototype Implementation',        desc: <>Built with <strong>context sandboxing</strong> and secure <strong>information flow</strong>, implemented with <strong> Python, LangChain, and prompt engineering</strong></> },
+            { Icon: CheckCheck,   label: 'Evaluation',       desc: <>Evaluated system utility and security metrics with external <strong>benchmarking</strong>, proving <strong>100% defense success</strong> against prompt injections</> },
+            { Icon: BookOpen,     label: 'Peer Review',      desc: <>Submitted as <strong>first author</strong> to <strong>NDSS 2026</strong>top 4 security venue, with <strong> 14 citations</strong> to date</>  },
         ],
+        pipelineLayout: 'vertical',
     },
     {
         role: 'Software Engineer',
@@ -72,11 +80,15 @@ const EXPERIENCES: ExpEntry[] = [
         type: 'Co-op',
         Icon: Briefcase,
         logo: vestmarkLogo,
-        bullets: [
-            { label: 'Wealth Agent',    detail: 'prototyping and maintaining an AI-powered financial advisor agent service' },
-            { label: 'Feature Dev',     detail: 'patching and extending agent capabilities to improve efficiency and UX' },
-            { label: 'Security',        detail: 'ensuring secure, compliant behavior across agent interactions and data flows' },
+        blurb: 'Building AI-powered financial advisory agents at scale',
+        bullets: [],
+        pipeline: [
+            { Icon: TbStack2,          label: 'Agentic Features', desc: <>Shipped and debugged agentic features using <strong>Ruby on Rails</strong>, <strong>React</strong>, <strong>Docker</strong>, and <strong>Dynatrace</strong></> },
+            { Icon: TbRocket,          label: 'Performance',      desc: <>Resolved <strong>latency</strong> and <strong>security</strong> issues in microservices via <strong>prompt engineering</strong> and parallelism</> },
+            { Icon: TbReportAnalytics, label: 'Telemetry',        desc: <>Implemented observability modules in <strong>Elixir</strong> tracking <strong>latency</strong>, <strong>token usage</strong>, and user session lifetimes</> },
+            { Icon: TbRoute,           label: 'Agent Design',     desc: <>Designing <strong>agent workflows</strong> and <strong>long-term memory retrieval</strong> for proactive agentic systems</> },
         ],
+        pipelineLayout: 'grid',
     },
     {
         role: 'R&D Test Systems Engineer',
@@ -89,11 +101,15 @@ const EXPERIENCES: ExpEntry[] = [
         type: 'Internship',
         Icon: Cpu,
         logo: keysightLogo,
-        bullets: [
-            { label: 'Anomaly Detection', detail: 'prototyping AI-powered tooling to detect anomalies in hardware test systems' },
-            { label: 'Stress Testing',    detail: 'building automated pipelines for load and stress testing of R&D instrumentation' },
-            { label: 'Integration',       detail: 'bridging hardware telemetry with ML inference for real-time diagnostics' },
+        blurb: 'Prototyping AI-powered diagnostics tooling for hardware test and measurement systems',
+        bullets: [],
+        pipeline: [
+            { Icon: TbRadar,        label: 'Anomaly Detection', desc: <>Developing AI-powered tooling to detect <strong>anomalies</strong> in <strong>hardware test systems</strong></> },
+            { Icon: TbFlame,        label: 'Stress Testing',    desc: <>Building automated pipelines for <strong>load and stress testing</strong> of R&D instrumentation</> },
+            { Icon: TbPlugConnected,label: 'Integration',       desc: <>Bridging <strong>hardware telemetry</strong> with <strong>ML inference</strong> for real-time signal diagnostics</> },
+            { Icon: TbHeartbeat,    label: 'Diagnostics',       desc: <>Wiring live instrument data into <strong>inference pipelines</strong> for <strong>real-time fault detection</strong></> },
         ],
+        pipelineLayout: 'grid',
     },
 ];
 
@@ -119,7 +135,7 @@ export const ExperienceSection = () => (
             </h2>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                {EXPERIENCES.map(({ role, org, industry, start, end, color, logoColor: lc, status, type, Icon, logo, blurb, bullets, pipeline }) => {
+                {EXPERIENCES.map(({ role, org, industry, start, end, color, logoColor: lc, status, type, Icon, logo, blurb, bullets, pipeline, pipelineLayout }) => {
                     const lclr = lc ?? color;
                     const statusLabel = status === 'current' ? 'Current' : status === 'upcoming' ? 'Upcoming' : 'Completed';
                     const statusColor = status === 'current' ? '#2DD4BF' : status === 'upcoming' ? '#818CF8' : `${color}99`;
@@ -189,63 +205,175 @@ export const ExperienceSection = () => (
                                 {role}
                             </span>
                             {blurb
-                                ? <p style={{ fontSize: '13px', color: 'rgba(215,230,248,0.85)', lineHeight: 1.65, fontStyle: 'italic' }}>{blurb}</p>
-                                : <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                                ? <p style={{ fontSize: '15px', color: 'rgba(230,242,255,0.95)', lineHeight: 1.7, fontStyle: 'italic' }}>{blurb}</p>
+                                : <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
                                     {bullets.map(({ label, detail }, i) => (
                                         <li key={i} style={{ display: 'flex', alignItems: 'baseline', gap: 9 }}>
-                                            <span style={{ color, fontSize: '13px', lineHeight: '20px', flexShrink: 0, filter: `drop-shadow(0 0 4px ${color}88)` }}>▸</span>
-                                            <span style={{ fontSize: '13px', lineHeight: '20px' }}>
-                                                <span style={{ fontWeight: 700, color, filter: `drop-shadow(0 0 6px ${color}55)`, marginRight: 2 }}>{label}:</span>
+                                            <span style={{ color, fontSize: '15px', lineHeight: '22px', flexShrink: 0, filter: `drop-shadow(0 0 4px ${color}88)` }}>▸</span>
+                                            <span style={{ fontSize: '15px', lineHeight: '22px' }}>
+                                                <span style={{ fontWeight: 800, color, filter: `drop-shadow(0 0 8px ${color}77)`, marginRight: 2 }}>{label}:</span>
                                                 {' '}
-                                                <span style={{ color: 'rgba(215,230,248,0.90)', fontWeight: 400 }}>{detail}</span>
+                                                <span style={{ color: 'rgba(230,242,255,0.92)', fontWeight: 400 }}>{detail}</span>
                                             </span>
                                         </li>
                                     ))}
                                 </ul>
                             }
 
-                            {/* Pipeline diagram */}
-                            {pipeline && (
+                            {/* Pipeline diagram — vertical stepper */}
+                            {pipeline && pipelineLayout === 'vertical' && (
                                 <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${color}33` }}>
-                                    <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignItems: 'start' }}>
-
-                                        {/* Connecting line — top = icon(48) + marginBottom(16) + dot_half(8) = 72px */}
-                                        <div style={{
-                                            position: 'absolute',
-                                            top: '72px',
-                                            left: 'calc(16.66%)',
-                                            right: 'calc(16.66%)',
-                                            height: '2px',
-                                            background: `linear-gradient(90deg, ${color}99, ${color}ff, ${color}99)`,
-                                            boxShadow: `0 0 6px 1px ${color}66`,
-                                        }}/>
-
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: 0, maxWidth: 620, margin: '0 auto' }}>
                                         {pipeline.map(({ Icon: NIcon, label, desc }, i) => (
-                                            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 12px' }}>
-                                                {/* Icon — glassified directly */}
-                                                <NIcon size={48} style={{
-                                                    marginBottom: 16,
+                                            <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 28 }}>
+
+                                                {/* Step number + vertical connector */}
+                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0, width: 52, marginTop: 30 }}>
+                                                    <div style={{
+                                                        width: 52, height: 52, borderRadius: '50%', flexShrink: 0,
+                                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                        background: `linear-gradient(135deg, ${color}cc, ${color}88)`,
+                                                        border: `1px solid ${color}`,
+                                                        boxShadow: `0 0 18px 6px ${color}55`,
+                                                        fontSize: '18px', fontWeight: 800, color: '#0a1628',
+                                                    }}>
+                                                        {i + 1}
+                                                    </div>
+                                                    {i < pipeline.length - 1 && (
+                                                        <div style={{
+                                                            width: '2px', flex: 1, minHeight: 44,
+                                                            background: `linear-gradient(180deg, ${color}99, ${color}22)`,
+                                                            margin: '7px 0',
+                                                        }}/>
+                                                    )}
+                                                </div>
+
+                                                {/* Icon */}
+                                                <NIcon size={56} style={{
+                                                    flexShrink: 0, marginTop: 26,
                                                     color: `${color}dd`,
                                                     filter: `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}99) drop-shadow(0 0 28px ${color}44)`,
                                                 }}/>
-                                                {/* Node dot */}
-                                                <div style={{
-                                                    width: 16, height: 16, borderRadius: '50%', marginBottom: 12,
-                                                    background: color,
-                                                    boxShadow: `0 0 10px 3px ${color}88`,
-                                                    zIndex: 1,
-                                                }}/>
-                                                {/* Label */}
-                                                <span style={{ fontSize: '13px', fontWeight: 700, color, letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 5, textAlign: 'center' }}>
-                                                    {label}
-                                                </span>
-                                                {/* Desc */}
-                                                <span style={{ fontSize: '12px', color: `${color}bb`, fontWeight: 600, textAlign: 'center', lineHeight: 1.6 }}>{desc}</span>
+
+                                                {/* Label + desc */}
+                                                <div style={{ paddingBottom: i < pipeline.length - 1 ? 40 : 0, paddingTop: 4 }}>
+                                                    <div style={{ fontSize: '15px', fontWeight: 700, color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
+                                                        {label}
+                                                    </div>
+                                                    <div style={{ fontSize: '15px', color: 'rgba(230,242,255,0.95)', fontWeight: 500, lineHeight: 1.75 }}>
+                                                        {desc}
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         ))}
                                     </div>
                                 </div>
                             )}
+                            {/* grid layout */}
+                            {pipeline && pipelineLayout === 'grid' && (() => {
+                                const n = pipeline.length;
+                                const cols = n === 3 ? 3 : 2;
+                                return (
+                                <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${color}33` }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: 28 }}>
+                                        {pipeline.map(({ Icon: NIcon, label, desc }, i) => (
+                                            <div key={i} style={{
+                                                display: 'flex', alignItems: 'flex-start', gap: 18,
+                                                gridColumn: cols === 2 && n % 2 !== 0 && i === n - 1 ? 'span 2' : 'auto',
+                                            }}>
+                                                <NIcon size={48} style={{
+                                                    flexShrink: 0,
+                                                    color: `${color}dd`,
+                                                    filter: `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}99) drop-shadow(0 0 28px ${color}44)`,
+                                                }}/>
+                                                <div style={{ paddingTop: 4 }}>
+                                                    <div style={{ fontSize: 13, fontWeight: 700, color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 7 }}>
+                                                        {label}
+                                                    </div>
+                                                    <div style={{ fontSize: 14, color: 'rgba(225,238,255,0.90)', fontWeight: 400, lineHeight: 1.7 }}>
+                                                        {desc}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                );
+                            })()}
+
+                            {pipeline && pipelineLayout !== 'vertical' && pipelineLayout !== 'grid' && (() => {
+                                const n = pipeline.length;
+                                const edgePct = 100 / (2 * n);
+                                return (
+                                <div style={{ marginTop: 16, paddingTop: 16, borderTop: `1px solid ${color}33` }}>
+                                    <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: `repeat(${n}, 1fr)`, alignItems: 'start' }}>
+
+                                        {/* Track — dim background rail */}
+                                        <div style={{
+                                            position: 'absolute', top: '81px',
+                                            left: `calc(${edgePct}%)`, right: `calc(${edgePct}%)`,
+                                            height: '4px', borderRadius: '2px',
+                                            background: `${color}22`,
+                                        }}/>
+                                        {/* Active line */}
+                                        <div style={{
+                                            position: 'absolute', top: '81px',
+                                            left: `calc(${edgePct}%)`, right: `calc(${edgePct}%)`,
+                                            height: '4px', borderRadius: '2px',
+                                            background: `linear-gradient(90deg, ${color}66, ${color}ff, ${color}66)`,
+                                            boxShadow: `0 0 8px 2px ${color}55, 0 0 18px 4px ${color}22`,
+                                        }}/>
+
+                                        {/* >>> arrows between nodes */}
+                                        {pipeline.slice(1).map(({ connector: ConnIcon }, i) => {
+                                            const pct = (i + 1) * (100 / n);
+                                            return (
+                                                <div key={i} style={{
+                                                    position: 'absolute', left: `${pct}%`, top: '44px',
+                                                    transform: 'translateX(-50%)',
+                                                    zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
+                                                }}>
+                                                    {ConnIcon && <ConnIcon size={18} style={{
+                                                        color,
+                                                        filter: `drop-shadow(0 0 5px ${color}) drop-shadow(0 0 10px ${color}88)`,
+                                                    }}/>}
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+                                                        {[0, 0.2, 0.4].map(delay => (
+                                                            <ChevronRight key={delay} size={14} style={{
+                                                                color,
+                                                                filter: `drop-shadow(0 0 4px ${color})`,
+                                                                animation: `pipeline-chevron 1.2s ease-in-out ${delay}s infinite`,
+                                                            }}/>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+
+                                        {pipeline.map(({ Icon: NIcon, label, desc }, i) => (
+                                            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 8px' }}>
+                                                <NIcon size={56} style={{
+                                                    marginBottom: 16,
+                                                    color: `${color}dd`,
+                                                    filter: `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}99) drop-shadow(0 0 28px ${color}44)`,
+                                                }}/>
+                                                <div style={{
+                                                    width: 18, height: 18, borderRadius: '50%', marginBottom: 12,
+                                                    background: color,
+                                                    boxShadow: `0 0 0 3px ${color}33, 0 0 12px 4px ${color}88`,
+                                                    zIndex: 1,
+                                                }}/>
+                                                <span style={{ fontSize: '13px', fontWeight: 700, color, letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 5, textAlign: 'center' }}>
+                                                    {label}
+                                                </span>
+                                                <span style={{ fontSize: '13px', color: 'rgba(230,242,255,0.95)', fontWeight: 500, textAlign: 'center', lineHeight: 1.6 }}>{desc}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                                );
+                            })()}
                         </div>
 
                         {/* Right: type + status */}

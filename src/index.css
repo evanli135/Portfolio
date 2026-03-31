@@ -94,6 +94,11 @@
   }
 }
 
+@keyframes pipeline-chevron {
+  0%, 100% { opacity: 0.15; transform: translateX(0); }
+  50%       { opacity: 1;    transform: translateX(3px); }
+}
+
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -229,6 +234,13 @@
 
 @utility cloud-group {
   @apply absolute;
+}
+
+/* Bold keywords in experience pipeline descriptions */
+#experience strong {
+  color: #d8eeff;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(180,220,255,0.25);
 }
 
 #root {

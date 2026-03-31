@@ -170,15 +170,7 @@ export const SkillsSection = () => (
                                 borderRight: `1px solid ${color}55`,
                                 background: `linear-gradient(180deg, ${color}08 0%, transparent 100%)`,
                             }}>
-                                <div style={{
-                                    width: 54, height: 54, borderRadius: '13px',
-                                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                    background: `linear-gradient(135deg, ${color}10 0%, ${color}06 100%)`,
-                                    border: `1px solid ${color}66`,
-                                    boxShadow: `0 0 18px 4px ${color}22, inset 0 1px 0 ${color}44, inset 0 -1px 0 ${color}18`,
-                                }}>
-                                    <Icon size={26} style={{ color, filter: `drop-shadow(0 0 10px ${color}dd)` } as React.CSSProperties}/>
-                                </div>
+                                <Icon size={44} style={{ color, filter: `drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}99) drop-shadow(0 0 28px ${color}44)` } as React.CSSProperties}/>
                                 <span style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.12em', color, textTransform: 'uppercase', textAlign: 'center', filter: `drop-shadow(0 0 6px ${color}88)` }}>
                                     {label}
                                 </span>
