@@ -24,7 +24,7 @@ interface Lane         { label: string; color: string; Icon: AnyIcon; skills: Sk
 
 const LANES: Lane[] = [
     {
-        label: 'Programming', color: '#F97316', Icon: Terminal,
+        label: 'Programming', color: '#FBBF24', Icon: Terminal,
         skills: [
             { name: 'Python',     Icon: SiPython     },
             { name: 'TypeScript', Icon: SiTypescript },

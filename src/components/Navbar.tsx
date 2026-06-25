@@ -9,6 +9,7 @@ const navItems = [
     {name: "Home",       href: "#hero"},
     {name: "About",      href: "#about"},
     {name: "Experience", href: "#experience"},
+    {name: "Writing",    href: "#writing"},
     {name: "Skills",     href: "#skills"},
     {name: "Projects",   href: "#projects"},
     {name: "Coursework", href: "#coursework"},
@@ -66,15 +67,17 @@ export const Navbar = () => {
         return () => observers.forEach(o => o.disconnect());
     }, []);
 
-    // Move indicator to match active link
+    // Move indicator to match active link — use offsetLeft/offsetWidth so CSS zoom doesn't skew the position
     useEffect(() => {
-        const activeIndex = navItems.findIndex(item => item.href.slice(1) === activeSection);
-        const el        = linkRefs.current[activeIndex];
-        const container = navLinksRef.current;
-        if (!el || !container) return;
-        const elRect        = el.getBoundingClientRect();
-        const containerRect = container.getBoundingClientRect();
-        setIndicator({ left: elRect.left - containerRect.left, width: elRect.width });
+        const update = () => {
+            const activeIndex = navItems.findIndex(item => item.href.slice(1) === activeSection);
+            const el = linkRefs.current[activeIndex];
+            if (!el) return;
+            setIndicator({ left: el.offsetLeft, width: el.offsetWidth });
+        };
+        const raf = requestAnimationFrame(update);
+        window.addEventListener('resize', update);
+        return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', update); };
     }, [activeSection]);
 
     return (

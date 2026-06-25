@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from "../lib/utils";
-import { Star, Cpu, Microscope, Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
+import { Star, Cpu, Microscope, Feather, Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
 // import portrait from '../assets/portrait.png';
 
 const TEAL = '#2DD4BF';
@@ -77,82 +77,100 @@ export const AboutSection = () => (
             </div> */}
 
             {/* ── Sleek glass callout boxes ── */}
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap: 100, marginBottom: 24 }}>
+            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 28, marginBottom: 24 }}>
 
                 {/* Box 1 — Research */}
                 <div style={{
                     position:'relative', overflow:'hidden',
-                    padding: '56px 28px 40px',
+                    padding: '48px 24px 36px',
                     borderRadius: '18px',
                     background: `linear-gradient(160deg, ${TEAL}0c 0%, ${TEAL}06 60%, transparent 100%)`,
                     backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
                     border: `1px solid ${TEAL}55`,
                     borderBottom: `2px solid ${TEAL}`,
                     boxShadow: `0 0 44px 10px ${TEAL}30, inset 0 1px 0 ${TEAL}44, inset 0 -1px 0 ${TEAL}22`,
-                    display:'flex', flexDirection:'column', gap: 16,
+                    display:'flex', flexDirection:'column', gap: 14,
                 }}>
-                    {/* Color splash orbs */}
                     <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
                         <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(45,212,191,0.20) 0%, transparent 70%)' }}/>
                         <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(20,185,165,0.16) 0%, transparent 70%)' }}/>
-                        <div style={{ position:'absolute', top:'40%', left:'30%', width:'160px', height:'120px', borderRadius:'50%', filter:'blur(55px)', background:'radial-gradient(ellipse, rgba(96,220,210,0.12) 0%, transparent 70%)' }}/>
-                        <div style={{ position:'absolute', top:'10%', left:'15%', width:'100px', height:'80px', borderRadius:'50%', filter:'blur(35px)', background:'radial-gradient(ellipse, rgba(160,240,235,0.09) 0%, transparent 70%)' }}/>
                     </div>
                     <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:TEAL, fill:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}bb)`, pointerEvents:'none' }}/>
-
-                    {/* Icon + header */}
                     <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
-                        <Microscope size={64} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
-                        <p style={{ fontSize:'15px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>Published Systems Researcher</p>
+                        <Microscope size={56} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
+                        <p style={{ fontSize:'14px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>Research</p>
                     </div>
-
-                    {/* Subsections with bolded keywords */}
                     {([
-                        <><strong style={{ color: TEAL }}>First Authored</strong> Paper on Distributed LLM Security Systems</>,
-                        <>Accepted into <strong style={{ color: TEAL }}>NDSS</strong> — <strong style={{ color: TEAL }}>Top 4</strong> Security Venue (<strong style={{ color: TEAL }}>16%</strong> acceptance rate)</>,
-                        <><strong style={{ color: TEAL }}>14 Citations</strong></>,
+                        <><strong style={{ color: TEAL }}>First Authored</strong> · Distributed LLM Security</>,
+                        <>Accepted to <strong style={{ color: TEAL }}>NDSS 2026</strong> — Top 4 Security Venue</>,
+                        <><strong style={{ color: TEAL }}>31 Citations</strong> to date</>,
                     ] as React.ReactNode[]).map((content, i) => (
-                        <div key={i} style={{ position:'relative', zIndex:1, padding:'14px 16px', borderRadius:'12px', background:`${TEAL}08`, border:`1px solid ${TEAL}2a` }}>
-                            <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}bb` }}>{content}</p>
+                        <div key={i} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${TEAL}08`, border:`1px solid ${TEAL}2a` }}>
+                            <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.06em', color:`${TEAL}bb` }}>{content}</p>
                         </div>
                     ))}
                 </div>
 
-                {/* Box 2 — Industry */}
+                {/* Box 2 — Engineering */}
                 <div style={{
                     position:'relative', overflow:'hidden',
-                    padding: '56px 28px 40px',
+                    padding: '48px 24px 36px',
                     borderRadius: '18px',
                     background: `linear-gradient(160deg, ${TEAL}0c 0%, ${TEAL}06 60%, transparent 100%)`,
                     backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
                     border: `1px solid ${TEAL}55`,
                     borderBottom: `2px solid ${TEAL}`,
                     boxShadow: `0 0 44px 10px ${TEAL}30, inset 0 1px 0 ${TEAL}44, inset 0 -1px 0 ${TEAL}22`,
-                    display:'flex', flexDirection:'column', gap: 16,
+                    display:'flex', flexDirection:'column', gap: 14,
                 }}>
-                    {/* Color splash orbs */}
                     <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
                         <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(45,212,191,0.20) 0%, transparent 70%)' }}/>
                         <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(20,185,165,0.16) 0%, transparent 70%)' }}/>
-                        <div style={{ position:'absolute', top:'40%', left:'30%', width:'160px', height:'120px', borderRadius:'50%', filter:'blur(55px)', background:'radial-gradient(ellipse, rgba(96,220,210,0.12) 0%, transparent 70%)' }}/>
-                        <div style={{ position:'absolute', top:'10%', left:'15%', width:'100px', height:'80px', borderRadius:'50%', filter:'blur(35px)', background:'radial-gradient(ellipse, rgba(160,240,235,0.09) 0%, transparent 70%)' }}/>
                     </div>
                     <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:TEAL, fill:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}bb)`, pointerEvents:'none' }}/>
-
-                    {/* Icon + header */}
                     <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
-                        <Cpu size={64} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
-                        <p style={{ fontSize:'15px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>1.5 Years of Professional Experience</p>
+                        <Cpu size={56} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
+                        <p style={{ fontSize:'14px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>Engineering</p>
                     </div>
-
-                    {/* Subsections with bolded keywords */}
                     {([
-                        <>Engineering <strong style={{ color: TEAL }}>Production AI</strong> Services</>,
-                        <>Designing <strong style={{ color: TEAL }}>Scalable</strong> and <strong style={{ color: TEAL }}>Secure</strong> Systems</>,
-                        <>  FULL STACK DEV + INFRASTRUCTURE + DEVOPS </>,
+                        <>Agentic AI Engineer at <strong style={{ color: TEAL }}>Vestmark</strong> — full-stack LLM pipelines</>,
+                        <>R&amp;D Test Engineer at <strong style={{ color: TEAL }}>Keysight</strong> — AI diagnostics &amp; hardware</>,
+                        <><strong style={{ color: TEAL }}>3× latency wins</strong>, observability, proactive agents</>,
                     ] as React.ReactNode[]).map((content, i) => (
-                        <div key={i} style={{ position:'relative', zIndex:1, padding:'14px 16px', borderRadius:'12px', background:`${TEAL}08`, border:`1px solid ${TEAL}2a` }}>
-                            <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}bb` }}>{content}</p>
+                        <div key={i} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${TEAL}08`, border:`1px solid ${TEAL}2a` }}>
+                            <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.06em', color:`${TEAL}bb` }}>{content}</p>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Box 3 — Creative Writing */}
+                <div style={{
+                    position:'relative', overflow:'hidden',
+                    padding: '48px 24px 36px',
+                    borderRadius: '18px',
+                    background: `linear-gradient(160deg, ${TEAL}0c 0%, ${TEAL}06 60%, transparent 100%)`,
+                    backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+                    border: `1px solid ${TEAL}55`,
+                    borderBottom: `2px solid ${TEAL}`,
+                    boxShadow: `0 0 44px 10px ${TEAL}30, inset 0 1px 0 ${TEAL}44, inset 0 -1px 0 ${TEAL}22`,
+                    display:'flex', flexDirection:'column', gap: 14,
+                }}>
+                    <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
+                        <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(45,212,191,0.20) 0%, transparent 70%)' }}/>
+                        <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(20,185,165,0.16) 0%, transparent 70%)' }}/>
+                    </div>
+                    <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:TEAL, fill:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}bb)`, pointerEvents:'none' }}/>
+                    <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
+                        <Feather size={56} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
+                        <p style={{ fontSize:'14px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>Creative Writing</p>
+                    </div>
+                    {([
+                        <><strong style={{ color: TEAL }}>Blades in Blue</strong> — a fantasy sci-fi hybrid about war, technology, and the cost of progress</>,
+                        <>Six POVs across enemy lines — grounded combat, political scheming, and what heroism actually costs</>,
+                        <>Bernard Cornwell meets high fantasy · Full excerpt <strong style={{ color: TEAL }}>below</strong></>,
+                    ] as React.ReactNode[]).map((content, i) => (
+                        <div key={i} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${TEAL}08`, border:`1px solid ${TEAL}2a` }}>
+                            <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.06em', color:`${TEAL}bb` }}>{content}</p>
                         </div>
                     ))}
                 </div>
@@ -187,9 +205,9 @@ export const AboutSection = () => (
                         </p>
 
                         <div style={{ display:'flex', flexDirection:'column', gap:8, fontSize:'14px', color:'rgba(190,215,235,0.75)', lineHeight:1.7 }}>
-                            <p>Current software engineer at <span style={{ color: TEAL, fontWeight:600 }}>Vestmark</span>, working on the financial advisor agent.</p>
-                            <p>Former researcher at Northeastern's Privacy & Security Lab, first-authored a paper on multi-agent LLM security at <span style={{ color: TEAL, fontWeight:600 }}>NDSS</span>.</p>
-                            <p>Former NLP engineer at <span style={{ color: TEAL, fontWeight:600 }}>MatrixOrigin</span>, building a natural language to SQL platform.</p>
+                            <p>Current R&amp;D Test Systems Engineer at <span style={{ color: TEAL, fontWeight:600 }}>Keysight Technologies</span>, building AI-powered diagnostics tooling for hardware test and measurement systems.</p>
+                            <p>Former Agentic Software Engineer at <span style={{ color: TEAL, fontWeight:600 }}>Vestmark</span>, shipping full-stack LLM pipelines for an AI-powered Investment Advisor Agent.</p>
+                            <p>Former researcher at Northeastern's Privacy &amp; Security Lab — first-authored a paper on multi-agent LLM security accepted to <span style={{ color: TEAL, fontWeight:600 }}>NDSS 2026</span> with 31 citations.</p>
                         </div>
 
                         <p style={{ fontSize:'13px', color:`${TEAL}bb`, lineHeight:1.6 }}>

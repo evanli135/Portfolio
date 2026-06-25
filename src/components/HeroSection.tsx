@@ -65,7 +65,7 @@ const internships: { role: string; org: string; blurb: string; color: string; on
         blurb: 'Prototyping and maintaining wealth agent services',
         color: '#60A5FA', ongoing: false,
         startYear: 2026, startMonth: 1,
-        endYear:   2026, endMonth: 7,
+        endYear:   2026, endMonth: 6,
     },
     {
         role: 'R&D Test Systems', org: 'Keysight',

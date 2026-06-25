@@ -20,6 +20,54 @@ interface Project {
 
 const PROJECTS: Project[] = [
     {
+        id: 5,
+        premise: 'Embedded Analytics Library',
+        title: 'Andal',
+        description:
+            'An embedded event store for Python — no server, no SQL, no config. Track millions of events and run funnels, aggregations, and filters from a simple Python API. Built on a custom C core with columnar storage, a write-ahead log for crash recovery, and lazy segment loading.',
+        display: (() => {
+            const K = '#FBBF24';
+            const T = 'rgba(220,235,255,0.88)';
+            const C = '#5a6a7a';
+            const S = (color: string) => ({ color });
+            const line = (nodes: React.ReactNode, i: number) => (
+                <div key={i} style={{ minHeight: '1.7em' }}>{nodes}</div>
+            );
+            return (
+                <div style={{
+                    minHeight: 340, borderRadius: 10, padding: '18px 20px',
+                    background: 'linear-gradient(160deg, rgba(251,191,36,0.05) 0%, rgba(0,0,0,0.3) 100%)',
+                    fontFamily: "'Fira Code', 'Courier New', monospace",
+                    fontSize: 12.5, lineHeight: 1.75,
+                }}>
+                    <div style={{ color: C, marginBottom: 10, fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase' }}>quick start</div>
+                    {[
+                        <><span style={S(K)}>import</span><span style={S(T)}> andal</span></>,
+                        <></>,
+                        <><span style={S(T)}>store = andal.</span><span style={S(K)}>EventStore</span><span style={S(T)}>("./data")</span></>,
+                        <></>,
+                        <span style={S(C)}># track events</span>,
+                        <><span style={S(T)}>store.</span><span style={S(K)}>track</span><span style={S(T)}>("page_view", user_id=123)</span></>,
+                        <><span style={S(T)}>store.</span><span style={S(K)}>track</span><span style={S(T)}>("purchase", amount=99.99)</span></>,
+                        <></>,
+                        <span style={S(C)}># funnel analysis</span>,
+                        <><span style={S(T)}>store.</span><span style={S(K)}>funnel</span><span style={S(T)}>(["page_view", "purchase"])</span></>,
+                        <span style={S(C)}># page_view  → 10,000 users</span>,
+                        <span style={S(C)}># purchase   →    240  (2.4%)</span>,
+                        <></>,
+                        <span style={S(C)}># crash-safe — WAL recovers on restart</span>,
+                    ].map((nodes, i) => line(nodes, i))}
+                </div>
+            );
+        })(),
+        tags: ['Systems', 'Open Source', 'Software Engineering'],
+        techs: ['Python', 'C', 'Columnar Storage', 'WAL'],
+        demoUrl: 'https://github.com/evanli135/Andal',
+        date: '2025 – Present',
+        type: 'Project' as Work,
+        color: '#FBBF24',
+    },
+    {
         id: 1,
         premise: 'LLM Security — First Author Research Paper',
         title: 'ACE: A Security Architecture for LLM-Integrated App Systems',
@@ -82,7 +130,7 @@ const PROJECTS: Project[] = [
         demoUrl: 'https://github.com/evanli135/Mario-City',
         date: 'Mar 2024 – May 2024',
         type: 'Project',
-        color: '#F97316',
+        color: '#FBBF24',
     },
     {
         id: 4,

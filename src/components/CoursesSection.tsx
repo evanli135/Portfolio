@@ -79,7 +79,7 @@ const COURSES: CourseRow[] = [
     },
     {
         title: 'Foundations in Data Science',
-        courseNum: 'DS3000', level: 'Undergraduate', color: '#F97316', grade: 'A', Icon: BarChart4,
+        courseNum: 'DS3000', level: 'Undergraduate', color: '#FBBF24', grade: 'A', Icon: BarChart4,
         bullets: [
             { label: 'Python Libraries', detail: 'Pandas, NumPy, Matplotlib, and Seaborn for data manipulation and visualization' },
             { label: 'Linear Algebra',   detail: 'matrix operations, eigenvalues, and their application in machine learning' },
@@ -99,7 +99,7 @@ const COURSES: CourseRow[] = [
     // },
     // {
     //     title: 'Cornerstones of Engineering',
-    //     courseNum: 'GE1501', level: 'Undergraduate', color: '#F97316', grade: 'A', Icon: Wrench,
+    //     courseNum: 'GE1501', level: 'Undergraduate', color: '#FBBF24', grade: 'A', Icon: Wrench,
     //     bullets: [
     //         { label: 'Design Process', detail: 'problem identification, brainstorming, prototyping, testing, and iteration' },
     //         { label: 'Hardware',       detail: 'CAD design, 3D printing, and electronics wiring on Arduino platforms' },
