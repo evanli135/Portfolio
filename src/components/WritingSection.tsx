@@ -1,6 +1,6 @@
 import book from '../assets/BIBDraftv1.pdf'
 
-const TEAL = '#2DD4BF';
+const TEAL = '#C084FC';
 
 export const WritingSection = () => (
     <section id="writing" className="py-24 px-2 relative">

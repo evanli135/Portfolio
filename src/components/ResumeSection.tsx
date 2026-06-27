@@ -1,6 +1,6 @@
 import resume from '../assets/EvanLiResume.pdf'
 
-const TEAL = '#2DD4BF';
+const TEAL = '#60A5FA';
 
 export const ResumeSection = () => (
     <section id="resume" className="py-24 px-2 relative">

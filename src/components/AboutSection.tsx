@@ -77,105 +77,72 @@ export const AboutSection = () => (
             </div> */}
 
             {/* ── Sleek glass callout boxes ── */}
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 28, marginBottom: 24 }}>
-
-                {/* Box 1 — Research */}
-                <div style={{
-                    position:'relative', overflow:'hidden',
-                    padding: '48px 24px 36px',
-                    borderRadius: '18px',
-                    background: `linear-gradient(160deg, ${TEAL}0c 0%, ${TEAL}06 60%, transparent 100%)`,
-                    backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
-                    border: `1px solid ${TEAL}55`,
-                    borderBottom: `2px solid ${TEAL}`,
-                    boxShadow: `0 0 44px 10px ${TEAL}30, inset 0 1px 0 ${TEAL}44, inset 0 -1px 0 ${TEAL}22`,
-                    display:'flex', flexDirection:'column', gap: 14,
-                }}>
-                    <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
-                        <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(45,212,191,0.20) 0%, transparent 70%)' }}/>
-                        <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(20,185,165,0.16) 0%, transparent 70%)' }}/>
+            {(() => {
+                const boxes: { color: string; Icon: React.ElementType; header: string; items: React.ReactNode[] }[] = [
+                    {
+                        color: '#E8345C',
+                        Icon: Microscope,
+                        header: 'Research',
+                        items: [
+                            <><strong style={{ color: '#E8345C' }}>First Authored</strong> · Distributed LLM Security</>,
+                            <>Accepted to <strong style={{ color: '#E8345C' }}>NDSS 2026</strong> — Top 4 Security Venue</>,
+                            <><strong style={{ color: '#E8345C' }}>31 Citations</strong> to date</>,
+                        ],
+                    },
+                    {
+                        color: '#60A5FA',
+                        Icon: Cpu,
+                        header: 'Engineering',
+                        items: [
+                            <>Agentic AI Engineer at <strong style={{ color: '#60A5FA' }}>Vestmark</strong> — full-stack LLM pipelines</>,
+                            <>R&amp;D Test Engineer at <strong style={{ color: '#60A5FA' }}>Keysight</strong> — AI diagnostics &amp; hardware</>,
+                            <><strong style={{ color: '#60A5FA' }}>3× latency wins</strong>, observability, proactive agents</>,
+                        ],
+                    },
+                    {
+                        color: '#C084FC',
+                        Icon: Feather,
+                        header: 'Creative Writing',
+                        items: [
+                            <><strong style={{ color: '#C084FC' }}>Blades in Blue</strong> — a fantasy sci-fi hybrid about war, technology, and the cost of progress</>,
+                            <>Six POVs across enemy lines — grounded combat, political scheming, and what heroism actually costs</>,
+                            <>Bernard Cornwell meets high fantasy · Full excerpt <strong style={{ color: '#C084FC' }}>below</strong></>,
+                        ],
+                    },
+                ];
+                return (
+                    <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 28, marginBottom: 24 }}>
+                        {boxes.map(({ color, Icon, header, items }) => (
+                            <div key={header} style={{
+                                position:'relative', overflow:'hidden',
+                                padding: '48px 24px 36px',
+                                borderRadius: '18px',
+                                background: `linear-gradient(160deg, ${color}0c 0%, ${color}06 60%, transparent 100%)`,
+                                backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
+                                border: `1px solid ${color}55`,
+                                borderBottom: `2px solid ${color}`,
+                                boxShadow: `0 0 44px 10px ${color}30, inset 0 1px 0 ${color}44, inset 0 -1px 0 ${color}22`,
+                                display:'flex', flexDirection:'column', gap: 14,
+                            }}>
+                                <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
+                                    <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:`radial-gradient(ellipse, ${color}30 0%, transparent 70%)` }}/>
+                                    <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:`radial-gradient(ellipse, ${color}22 0%, transparent 70%)` }}/>
+                                </div>
+                                <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color, fill:color, filter:`drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}bb)`, pointerEvents:'none' }}/>
+                                <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
+                                    <Icon size={56} style={{ color, filter:`drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}99) drop-shadow(0 0 28px ${color}44)` }}/>
+                                    <p style={{ fontSize:'14px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${color}ee` }}>{header}</p>
+                                </div>
+                                {items.map((content, i) => (
+                                    <div key={i} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${color}08`, border:`1px solid ${color}2a` }}>
+                                        <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.06em', color:`${color}bb` }}>{content}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
                     </div>
-                    <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:TEAL, fill:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}bb)`, pointerEvents:'none' }}/>
-                    <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
-                        <Microscope size={56} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
-                        <p style={{ fontSize:'14px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>Research</p>
-                    </div>
-                    {([
-                        <><strong style={{ color: TEAL }}>First Authored</strong> · Distributed LLM Security</>,
-                        <>Accepted to <strong style={{ color: TEAL }}>NDSS 2026</strong> — Top 4 Security Venue</>,
-                        <><strong style={{ color: TEAL }}>31 Citations</strong> to date</>,
-                    ] as React.ReactNode[]).map((content, i) => (
-                        <div key={i} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${TEAL}08`, border:`1px solid ${TEAL}2a` }}>
-                            <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.06em', color:`${TEAL}bb` }}>{content}</p>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Box 2 — Engineering */}
-                <div style={{
-                    position:'relative', overflow:'hidden',
-                    padding: '48px 24px 36px',
-                    borderRadius: '18px',
-                    background: `linear-gradient(160deg, ${TEAL}0c 0%, ${TEAL}06 60%, transparent 100%)`,
-                    backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
-                    border: `1px solid ${TEAL}55`,
-                    borderBottom: `2px solid ${TEAL}`,
-                    boxShadow: `0 0 44px 10px ${TEAL}30, inset 0 1px 0 ${TEAL}44, inset 0 -1px 0 ${TEAL}22`,
-                    display:'flex', flexDirection:'column', gap: 14,
-                }}>
-                    <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
-                        <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(45,212,191,0.20) 0%, transparent 70%)' }}/>
-                        <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(20,185,165,0.16) 0%, transparent 70%)' }}/>
-                    </div>
-                    <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:TEAL, fill:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}bb)`, pointerEvents:'none' }}/>
-                    <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
-                        <Cpu size={56} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
-                        <p style={{ fontSize:'14px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>Engineering</p>
-                    </div>
-                    {([
-                        <>Agentic AI Engineer at <strong style={{ color: TEAL }}>Vestmark</strong> — full-stack LLM pipelines</>,
-                        <>R&amp;D Test Engineer at <strong style={{ color: TEAL }}>Keysight</strong> — AI diagnostics &amp; hardware</>,
-                        <><strong style={{ color: TEAL }}>3× latency wins</strong>, observability, proactive agents</>,
-                    ] as React.ReactNode[]).map((content, i) => (
-                        <div key={i} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${TEAL}08`, border:`1px solid ${TEAL}2a` }}>
-                            <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.06em', color:`${TEAL}bb` }}>{content}</p>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Box 3 — Creative Writing */}
-                <div style={{
-                    position:'relative', overflow:'hidden',
-                    padding: '48px 24px 36px',
-                    borderRadius: '18px',
-                    background: `linear-gradient(160deg, ${TEAL}0c 0%, ${TEAL}06 60%, transparent 100%)`,
-                    backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
-                    border: `1px solid ${TEAL}55`,
-                    borderBottom: `2px solid ${TEAL}`,
-                    boxShadow: `0 0 44px 10px ${TEAL}30, inset 0 1px 0 ${TEAL}44, inset 0 -1px 0 ${TEAL}22`,
-                    display:'flex', flexDirection:'column', gap: 14,
-                }}>
-                    <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
-                        <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:'radial-gradient(ellipse, rgba(45,212,191,0.20) 0%, transparent 70%)' }}/>
-                        <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:'radial-gradient(ellipse, rgba(20,185,165,0.16) 0%, transparent 70%)' }}/>
-                    </div>
-                    <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color:TEAL, fill:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}bb)`, pointerEvents:'none' }}/>
-                    <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
-                        <Feather size={56} style={{ color:TEAL, filter:`drop-shadow(0 0 6px ${TEAL}) drop-shadow(0 0 14px ${TEAL}99) drop-shadow(0 0 28px ${TEAL}44)` }}/>
-                        <p style={{ fontSize:'14px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${TEAL}ee` }}>Creative Writing</p>
-                    </div>
-                    {([
-                        <><strong style={{ color: TEAL }}>Blades in Blue</strong> — a fantasy sci-fi hybrid about war, technology, and the cost of progress</>,
-                        <>Six POVs across enemy lines — grounded combat, political scheming, and what heroism actually costs</>,
-                        <>Bernard Cornwell meets high fantasy · Full excerpt <strong style={{ color: TEAL }}>below</strong></>,
-                    ] as React.ReactNode[]).map((content, i) => (
-                        <div key={i} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${TEAL}08`, border:`1px solid ${TEAL}2a` }}>
-                            <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.06em', color:`${TEAL}bb` }}>{content}</p>
-                        </div>
-                    ))}
-                </div>
-
-            </div>
+                );
+            })()}
 
             {/* ── Merged bottom box ── */}
             <div style={{

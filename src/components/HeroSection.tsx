@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ChevronLeft, ChevronRight, Brain, Cpu, Shield, Share2, Globe, GitBranch, Bot, Layers, Activity, Zap, Target, Crosshair, type LucideIcon } from "lucide-react";
+import { ArrowDown, Brain, Cpu, Shield, Share2, Globe, GitBranch, Bot, Layers, Activity, Zap, Target, Crosshair, type LucideIcon } from "lucide-react";
 import { GlassText } from "./GlassText";
 
 // ── Geometry ───────────────────────────────────────────────────────
@@ -106,23 +106,21 @@ export const HeroSection = () => {
         return () => window.removeEventListener('resize', measure);
     }, []);
 
-    const stopScroll = () => {
-        if (rafRef.current !== null) { cancelAnimationFrame(rafRef.current); rafRef.current = null; }
-    };
-    const startScroll = (dir: 1 | -1) => {
-        stopScroll();
+    // Auto-scroll the timeline back and forth
+    useEffect(() => {
+        if (maxScroll === 0) return;
+        let dir = 1;
         const step = () => {
-            const next = Math.max(0, Math.min(maxScrollRef.current, scrollXRef.current + dir * SCROLL_SPD));
-            if (next !== scrollXRef.current) {
-                scrollXRef.current = next;
-                setScrollX(next);
-                rafRef.current = requestAnimationFrame(step);
-            } else {
-                rafRef.current = null;
-            }
+            const next = scrollXRef.current + dir * 1.8;
+            if (next >= maxScrollRef.current) dir = -1;
+            else if (next <= 0) dir = 1;
+            scrollXRef.current = Math.max(0, Math.min(maxScrollRef.current, next));
+            setScrollX(scrollXRef.current);
+            rafRef.current = requestAnimationFrame(step);
         };
         rafRef.current = requestAnimationFrame(step);
-    };
+        return () => { if (rafRef.current !== null) { cancelAnimationFrame(rafRef.current); rafRef.current = null; } };
+    }, [maxScroll]);
 
     return (
         <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-4 pt-24">
@@ -246,22 +244,16 @@ export const HeroSection = () => {
             </div>{/* end max-w-5xl container */}
 
             {/* Timeline — full viewport width */}
-            <div className="opacity-0 animate-fade-in-delay-3 w-full z-10" style={{ position:'relative', padding:'0 48px' }}>
-
-                    <ScrollBtn dir="left"  faded={scrollX <= 0}         lineTop={LINE_TOP}
-                        onMouseDown={() => startScroll(-1)} onMouseUp={stopScroll} onMouseLeave={stopScroll}/>
-                    <ScrollBtn dir="right" faded={scrollX >= maxScroll} lineTop={LINE_TOP}
-                        onMouseDown={() => startScroll(1)}  onMouseUp={stopScroll} onMouseLeave={stopScroll}/>
+            <div className="opacity-0 animate-fade-in-delay-3 w-full z-10" style={{ position:'relative' }}>
 
                     <div ref={containerRef} style={{
                         overflow:'hidden', position:'relative', height:TOTAL_H,
-                        maskImage:'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
-                        WebkitMaskImage:'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)',
+                        maskImage:'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+                        WebkitMaskImage:'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
                     }}>
                         <div style={{
                             width:CONTENT_W, height:TOTAL_H, position:'relative',
                             transform:`translateX(${-scrollX}px)`,
-                            transition: rafRef.current === null ? 'transform 0.15s ease-out' : 'none',
                         }}>
 
                             {/* Base gradient line — glass tube */}
@@ -416,28 +408,6 @@ export const HeroSection = () => {
 
 // ── Sub-components ─────────────────────────────────────────────────
 
-function ScrollBtn({ dir, faded, lineTop, onMouseDown, onMouseUp, onMouseLeave }: {
-    dir: 'left' | 'right'; faded: boolean; lineTop: number;
-    onMouseDown: () => void; onMouseUp: () => void; onMouseLeave: () => void;
-}) {
-    return (
-        <button onMouseDown={onMouseDown} onMouseUp={onMouseUp} onMouseLeave={onMouseLeave}
-            style={{
-                position:'absolute', top: lineTop, [dir]: 52, transform:'translateY(-50%)',
-                zIndex:20, width:42, height:42, borderRadius:'50%',
-                border:'1px solid rgba(255,255,255,0.22)',
-                background:'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%)',
-                backdropFilter:'blur(20px)', WebkitBackdropFilter:'blur(20px)',
-                boxShadow:'0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.18)',
-                display:'flex', alignItems:'center', justifyContent:'center',
-                cursor:'pointer', color:'#2DD4BF',
-                opacity: faded ? 0.2 : 0.85,
-                transition:'opacity 0.3s',
-            }}>
-            {dir === 'left' ? <ChevronLeft size={22}/> : <ChevronRight size={22}/>}
-        </button>
-    );
-}
 
 function ExpCard({ role, org, blurb, degree, gpa, color, accent }: {
     role: string; org: string; blurb?: string; degree?: string; gpa?: string; color: string; accent: 'top' | 'bottom';
