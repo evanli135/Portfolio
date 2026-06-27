@@ -113,7 +113,7 @@ export const HeroSection = () => {
         const step = () => {
             const next = scrollXRef.current + dir * 1.8;
             if (next >= maxScrollRef.current) dir = -1;
-            else if (next <= 0) dir = 1;
+            else if (next <= toX(2024, 1)) dir = 1;
             scrollXRef.current = Math.max(0, Math.min(maxScrollRef.current, next));
             setScrollX(scrollXRef.current);
             rafRef.current = requestAnimationFrame(step);
