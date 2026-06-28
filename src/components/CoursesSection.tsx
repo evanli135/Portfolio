@@ -1,4 +1,4 @@
-import { Cpu, Network, Binary, Code, Database, Shield, BarChart4, type LucideIcon } from 'lucide-react';
+import { Cpu, Network, Binary, Code, Database, Shield, BarChart4, Globe, GitBranch, AppWindow, Bot, type LucideIcon } from 'lucide-react';
 import NUseal from '../assets/NUseal.png';
 
 const NU_COLOR = '#E8345C';
@@ -11,6 +11,7 @@ interface CourseRow {
     color: string;
     grade?: string;
     inProgress?: boolean;
+    upcoming?: boolean;
     bullets: Bullet[];
     Icon: LucideIcon;
 }
@@ -85,6 +86,46 @@ const COURSES: CourseRow[] = [
             { label: 'Linear Algebra',   detail: 'matrix operations, eigenvalues, and their application in machine learning' },
             { label: 'Data Collection',  detail: 'web scraping and REST API usage to build real-world datasets' },
             { label: 'ML Fundamentals',  detail: 'supervised learning, regression, classification, and model evaluation metrics' },
+        ],
+    },
+    {
+        title: 'Network Fundamentals',
+        courseNum: 'CS3700', level: 'Undergraduate', color: '#60A5FA', upcoming: true, Icon: Globe,
+        bullets: [
+            { label: 'TCP/IP',     detail: 'protocol stack, addressing, routing, forwarding, and the data/control plane split' },
+            { label: 'Transport',  detail: 'TCP reliability, flow control, congestion control, and UDP tradeoffs' },
+            { label: 'Sockets',    detail: 'client-server programming, connection lifecycle, and raw protocol design' },
+            { label: 'Security',   detail: 'firewalls, NAT traversal, DNS, and common network attack surfaces' },
+        ],
+    },
+    {
+        title: 'Theory of Computation',
+        courseNum: 'CS3800', level: 'Undergraduate', color: '#D946EF', upcoming: true, Icon: GitBranch,
+        bullets: [
+            { label: 'Automata',      detail: 'DFAs, NFAs, regular languages, and pumping lemma proofs' },
+            { label: 'Context-Free',  detail: 'pushdown automata, CFGs, Chomsky normal form, and CYK parsing' },
+            { label: 'Computability', detail: 'Turing machines, Church-Turing thesis, decidability, and the halting problem' },
+            { label: 'Complexity',    detail: 'P, NP, NP-completeness, reductions, and approximation algorithms' },
+        ],
+    },
+    {
+        title: 'GUI Programming',
+        courseNum: 'CS3520', level: 'Undergraduate', color: '#FBBF24', upcoming: true, Icon: AppWindow,
+        bullets: [
+            { label: 'Event Models',      detail: 'callbacks, listeners, event loops, and the model-view-controller pattern' },
+            { label: 'Layout',            detail: 'constraint-based layout, responsive design, and widget hierarchies' },
+            { label: 'State Management',  detail: 'reactive data binding, immutability, and UI state machines' },
+            { label: 'Graphics',          detail: 'custom rendering, animation, and interactive canvas drawing' },
+        ],
+    },
+    {
+        title: 'Robotics Programming',
+        courseNum: 'CS4610', level: 'Undergraduate', color: '#2DD4BF', upcoming: true, Icon: Bot,
+        bullets: [
+            { label: 'Kinematics',  detail: 'forward/inverse kinematics, joint space, and workspace transformations' },
+            { label: 'Sensors',     detail: 'IMUs, LiDAR, encoders, and sensor fusion for state estimation' },
+            { label: 'Control',     detail: 'PID controllers, motion planning, and closed-loop feedback systems' },
+            { label: 'ROS',         detail: 'Robot Operating System, node communication, topics, and service calls' },
         ],
     },
     // {
@@ -197,7 +238,7 @@ export const CoursesSection = () => (
 
             {/* ── Course Rows ─────────────────────────────────────────── */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-                {COURSES.map(({ title, courseNum, level, color, grade, inProgress, bullets, Icon }) => {
+                {COURSES.map(({ title, courseNum, level, color, grade, inProgress, upcoming, bullets, Icon }) => {
                     return (
                         <div key={courseNum} style={{
                             display: 'flex', alignItems: 'stretch',
@@ -290,6 +331,11 @@ export const CoursesSection = () => (
                                     <>
                                         <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.10em', color: `${color}99`, textTransform: 'uppercase' }}>Status</span>
                                         <span style={{ fontSize: '12px', fontWeight: 700, color, textAlign: 'center', filter: `drop-shadow(0 0 6px ${color}88)` }}>In Progress</span>
+                                    </>
+                                ) : upcoming ? (
+                                    <>
+                                        <span style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '0.10em', color: `${color}99`, textTransform: 'uppercase' }}>Status</span>
+                                        <span style={{ fontSize: '11px', fontWeight: 700, color, textAlign: 'center', filter: `drop-shadow(0 0 6px ${color}88)`, lineHeight: 1.3 }}>Upcoming</span>
                                     </>
                                 ) : (
                                     <>

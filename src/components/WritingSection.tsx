@@ -1,4 +1,4 @@
-import book from '../assets/BIBDraftv1.pdf'
+import book from '../assets/BIBRw.pdf'
 
 const TEAL = '#C084FC';
 
@@ -34,7 +34,7 @@ export const WritingSection = () => (
                     <span style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: `${TEAL}cc` }}>
                         Blades in Blue — Draft
                     </span>
-                    <a href={book} download="BladesInBlue_Draft.pdf" style={{
+                    <a href={book} download="BladesInBlue_RW.pdf" style={{
                         fontSize: '12px', fontWeight: 700, letterSpacing: '0.06em', textTransform: 'uppercase',
                         color: TEAL, textDecoration: 'none', padding: '6px 14px', borderRadius: '8px',
                         border: `1px solid ${TEAL}55`, background: `${TEAL}0f`,

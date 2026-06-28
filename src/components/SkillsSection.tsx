@@ -1,12 +1,12 @@
 import { Terminal, Bot, Cpu, Layers, HardDrive, Share2, Server, Network, Plug, Database, Monitor, GitBranch, MessageSquare, ShieldAlert, BookOpen } from 'lucide-react';
 import { TbTopologyComplex } from 'react-icons/tb';
 import {
-    SiPython, SiTypescript, SiJavascript, SiRust, SiRuby, SiC, SiCplusplus, SiElixir,
+    SiPython, SiTypescript, SiJavascript, SiRust, SiRuby, SiC, SiCplusplus,
     SiDocker, SiKubernetes, SiPostgresql, SiLinux, SiAmazonwebservices,
     SiReact, SiNodedotjs, SiTailwindcss, SiExpress, SiDjango, SiFastapi, SiRubyonrails,
     SiGit, SiPostman, SiFigma, SiDynatrace, SiWireshark, SiJira, SiIntellijidea,
     SiMongodb, SiRedis,
-    SiPhoenixframework, SiSpring,
+    SiSpring,
     SiPytorch, SiPandas, SiNumpy, SiScikitlearn, SiLangchain
 } from 'react-icons/si';
 import { FaJava, FaCodeCompare } from 'react-icons/fa6';
@@ -34,7 +34,6 @@ const LANES: Lane[] = [
             { name: 'C',          Icon: SiC          },
             { name: 'C++',        Icon: SiCplusplus  },
             { name: 'Rust',       Icon: SiRust       },
-            { name: 'Elixir',     Icon: SiElixir     },
         ],
         competencies: [
             { name: 'Parallel Programming',    Icon: Cpu      },
@@ -68,7 +67,6 @@ const LANES: Lane[] = [
             { name: 'Express',       Icon: SiExpress         },
             { name: 'Django',        Icon: SiDjango          },
             { name: 'FastAPI',       Icon: SiFastapi         },
-            { name: 'Phoenix',       Icon: SiPhoenixframework },
             { name: 'Spring',        Icon: SiSpring          },
             { name: 'Ruby on Rails', Icon: SiRubyonrails     },
         ],

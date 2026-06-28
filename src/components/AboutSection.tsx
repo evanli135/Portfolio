@@ -80,66 +80,86 @@ export const AboutSection = () => (
             {(() => {
                 const boxes: { color: string; Icon: React.ElementType; header: string; items: React.ReactNode[] }[] = [
                     {
-                        color: '#E8345C',
+                        color: '#818CF8',
                         Icon: Microscope,
                         header: 'Research',
                         items: [
-                            <><strong style={{ color: '#E8345C' }}>First Authored</strong> · Distributed LLM Security</>,
-                            <>Accepted to <strong style={{ color: '#E8345C' }}>NDSS 2026</strong> — Top 4 Security Venue</>,
-                            <><strong style={{ color: '#E8345C' }}>31 Citations</strong> to date</>,
-                        ],
-                    },
-                    {
-                        color: '#60A5FA',
-                        Icon: Cpu,
-                        header: 'Engineering',
-                        items: [
-                            <>Agentic AI Engineer at <strong style={{ color: '#60A5FA' }}>Vestmark</strong> — full-stack LLM pipelines</>,
-                            <>R&amp;D Test Engineer at <strong style={{ color: '#60A5FA' }}>Keysight</strong> — AI diagnostics &amp; hardware</>,
-                            <><strong style={{ color: '#60A5FA' }}>3× latency wins</strong>, observability, proactive agents</>,
+                            <><strong style={{ color: '#818CF8' }}>First Authored</strong> · Distributed LLM Security</>,
+                            <>Accepted to <strong style={{ color: '#818CF8' }}>NDSS 2026</strong> — Top 4 Security Venue</>,
+                            <><strong style={{ color: '#818CF8' }}>31 Citations</strong> to date</>,
                         ],
                     },
                     {
                         color: '#C084FC',
+                        Icon: Cpu,
+                        header: 'Engineering',
+                        items: [
+                            <>Agentic AI Engineer at <strong style={{ color: '#C084FC' }}>Vestmark</strong> — full-stack LLM pipelines</>,
+                            <>R&amp;D Test Engineer at <strong style={{ color: '#C084FC' }}>Keysight</strong> — AI diagnostics &amp; hardware</>,
+                            <><strong style={{ color: '#C084FC' }}>3× latency wins</strong>, observability, proactive agents</>,
+                        ],
+                    },
+                    {
+                        color: '#60A5FA',
                         Icon: Feather,
                         header: 'Creative Writing',
                         items: [
-                            <><strong style={{ color: '#C084FC' }}>Blades in Blue</strong> — a fantasy sci-fi hybrid about war, technology, and the cost of progress</>,
+                            <><strong style={{ color: '#60A5FA' }}>Blades in Blue</strong> — a fantasy sci-fi hybrid about war, technology, and the cost of progress</>,
                             <>Six POVs across enemy lines — grounded combat, political scheming, and what heroism actually costs</>,
-                            <>Bernard Cornwell meets high fantasy · Full excerpt <strong style={{ color: '#C084FC' }}>below</strong></>,
+                            <>Bernard Cornwell meets high fantasy · Full excerpt <strong style={{ color: '#60A5FA' }}>below</strong></>,
                         ],
                     },
                 ];
                 return (
                     <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap: 28, marginBottom: 24 }}>
-                        {boxes.map(({ color, Icon, header, items }) => (
+                        {boxes.map(({ color, Icon, header, items }) => {
+                            const featured = header === 'Research';
+                            return (
                             <div key={header} style={{
                                 position:'relative', overflow:'hidden',
-                                padding: '48px 24px 36px',
+                                padding: featured ? '56px 28px 40px' : '48px 24px 36px',
                                 borderRadius: '18px',
-                                background: `linear-gradient(160deg, ${color}0c 0%, ${color}06 60%, transparent 100%)`,
+                                background: featured
+                                    ? `linear-gradient(160deg, ${color}18 0%, ${color}0e 60%, transparent 100%)`
+                                    : `linear-gradient(160deg, ${color}0c 0%, ${color}06 60%, transparent 100%)`,
                                 backdropFilter: 'blur(8px)', WebkitBackdropFilter: 'blur(8px)',
-                                border: `1px solid ${color}55`,
+                                border: `1px solid ${color}${featured ? '88' : '55'}`,
                                 borderBottom: `2px solid ${color}`,
-                                boxShadow: `0 0 44px 10px ${color}30, inset 0 1px 0 ${color}44, inset 0 -1px 0 ${color}22`,
+                                boxShadow: featured
+                                    ? `0 0 70px 22px ${color}45, 0 0 28px 8px ${color}30, inset 0 1px 0 ${color}66, inset 0 -1px 0 ${color}33`
+                                    : `0 0 44px 10px ${color}30, inset 0 1px 0 ${color}44, inset 0 -1px 0 ${color}22`,
                                 display:'flex', flexDirection:'column', gap: 14,
                             }}>
+                                {featured && (
+                                    <div style={{
+                                        position:'absolute', top:0, left:0, right:0,
+                                        background:`linear-gradient(90deg, transparent, ${color}44, ${color}99, ${color}44, transparent)`,
+                                        padding:'5px 0', textAlign:'center',
+                                        fontSize:'9px', fontWeight:800, letterSpacing:'0.14em',
+                                        textTransform:'uppercase', color, zIndex:2,
+                                        borderBottom:`1px solid ${color}44`,
+                                        filter:`drop-shadow(0 0 6px ${color})`,
+                                    } as React.CSSProperties}>
+                                        ★ &nbsp; NDSS 2026 &nbsp; · &nbsp; Top Security Venue &nbsp; ★
+                                    </div>
+                                )}
                                 <div style={{ position:'absolute', inset:0, pointerEvents:'none', overflow:'hidden' }}>
-                                    <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:`radial-gradient(ellipse, ${color}30 0%, transparent 70%)` }}/>
-                                    <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:`radial-gradient(ellipse, ${color}22 0%, transparent 70%)` }}/>
+                                    <div style={{ position:'absolute', top:'-20%', right:'-10%', width:'220px', height:'180px', borderRadius:'50%', filter:'blur(50px)', background:`radial-gradient(ellipse, ${color}${featured ? '44' : '30'} 0%, transparent 70%)` }}/>
+                                    <div style={{ position:'absolute', bottom:'-15%', left:'-5%', width:'200px', height:'160px', borderRadius:'50%', filter:'blur(45px)', background:`radial-gradient(ellipse, ${color}${featured ? '33' : '22'} 0%, transparent 70%)` }}/>
                                 </div>
                                 <Star style={{ position:'absolute', top:16, left:18, width:20, height:20, color, fill:color, filter:`drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}bb)`, pointerEvents:'none' }}/>
                                 <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:12, position:'relative', zIndex:1, textAlign:'center' }}>
-                                    <Icon size={56} style={{ color, filter:`drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}99) drop-shadow(0 0 28px ${color}44)` }}/>
+                                    <Icon size={featured ? 68 : 56} style={{ color, filter:`drop-shadow(0 0 6px ${color}) drop-shadow(0 0 14px ${color}99) drop-shadow(0 0 28px ${color}44)` }}/>
                                     <p style={{ fontSize:'14px', fontWeight:700, letterSpacing:'0.08em', textTransform:'uppercase', color:`${color}ee` }}>{header}</p>
                                 </div>
                                 {items.map((content, i) => (
-                                    <div key={i} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${color}08`, border:`1px solid ${color}2a` }}>
+                                    <div key={i} style={{ position:'relative', zIndex:1, padding:'12px 14px', borderRadius:'12px', background:`${color}08`, border:`1px solid ${color}${featured ? '40' : '2a'}` }}>
                                         <p style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.06em', color:`${color}bb` }}>{content}</p>
                                     </div>
                                 ))}
                             </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 );
             })()}

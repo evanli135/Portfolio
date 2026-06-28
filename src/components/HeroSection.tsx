@@ -271,11 +271,11 @@ export const HeroSection = () => {
                             {YEAR_TICKS.map(year => {
                                 const x   = toX(year);
                                 const dim = year === 2027;
-                                const clr = dim ? EMPTY_CLR : 'rgba(255,255,255,0.5)';
+                                const clr = dim ? EMPTY_CLR : 'rgba(255,255,255,0.82)';
                                 return (
                                     <div key={year} style={{ position:'absolute', left:x, top: LINE_TOP + 2, transform:'translateX(-50%)', zIndex:2 }}>
-                                        <div style={{ width:'2px', height:NOTCH_H, background:clr, opacity: dim ? 0.35 : 0.80, margin:'0 auto' }}/>
-                                        <p style={{ fontSize:'13px', fontWeight:700, letterSpacing:'0.08em', color:clr, opacity: dim ? 0.35 : 0.95, marginTop:4, whiteSpace:'nowrap' }}>
+                                        <div style={{ width:'2px', height:NOTCH_H, background:clr, opacity: dim ? 0.35 : 0.90, margin:'0 auto' }}/>
+                                        <p style={{ fontSize:'14px', fontWeight:700, letterSpacing:'0.08em', color:clr, opacity: dim ? 0.35 : 1.0, marginTop:4, whiteSpace:'nowrap' }}>
                                             {year}
                                         </p>
                                     </div>
@@ -303,7 +303,7 @@ export const HeroSection = () => {
                                     const top = p.below ? eduBarTop + BAR_H + 3 : BAR_TOP_Y - 22;
                                     return (
                                         <div key={i} style={{ position:'absolute', left: p.x, top, transform:'translateX(-50%)', zIndex:5, pointerEvents:'none' }}>
-                                            <p style={{ fontSize:'12px', fontWeight:700, color: p.color, opacity:1, whiteSpace:'nowrap', letterSpacing:'0.04em', margin:0 }}>
+                                            <p style={{ fontSize:'13px', fontWeight:800, color: p.color, opacity:1, whiteSpace:'nowrap', letterSpacing:'0.05em', margin:0, filter:`drop-shadow(0 0 4px ${p.color}99)` }}>
                                                 {p.label}
                                             </p>
                                         </div>
@@ -417,30 +417,30 @@ function ExpCard({ role, org, blurb, degree, gpa, color, accent }: {
         : { borderBottom: `2px solid ${color}` };
     return (
         <div style={{
-            background:'rgba(255,255,255,0.04)',
-            backdropFilter:'blur(10px)', WebkitBackdropFilter:'blur(10px)',
-            border:`1px solid ${color}44`, ...borderAccent,
-            borderRadius:'12px', padding:'13px 15px', textAlign:'left',
-            boxShadow:`0 0 20px 4px ${color}20`,
+            background:'rgba(6,14,30,0.42)',
+            backdropFilter:'blur(14px)', WebkitBackdropFilter:'blur(14px)',
+            border:`1px solid ${color}55`, ...borderAccent,
+            borderRadius:'12px', padding:'14px 16px', textAlign:'left',
+            boxShadow:`0 0 24px 6px ${color}28, inset 0 1px 0 rgba(255,255,255,0.08)`,
         }}>
-            <p style={{ fontSize:'14px', fontWeight:700, color:'var(--color-foreground)', marginBottom:'4px', lineHeight:1.3 }}>
+            <p style={{ fontSize:'15px', fontWeight:700, color:'rgba(240,248,255,1.0)', marginBottom:'4px', lineHeight:1.3 }}>
                 {role}
             </p>
-            <p style={{ fontSize:'13px', color, fontWeight:600, marginBottom: (blurb || degree) ? '6px' : 0 }}>
+            <p style={{ fontSize:'13px', color, fontWeight:700, marginBottom: (blurb || degree) ? '7px' : 0, filter:`drop-shadow(0 0 5px ${color}88)` }}>
                 {org}
             </p>
             {degree && (
-                <p style={{ fontSize:'12px', color:'rgba(210,225,245,0.95)', lineHeight:1.4, marginBottom:'4px' }}>
+                <p style={{ fontSize:'13px', color:'rgba(210,230,255,0.92)', lineHeight:1.5, marginBottom:'4px' }}>
                     {degree}
                 </p>
             )}
             {gpa && (
-                <p style={{ fontSize:'12px', color, fontWeight:700, marginBottom: blurb ? '5px' : 0 }}>
+                <p style={{ fontSize:'13px', color, fontWeight:700, marginBottom: blurb ? '5px' : 0 }}>
                     {gpa}
                 </p>
             )}
             {blurb && (
-                <p style={{ fontSize:'12px', color:'rgba(210,225,245,0.95)', lineHeight:1.4, fontStyle:'italic' }}>
+                <p style={{ fontSize:'12px', color:'rgba(200,220,248,0.88)', lineHeight:1.5, fontStyle:'italic' }}>
                     {blurb}
                 </p>
             )}
