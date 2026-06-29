@@ -16,7 +16,6 @@ const BAR_GAP    = 10;   // gap between bar bottom and line
 const BAR_ROW_H  = BAR_H + 8;  // vertical spacing between stacked bar rows
 const CONN       = 68;   // connector length
 const NOTCH_H    = 14;
-const SCROLL_SPD = 2;
 const MONTHS     = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const EMPTY_CLR  = 'rgba(255,255,255,0.28)';
 
