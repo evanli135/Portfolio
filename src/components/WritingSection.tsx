@@ -1,4 +1,4 @@
-import book from '../assets/BIBRw.pdf'
+import book from '../assets/BIBPreview.pdf'
 
 const TEAL = '#C084FC';
 
