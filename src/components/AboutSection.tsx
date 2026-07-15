@@ -3,7 +3,7 @@ import { cn } from "../lib/utils";
 import { Star, Cpu, Microscope, Feather, Mail, Phone, MapPin, Github, Linkedin, Package } from "lucide-react";
 // import portrait from '../assets/portrait.png';
 
-const TEAL = '#2DD4BF';
+const ACCENT = '#A78BFA';
 
 // Scattered star configs for the merged bottom box sides
 const STARS_BOTTOM: { top: string; left?: string; right?: string; size: number; opacity: number; rotate: number }[] = [
@@ -26,7 +26,7 @@ const StarDeco = ({ stars }: { stars: typeof STARS_BOTTOM }) => (
                     ...(s.left  ? { left:  s.left  } : {}),
                     ...(s.right ? { right: s.right } : {}),
                     width: s.size, height: s.size,
-                    color: TEAL,
+                    color: ACCENT,
                     opacity: s.opacity,
                     transform: `rotate(${s.rotate}deg)`,
                     pointerEvents: 'none',
@@ -59,8 +59,8 @@ export const AboutSection = () => (
                     width: 200, height: 200,
                     borderRadius: '22px',
                     overflow: 'hidden',
-                    border: `2px solid ${TEAL}77`,
-                    boxShadow: `0 0 36px 10px ${TEAL}2a, 0 0 80px 20px ${TEAL}12, inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -1px 0 ${TEAL}33`,
+                    border: `2px solid ${ACCENT}77`,
+                    boxShadow: `0 0 36px 10px ${ACCENT}2a, 0 0 80px 20px ${ACCENT}12, inset 0 1px 0 rgba(255,255,255,0.45), inset 0 -1px 0 ${ACCENT}33`,
                     backdropFilter: 'blur(4px)',
                     WebkitBackdropFilter: 'blur(4px)',
                 }}>
@@ -169,11 +169,11 @@ export const AboutSection = () => (
                 position:'relative',
                 padding: '36px 36px',
                 borderRadius: '20px',
-                background: `linear-gradient(160deg, ${TEAL}18 0%, ${TEAL}0a 100%)`,
+                background: `linear-gradient(160deg, ${ACCENT}18 0%, ${ACCENT}0a 100%)`,
                 backdropFilter: 'blur(22px)', WebkitBackdropFilter: 'blur(22px)',
-                border: `1px solid ${TEAL}88`,
-                borderBottom: `2px solid ${TEAL}`,
-                boxShadow: `0 0 40px 8px ${TEAL}38, inset 0 1px 0 ${TEAL}55, inset 0 -1px 0 ${TEAL}22`,
+                border: `1px solid ${ACCENT}88`,
+                borderBottom: `2px solid ${ACCENT}`,
+                boxShadow: `0 0 40px 8px ${ACCENT}38, inset 0 1px 0 ${ACCENT}55, inset 0 -1px 0 ${ACCENT}22`,
             }}>
                 <StarDeco stars={STARS_BOTTOM} />
 
@@ -192,18 +192,18 @@ export const AboutSection = () => (
                         </p>
 
                         <div style={{ display:'flex', flexDirection:'column', gap:8, fontSize:'14px', color:'rgba(190,215,235,0.75)', lineHeight:1.7 }}>
-                            <p>Current R&amp;D Test Systems Engineer at <span style={{ color: TEAL, fontWeight:600 }}>Keysight Technologies</span>, building AI-powered diagnostics tooling for hardware test and measurement systems.</p>
-                            <p>Former Agentic Software Engineer at <span style={{ color: TEAL, fontWeight:600 }}>Vestmark</span>, shipping full-stack LLM pipelines for an AI-powered Investment Advisor Agent.</p>
-                            <p>Former researcher at Northeastern's Privacy &amp; Security Lab — first-authored a paper on multi-agent LLM security accepted to <span style={{ color: TEAL, fontWeight:600 }}>NDSS 2026</span> with 31 citations.</p>
+                            <p>Current R&amp;D Test Systems Engineer at <span style={{ color: ACCENT, fontWeight:600 }}>Keysight Technologies</span>, building AI-powered diagnostics tooling for hardware test and measurement systems.</p>
+                            <p>Former Agentic Software Engineer at <span style={{ color: ACCENT, fontWeight:600 }}>Vestmark</span>, shipping full-stack LLM pipelines for an AI-powered Investment Advisor Agent.</p>
+                            <p>Former researcher at Northeastern's Privacy &amp; Security Lab — first-authored a paper on multi-agent LLM security accepted to <span style={{ color: ACCENT, fontWeight:600 }}>NDSS 2026</span> with 31 citations.</p>
                         </div>
 
-                        <p style={{ fontSize:'13px', color:`${TEAL}bb`, lineHeight:1.6 }}>
+                        <p style={{ fontSize:'13px', color:`${ACCENT}bb`, lineHeight:1.6 }}>
                             Looking for roles in research, development, or engineering — especially LLMs or distributed systems.
                         </p>
                     </div>
 
                     {/* Divider */}
-                    <div style={{ height:1, background:`linear-gradient(90deg, transparent, ${TEAL}44, transparent)` }}/>
+                    <div style={{ height:1, background:`linear-gradient(90deg, transparent, ${ACCENT}44, transparent)` }}/>
 
                     {/* Featured project — Andal */}
                     <div style={{ display:'flex', flexDirection:'column', gap: 10 }}>
@@ -249,7 +249,7 @@ export const AboutSection = () => (
                     </div>
 
                     {/* Divider */}
-                    <div style={{ height:1, background:`linear-gradient(90deg, transparent, ${TEAL}44, transparent)` }}/>
+                    <div style={{ height:1, background:`linear-gradient(90deg, transparent, ${ACCENT}44, transparent)` }}/>
 
                     {/* Contact info */}
                     <div style={{ display:'flex', flexDirection:'column', gap: 14 }}>
@@ -263,14 +263,14 @@ export const AboutSection = () => (
                                 <div key={label} style={{
                                     display:'flex', alignItems:'center', gap: 10,
                                     padding: '10px 16px', borderRadius: '12px',
-                                    background: `${TEAL}08`, border: `1px solid ${TEAL}2a`,
+                                    background: `${ACCENT}08`, border: `1px solid ${ACCENT}2a`,
                                 }}>
-                                    <Icon size={18} style={{ color: TEAL, flexShrink:0, filter:`drop-shadow(0 0 5px ${TEAL}99)` }}/>
+                                    <Icon size={18} style={{ color: ACCENT, flexShrink:0, filter:`drop-shadow(0 0 5px ${ACCENT}99)` }}/>
                                     <div>
-                                        <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'0.10em', textTransform:'uppercase', color:`${TEAL}88`, marginBottom:1 }}>{label}</p>
+                                        <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'0.10em', textTransform:'uppercase', color:`${ACCENT}88`, marginBottom:1 }}>{label}</p>
                                         {href
                                             ? <a href={href} style={{ fontSize:'13px', color:'rgba(200,225,245,0.85)', fontWeight:500, textDecoration:'none' }}
-                                                onMouseOver={e => (e.currentTarget.style.color = TEAL)}
+                                                onMouseOver={e => (e.currentTarget.style.color = ACCENT)}
                                                 onMouseOut={e  => (e.currentTarget.style.color = 'rgba(200,225,245,0.85)')}>{value}</a>
                                             : <p style={{ fontSize:'13px', color:'rgba(200,225,245,0.85)', fontWeight:500 }}>{value}</p>
                                         }
@@ -287,14 +287,14 @@ export const AboutSection = () => (
                                 <div key={label} style={{
                                     display:'flex', alignItems:'center', gap: 10,
                                     padding: '10px 16px', borderRadius: '12px',
-                                    background: `${TEAL}08`, border: `1px solid ${TEAL}2a`,
+                                    background: `${ACCENT}08`, border: `1px solid ${ACCENT}2a`,
                                     width: 'calc(33.33% - 8px)',
                                 }}>
-                                    <Icon size={18} style={{ color: TEAL, flexShrink:0, filter:`drop-shadow(0 0 5px ${TEAL}99)` }}/>
+                                    <Icon size={18} style={{ color: ACCENT, flexShrink:0, filter:`drop-shadow(0 0 5px ${ACCENT}99)` }}/>
                                     <div>
-                                        <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'0.10em', textTransform:'uppercase', color:`${TEAL}88`, marginBottom:1 }}>{label}</p>
+                                        <p style={{ fontSize:'10px', fontWeight:700, letterSpacing:'0.10em', textTransform:'uppercase', color:`${ACCENT}88`, marginBottom:1 }}>{label}</p>
                                         <a href={href} style={{ fontSize:'13px', color:'rgba(200,225,245,0.85)', fontWeight:500, textDecoration:'none' }}
-                                            onMouseOver={e => (e.currentTarget.style.color = TEAL)}
+                                            onMouseOver={e => (e.currentTarget.style.color = ACCENT)}
                                             onMouseOut={e  => (e.currentTarget.style.color = 'rgba(200,225,245,0.85)')}>{value}</a>
                                     </div>
                                 </div>
@@ -303,7 +303,7 @@ export const AboutSection = () => (
                     </div>
 
                     {/* Divider */}
-                    <div style={{ height:1, background:`linear-gradient(90deg, transparent, ${TEAL}44, transparent)` }}/>
+                    <div style={{ height:1, background:`linear-gradient(90deg, transparent, ${ACCENT}44, transparent)` }}/>
 
                     {/* CTA buttons */}
                     <div style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
