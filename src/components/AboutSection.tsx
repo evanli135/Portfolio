@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from "../lib/utils";
-import { Star, Cpu, Microscope, Feather, Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
+import { Star, Cpu, Microscope, Feather, Mail, Phone, MapPin, Github, Linkedin, Package } from "lucide-react";
 // import portrait from '../assets/portrait.png';
 
 const TEAL = '#2DD4BF';
@@ -182,8 +182,8 @@ export const AboutSection = () => (
                     {/* Bio blurb */}
                     <div style={{ display:'flex', flexDirection:'column', gap: 10 }}>
                         <h3 style={{ fontSize:'17px', fontWeight:700, color:'rgba(255,255,255,0.92)', lineHeight:1.4 }}>
-                            Third-year <span style={{ color: TEAL }}>CS</span> undergrad at Northeastern University,
-                            concentration in <span style={{ color: TEAL }}>Systems Engineering</span>
+                            Third-year <span style={{ color: '#FB7185' }}>CS</span> undergrad at Northeastern University,
+                            concentration in <span style={{ color: '#FB7185' }}>Systems Engineering</span>
                         </h3>
 
                         <p style={{ fontSize:'14px', color:'rgba(200,220,240,0.80)', lineHeight:1.7 }}>
@@ -200,6 +200,52 @@ export const AboutSection = () => (
                         <p style={{ fontSize:'13px', color:`${TEAL}bb`, lineHeight:1.6 }}>
                             Looking for roles in research, development, or engineering — especially LLMs or distributed systems.
                         </p>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ height:1, background:`linear-gradient(90deg, transparent, ${TEAL}44, transparent)` }}/>
+
+                    {/* Featured project — Andal */}
+                    <div style={{ display:'flex', flexDirection:'column', gap: 10 }}>
+                        <p style={{ fontSize:'11px', fontWeight:700, letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(200,220,240,0.55)' }}>
+                            Featured Project
+                        </p>
+                        <a href="https://github.com/evanli135/Andal" target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none' }}>
+                            <div style={{
+                                position:'relative', overflow:'hidden',
+                                display:'flex', alignItems:'center', gap:16,
+                                padding:'16px 20px', borderRadius:'14px',
+                                background:'linear-gradient(160deg, rgba(251,191,36,0.10) 0%, rgba(251,191,36,0.03) 100%)',
+                                border:'1px solid rgba(251,191,36,0.4)',
+                                borderBottom:'2px solid #FBBF24',
+                                transition:'transform 0.2s, box-shadow 0.2s',
+                            }}
+                                onMouseOver={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 0 32px 6px rgba(251,191,36,0.28)'; }}
+                                onMouseOut={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}
+                            >
+                                <div style={{
+                                    flexShrink:0, width:44, height:44, borderRadius:'12px',
+                                    display:'flex', alignItems:'center', justifyContent:'center',
+                                    background:'rgba(251,191,36,0.12)', border:'1px solid rgba(251,191,36,0.4)',
+                                }}>
+                                    <Package size={22} style={{ color:'#FBBF24', filter:'drop-shadow(0 0 6px rgba(251,191,36,0.7))' }}/>
+                                </div>
+                                <div style={{ display:'flex', flexDirection:'column', gap:4, flex:1, minWidth:0 }}>
+                                    <div style={{ display:'flex', alignItems:'baseline', gap:10, flexWrap:'wrap' }}>
+                                        <span style={{ fontSize:'15px', fontWeight:700, color:'#FBBF24' }}>Andal</span>
+                                        <code style={{
+                                            fontFamily:"'Fira Code', 'Courier New', monospace",
+                                            fontSize:'11.5px', color:'rgba(220,235,255,0.85)',
+                                            background:'rgba(0,0,0,0.35)', padding:'2px 8px', borderRadius:'6px',
+                                            border:'1px solid rgba(251,191,36,0.25)',
+                                        }}>pip install andal</code>
+                                    </div>
+                                    <p style={{ fontSize:'12.5px', color:'rgba(200,220,240,0.75)', lineHeight:1.5 }}>
+                                        Embedded event store for Python — track events and run funnels/aggregations with no server, no SQL, no config.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
 
                     {/* Divider */}
