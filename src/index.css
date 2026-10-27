@@ -114,10 +114,12 @@ a:hover { color: var(--acc); }
   grid-area: 2 / 1 / 4 / 2;
   align-self: end;
   position: relative;
-  padding: clamp(10px, 1.6vw, 22px) clamp(14px, 2vw, 28px) clamp(6px, 1vw, 14px);
+  /* One margin, measured from the ink: each side subtracts the letters' own bearing. */
+  --name: min(39vh, 30vw);
+  --m: calc(var(--name) * 0.115);
+  padding: calc(var(--m) - var(--name) * 0.006) calc(var(--m) - var(--name) * 0.034) calc(var(--m) - var(--name) * 0.043) calc(var(--m) - var(--name) * 0.046);
   border: 1.5px dashed var(--ink);
 }
-.fence { --name: min(39vh, 30vw); }
 .hero h1 {
   margin: 0;
   font: 900 var(--name) / 0.84 var(--display);
@@ -197,10 +199,10 @@ a:hover { color: var(--acc); }
 .index button[aria-selected='true']::before { content: ''; align-self: center; width: 14px; height: 4px; margin-right: 8px; background: var(--acc); }
 .portrait-wrap {
   position: absolute;
-  right: clamp(14px, 2vw, 28px);
-  bottom: clamp(6px, 1vw, 14px);
+  right: var(--m);
+  bottom: var(--m);
   z-index: 1;
-  height: calc(var(--name) * 0.8);
+  height: calc(var(--name) * 0.79); /* cap height of LI */
   aspect-ratio: 1;
   background: var(--duo);
 }

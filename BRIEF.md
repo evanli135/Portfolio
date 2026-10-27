@@ -79,3 +79,4 @@ Diagrams are hand-built inline SVG with `role="img"`, `<title>`, `<desc>`. Flat,
 - 2026-10-27: Light palette cooled and quieted (#edf1f0 ground, finer grain, corner buttons without boxes). The lens always opens onto the dark agent layer, in both themes.
 - 2026-10-27: The photo sits inside the name's boundary, beside "LI", as a muted teal duotone (multiply over a desaturated teal). Inside the lens it turns into a halftone.
 - 2026-10-27: The URL no longer changes when you switch sections; `/#coursework`-style links still open that section.
+- 2026-10-27: The name's box uses one margin on every side, measured from the ink (each side's padding subtracts the typeface's own bearing). The photo matches LI's cap height and lines up with EVAN's right edge.
