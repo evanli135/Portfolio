@@ -19,7 +19,7 @@ export function Text({ children }: { children: string }) {
 }
 
 /** Only exists in the agent layer: things an agent would notice. Positioned so it never moves layout. */
-export function AgentOnly({ id, className, children }: { id: string; className?: string; children: React.ReactNode }) {
+export function AgentOnly({ className, children }: { className?: string; children: React.ReactNode }) {
   if (useLayer() !== 'agent') return null;
-  return <span className={`agent-only find ${className ?? ''}`} data-find={id}>{children}</span>;
+  return <span className={`agent-only ${className ?? ''}`}>{children}</span>;
 }

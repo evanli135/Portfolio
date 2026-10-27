@@ -1,24 +1,23 @@
 import { useEffect, useRef } from 'react';
-import { categories, links, site, type Entry } from '../data';
+import { categories, type Entry } from '../data';
 import { Diagram } from '../diagrams/Diagram';
 import * as specs from '../diagrams/specs';
 import { useId, useLayer, useShared } from '../layer';
 import { AgentOnly, Text } from './Text';
-import portrait from '../assets/portrait.jpg';
 
 // Every section is its own scroll journey: one entry per screen. Wide screens pin
 // the stage and crossfade entries as you scroll; phones stack them.
 
 const STEP: Record<string, string> = { work: '100vh', coursework: '55vh' };
 
-/** The big outlined readout: a year, a course number, or the entry's place in line. */
-function readout(catId: string, e: Entry, i: number) {
+/** The big outlined poster: a course number or the latest year, when there is one. */
+function poster(catId: string, e: Entry) {
   if (catId === 'coursework') return (e.org ?? '').split(' · ')[0];
-  const years = (e.meta ?? '').split(' · ')[0].match(/\d{4}/g);
-  return years ? years[years.length - 1] : String(i + 1).padStart(2, '0');
+  const years = (e.meta ?? '').match(/\d{4}/g);
+  return years ? years[years.length - 1] : null;
 }
 
-function Chapter({ catId, entry, index, total, on }: { catId: string; entry: Entry; index: number; total: number; on: boolean }) {
+function Chapter({ catId, entry, index, on }: { catId: string; entry: Entry; index: number; on: boolean }) {
   const layer = useLayer();
   const { phase, setHover, togglePin } = useShared();
   const shown = on ? phase : null;
@@ -27,23 +26,23 @@ function Chapter({ catId, entry, index, total, on }: { catId: string; entry: Ent
     const id = (target as Element).closest?.('[data-phase]')?.getAttribute('data-phase');
     return id && phases.has(id) ? id : null;
   };
-  const [when, ...rest] = (entry.meta ?? '').split(' · ');
+  const when = entry.meta;
   const spec = entry.diagram ? specs[entry.diagram] : null;
   const words = entry.body?.flat().map((s) => s.text).join('').split(/\s+/).length ?? 0;
   const tab = on && layer === 'human' ? 0 : -1;
   const work = catId === 'work';
-  const sub = work ? entry.title : entry.org;
+  const sub = work ? entry.title : catId === 'coursework' ? (entry.org ?? '').split(' · ')[1] : entry.org;
+  const big = spec ? null : poster(catId, entry);
 
   return (
-    <article className={`chapter${on ? ' on' : ''}${spec ? ' has-dia' : ' no-dia'}`} aria-hidden={!on || undefined}>
+    <article className={`chapter${on ? ' on' : ''}${spec ? ' has-dia' : big ? ' no-dia' : ' solo'}`} aria-hidden={!on || undefined}>
       <div className="ch-read">
-        <p className="ch-num">{String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}{when ? ` · ${when}` : ''}</p>
-        {spec && <p className="ch-year" aria-hidden="true">{readout(catId, entry, index)}</p>}
-        <h3 className="ch-title">{work ? entry.org : entry.title}</h3>
-        {sub && <p className="ch-sub">{sub}{rest.length ? ` · ${rest.join(' · ')}` : ''}</p>}
+        {when && <p className="ch-num">{when}</p>}
+        {(work ? entry.org : entry.title) && <h2 className="ch-title">{work ? entry.org : entry.title}</h2>}
+        {sub && <p className="ch-sub">{sub}</p>}
         <div className="ch-text" data-prov="trusted" data-prov-label="authored by Evan">
           {entry.body && (
-            <AgentOnly id={`${catId}-${index}`} className="note-ch">
+            <AgentOnly className="note-ch">
               {entry.body.length} {entry.body.length === 1 ? 'sentence' : 'sentences'} · {words} words{phases.size ? ` · ${phases.size} linked to the diagram` : ''}
             </AgentOnly>
           )}
@@ -74,7 +73,16 @@ function Chapter({ catId, entry, index, total, on }: { catId: string; entry: Ent
               {entry.bullets.map(([k, v]) => <div key={k}><dt>{k}</dt><dd><Text>{v}</Text></dd></div>)}
             </dl>
           )}
+          {entry.list && <p className="ch-list"><Text>{entry.list}</Text></p>}
           {entry.code && <code className="code">{entry.code}</code>}
+          {entry.paper && (
+            <a className="paper" href={entry.paper.href} tabIndex={tab} data-prov="untrusted" data-prov-label="peer-reviewed, leaves the site">
+              <span className="paper-venue">{entry.paper.venue}</span>
+              <span className="paper-title">{entry.paper.title}</span>
+              <span className="paper-by">{entry.paper.byline}</span>
+              <span className="paper-go">Read the paper ↗</span>
+            </a>
+          )}
           {entry.links && (
             <p className="ch-links">
               {entry.links.map((l) => (
@@ -86,12 +94,12 @@ function Chapter({ catId, entry, index, total, on }: { catId: string; entry: Ent
           )}
         </div>
       </div>
-      {!spec && <p className="ch-big" aria-hidden="true">{readout(catId, entry, index)}</p>}
+      {big && <p className="ch-big" aria-hidden="true">{big}</p>}
       {spec && (
         <div
           className="ch-dia"
           data-prov="trusted"
-          data-prov-label={spec.illustrative ? 'illustrative, generic' : 'drawn from the paper'}
+          data-prov-label={entry.paper ? 'drawn from the paper' : 'generic, nothing confidential'}
           onPointerOver={(e) => e.pointerType === 'mouse' && setHover(phaseAt(e.target))}
           onPointerLeave={() => setHover(null)}
           onClick={(e) => togglePin(phaseAt(e.target))}
@@ -144,24 +152,16 @@ export function Journey() {
               onClick={() => pick(c.id)}
             >
               <span className="ix-word">{c.label}</span>
-              <sup data-prov="tool" data-prov-label="counted">{c.entries.length}</sup>
             </button>
           ))}
         </nav>
-        <ol className="rail" aria-hidden="true">
-          {cat.entries.map((e, i) => <li key={e.title} className={i === chapter ? 'on' : i < chapter ? 'past' : ''} />)}
-        </ol>
-        <span className="portrait-wrap" data-prov="trusted" data-prov-label="first-party photo">
-          <img className="portrait" src={portrait} alt="Evan Li" width={640} height={640} loading="lazy" />
-          <AgentOnly id="photo" className="note-photo">640 × 640 · 1 face · no hidden text</AgentOnly>
-        </span>
+        <AgentOnly className="note-egg"><Text>TODO(evan): something worth finding</Text></AgentOnly>
       </aside>
 
       <div className="j-main" id={id('j-panel')} role="tabpanel" aria-labelledby={id(`tab-${cat.id}`)}>
         <div className="stage">
-          <h2 className="j-label">{cat.label}</h2>
           {cat.entries.map((e, i) => (
-            <Chapter key={`${cat.id}-${e.title}`} catId={cat.id} entry={e} index={i} total={cat.entries.length} on={i === chapter} />
+            <Chapter key={`${cat.id}-${e.title}`} catId={cat.id} entry={e} index={i} on={i === chapter} />
           ))}
         </div>
         <div className="steps" aria-hidden="true">
@@ -169,13 +169,6 @@ export function Journey() {
         </div>
       </div>
 
-      <footer className="j-foot">
-        {links.slice(0, 2).map((l) => <a key={l.label} href={l.href} tabIndex={focusable}>{l.label} ↗</a>)}
-        <span className="foot-egg">
-          <AgentOnly id="egg" className="note-egg"><Text>TODO(evan): something worth finding</Text></AgentOnly>
-        </span>
-        <a href={`mailto:${site.email}`} tabIndex={focusable}>{site.email}</a>
-      </footer>
     </section>
   );
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { site } from '../data';
 import { useLayer } from '../layer';
 import { AgentOnly, Text } from './Text';
+import portrait from '../assets/portrait.jpg';
 
 // A field of untrusted inputs. Every one of them stops at the boundary around the name.
 // Deterministic, so both layers draw the same field.
@@ -36,7 +37,7 @@ function PageFacts() {
     const out = Array.from(linksAll).filter((a) => /^https?:/.test(a.getAttribute('href') ?? '')).length;
     setFacts(`${words.toLocaleString()} words · ${linksAll.length} links, ${out} leave the site · ${Math.max(1, Math.round(words / 230))} min read`);
   }, []);
-  return <AgentOnly id="facts" className="facts">{facts}</AgentOnly>;
+  return <AgentOnly className="facts">{facts}</AgentOnly>;
 }
 
 export function Hero() {
@@ -54,7 +55,11 @@ export function Hero() {
           <span>Evan</span>
           <span>Li</span>
         </h1>
-        <AgentOnly id="h1" className="note-h1">h1 · 2 tokens · 1 of 1</AgentOnly>
+        <span className="portrait-wrap" data-prov="trusted" data-prov-label="first-party photo">
+          <img className="portrait" src={portrait} alt="Evan Li" width={640} height={640} />
+          <AgentOnly className="note-photo">640 × 640 · 1 face · no hidden text</AgentOnly>
+        </span>
+        <AgentOnly className="note-h1">h1 · 2 tokens · 1 of 1</AgentOnly>
         <div className="field" aria-hidden="true" data-prov="untrusted" data-prov-label="untrusted input, drawn and never written">
           {FIELD.map((l) => (
             <span key={l.key} className={`lane ${l.side}`} style={l.style}>

@@ -18,8 +18,6 @@ export type Shared = {
   setTab: (id: string) => void;
   theme: Theme;
   setTheme: (t: Theme) => void;
-  found: number;
-  finds: number;
 };
 export const SharedCtx = createContext<Shared>(null!);
 export const useShared = () => useContext(SharedCtx);

@@ -26,9 +26,9 @@ function ThemeIcon({ theme }: { theme: Theme }) {
   );
 }
 
-/** Fixed top-right: the five links, what the lens has found, and sun / moon. */
+/** Fixed top-right: the links and sun / moon. */
 export function Corner() {
-  const { theme, setTheme, found, finds } = useShared();
+  const { theme, setTheme } = useShared();
   return (
     <div className="corner">
       <nav className="corner-links" aria-label="Links">
@@ -43,11 +43,7 @@ export function Corner() {
           </a>
         ))}
       </nav>
-      {finds > 0 && (
-        <span className="found" role="img" aria-label={`${found} of ${finds} found`}>
-          {Array.from({ length: finds }, (_, i) => <i key={i} className={i < found ? 'on' : ''} />)}
-        </span>
-      )}
+
       <button className="theme" aria-label={NAME[theme]} onClick={() => setTheme(NEXT[theme])}>
         <ThemeIcon theme={theme} />
       </button>

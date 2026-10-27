@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 // The cursor is the lens. Inside it, the agent layer shows through.
 // On touch screens it rests mid-screen and moves to wherever you touch.
-export function Lens({ onFind }: { onFind: (found: number, total: number) => void }) {
+export function Lens() {
   const ring = useRef<HTMLDivElement>(null);
   const hud = useRef<HTMLSpanElement>(null);
 
@@ -10,7 +10,6 @@ export function Lens({ onFind }: { onFind: (found: number, total: number) => voi
     const agent = document.querySelector<HTMLElement>('.agent-layer');
     const human = document.querySelector<HTMLElement>('.human-layer');
     if (!agent || !human) return;
-    const found = new Set<string>();
     const radius = () => (innerWidth < 640 ? 96 : 150);
     let x = innerWidth / 2;
     let y = innerHeight * 0.55;
@@ -21,7 +20,7 @@ export function Lens({ onFind }: { onFind: (found: number, total: number) => voi
       const prov = el.closest('[data-prov]');
       const tag = el.closest('a') ? 'link' : el.closest('button') ? 'button' : el.closest('svg') ? 'diagram' : el.closest('img') ? 'image' : el.closest('h1,h2,h3') ? 'heading' : 'text';
       const label = prov?.getAttribute('data-prov-label');
-      return label ? `${tag} · ${label}` : tag;
+      return label ? `${tag} · ${label}` : '';
     };
 
     const update = () => {
@@ -35,15 +34,6 @@ export function Lens({ onFind }: { onFind: (found: number, total: number) => voi
         ring.current.toggleAttribute('data-flip', x > innerWidth * 0.6);
       }
       if (hud.current) hud.current.textContent = describe(document.elementFromPoint(x, y));
-      const items = agent.querySelectorAll('.find');
-      items.forEach((el) => {
-        const b = el.getBoundingClientRect();
-        const dx = Math.max(b.left - x, 0, x - b.right);
-        const dy = Math.max(b.top - y, 0, y - b.bottom);
-        const visible = el.checkVisibility?.({ visibilityProperty: true, opacityProperty: true }) ?? true;
-        if (visible && b.width && dx * dx + dy * dy < r * r * 0.5) found.add(el.getAttribute('data-find') ?? '');
-      });
-      onFind(found.size, new Set(Array.from(items, (el) => el.getAttribute('data-find'))).size);
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const move = (e: PointerEvent) => { x = e.clientX; y = e.clientY; schedule(); };
@@ -54,8 +44,6 @@ export function Lens({ onFind }: { onFind: (found: number, total: number) => voi
     window.addEventListener('touchmove', touch, { passive: true });
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
-    const mo = new MutationObserver(schedule);
-    mo.observe(agent, { subtree: true, childList: true });
     schedule();
     return () => {
       window.removeEventListener('pointermove', move);
@@ -63,10 +51,9 @@ export function Lens({ onFind }: { onFind: (found: number, total: number) => voi
       window.removeEventListener('touchmove', touch);
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
-      mo.disconnect();
       cancelAnimationFrame(frame);
     };
-  }, [onFind]);
+  }, []);
 
   return (
     <div className="lens" ref={ring} aria-hidden="true">

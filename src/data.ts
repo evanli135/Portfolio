@@ -15,6 +15,8 @@ export type Entry = {
   body?: Segment[][]; // paragraphs
   bullets?: [string, string][];
   code?: string;
+  list?: string; // one plain line of fragments
+  paper?: { venue: string; title: string; byline: string; href: string };
   links?: Link[];
 };
 
@@ -32,7 +34,6 @@ export const site = {
 export const links: Link[] = [
   // TODO(evan): replace public/evan-li-resume.pdf with the final PDF (current file is the old résumé)
   { label: 'Résumé', href: '/evan-li-resume.pdf' },
-  { label: 'Paper', href: 'https://arxiv.org/abs/2504.20984' },
   { label: 'GitHub', href: 'https://github.com/evanli135' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/evan-li-ff/' },
   { label: 'Email', href: `mailto:${site.email}` },
@@ -68,7 +69,7 @@ export const categories: Category[] = [
       {
         title: 'Distributed Systems Security Researcher',
         org: 'Northeastern Privacy & Security Lab',
-        meta: 'Jan to Jul 2025 · ACE: A Security Architecture for LLM-Integrated App Systems · NDSS 2026',
+        meta: 'Jan to Jul 2025',
         diagram: 'ace',
         body: [
           p('Apps installed into an LLM agent can hijack it, through a poisoned description while it plans or a poisoned output while it runs.'),
@@ -82,9 +83,13 @@ export const categories: Category[] = [
             t('.'),
           ],
           p('It blocked every attack in the InjecAgent and Agent Security Bench benchmarks.'),
-          p('Co-first author with Tushin Mallick and Evan Rose. With William Robertson, Alina Oprea, and Cristina Nita-Rotaru.'),
         ],
-        links: [{ label: 'arXiv 2504.20984', href: 'https://arxiv.org/abs/2504.20984' }],
+        paper: {
+          venue: 'NDSS 2026',
+          title: 'ACE: A Security Architecture for LLM-Integrated App Systems',
+          byline: 'Co-first author with Tushin Mallick and Evan Rose · with William Robertson, Alina Oprea, Cristina Nita-Rotaru',
+          href: 'https://arxiv.org/abs/2504.20984',
+        },
       },
       {
         // TODO(evan): confirm title (old site said Agentic Software Engineer)
@@ -179,22 +184,27 @@ export const categories: Category[] = [
       { title: 'Introduction to Databases', org: 'CS 3200', bullets: [['Relational', 'SQL, normalization, transactions, isolation'], ['NoSQL', 'MongoDB and when to prefer it']] },
       { title: 'Foundations of Data Science', org: 'DS 3000', bullets: [['Tools', 'Pandas, NumPy, Matplotlib'], ['ML', 'Regression, classification, evaluation']] },
       { title: 'Object-Oriented Design', org: 'CS 3500', bullets: [['Patterns', 'Observer, Strategy, MVC, Factory in Java'], ['Testing', 'JUnit, test-driven development']] },
-      { title: 'Network Fundamentals', org: 'CS 4700', bullets: [['Covers', 'TCP/IP, congestion control, sockets, firewalls, NAT, DNS']] },
-      { title: 'Theory of Computation', org: 'CS 3800', bullets: [['Covers', 'Automata, CFGs, Turing machines, P vs. NP']] },
-      { title: 'GUI Programming', org: 'CS 3520', bullets: [['Covers', 'Event models, layout, state, rendering']] },
-      { title: 'Robotics Programming', org: 'CS 4610', bullets: [['Covers', 'Kinematics, sensor fusion, PID, ROS']] },
+      { title: 'Network Fundamentals', org: 'CS 4700', list: 'TCP/IP, congestion control, sockets, firewalls, NAT, DNS' },
+      { title: 'Theory of Computation', org: 'CS 3800', list: 'Automata, CFGs, Turing machines, P vs. NP' },
+      { title: 'GUI Programming', org: 'CS 3520', list: 'Event models, layout, state, rendering' },
+      { title: 'Robotics Programming', org: 'CS 4610', list: 'Kinematics, sensor fusion, PID, ROS' },
     ],
   },
   {
     id: 'skills',
     label: 'Skills',
     entries: [
-      { title: 'Languages', body: [p('Python, TypeScript, C, C++, Rust, Java, Ruby')] },
-      { title: 'Agents', body: [p('LangChain, Mastra, MCP, AWS Bedrock, RAG, prompt injection testing')] },
-      { title: 'Systems', body: [p('Distributed systems, operating systems, networks, memory management, parallel programming')] },
-      { title: 'Infrastructure', body: [p('PostgreSQL, Redis, MongoDB, Docker, Kubernetes, AWS, Linux')] },
-      { title: 'Observability', body: [p('OpenTelemetry, Grafana, Dynatrace, Wireshark')] },
-      { title: 'Web', body: [p('React, Node.js, Django, FastAPI, Spring, Ruby on Rails')] },
+      {
+        title: '',
+        bullets: [
+          ['Languages', 'Python, TypeScript, C, C++, Rust, Java, Ruby'],
+          ['Agents', 'LangChain, Mastra, MCP, AWS Bedrock, RAG'],
+          ['Systems', 'Distributed systems, operating systems, networks'],
+          ['Infrastructure', 'PostgreSQL, Redis, MongoDB, Docker, Kubernetes, AWS'],
+          ['Observability', 'OpenTelemetry, Grafana, Dynatrace, Wireshark'],
+          ['Web', 'React, Node.js, Django, FastAPI, Rails'],
+        ],
+      },
     ],
   },
   {

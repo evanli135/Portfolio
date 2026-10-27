@@ -3,9 +3,8 @@ import type { Spec } from './Diagram';
 // Node ids double as phase ids; data.ts segments reference them.
 
 export const matrix: Spec = {
-  title: 'NL-to-SQL evaluation loop (illustrative)',
+  title: 'NL-to-SQL evaluation loop',
   desc: 'A question goes to a model, which writes a SQL query that runs against a database. An evaluation harness compares the result to the expected one and feeds the score back to the model. No boundaries yet.',
-  illustrative: true,
   view: { wide: [760, 250], tall: [360, 500] },
   boundaries: [],
   nodes: [
@@ -62,9 +61,8 @@ export const ace: Spec = {
 };
 
 export const vestmark: Spec = {
-  title: 'Approval gate for an advisory agent (illustrative)',
+  title: 'Approval gate for an advisory agent',
   desc: 'An agent outside the boundary proposes a portfolio change. A policy and guardrail check runs, then a human approval gate on the edge of client accounts, then the change is executed and logged. Sensitive data leaving the check is blocked.',
-  illustrative: true,
   view: { wide: [760, 290], tall: [360, 610] },
   boundaries: [
     { label: 'Guardrails', wide: { x: 160, y: 40, w: 584, h: 220 }, tall: { x: 20, y: 90, w: 320, h: 500 } },
@@ -90,9 +88,8 @@ export const vestmark: Spec = {
 };
 
 export const keysight: Spec = {
-  title: 'Agentic penetration test loop (illustrative)',
+  title: 'Agentic penetration test loop',
   desc: 'A loop: plan attack, run via MCP, observe response, record and classify, then back to planning. The firewall under test sits inside a test scope boundary, reachable only through the MCP tool. Direct access is blocked. Attack types: SQL injection, prompt injection, denial of service.',
-  illustrative: true,
   view: { wide: [760, 310], tall: [360, 425] },
   boundaries: [{ label: 'Test scope', wide: { x: 180, y: 190, w: 350, h: 110 }, tall: { x: 210, y: 110, w: 140, h: 210 } }],
   nodes: [

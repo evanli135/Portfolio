@@ -39,8 +39,6 @@ export default function App() {
   const [pinned, setPinned] = useState<string | null>(null);
   const [tab, setTabState] = useState(fromHash);
   const [theme, setTheme] = useState<Theme>(readTheme);
-  const [found, setFound] = useState(0);
-  const [finds, setFinds] = useState(0);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -60,13 +58,12 @@ export default function App() {
 
   const setTab = useCallback((id: string) => {
     setTabState(id);
-    history.replaceState(null, '', `#${id}`);
+    if (window.location.hash) history.replaceState(null, '', window.location.pathname);
   }, []);
   const changeChapter = useCallback((i: number) => { setChapter(i); setHover(null); setPinned(null); }, []);
   const togglePin = useCallback((p: string | null) => setPinned((cur) => (p === cur ? null : p)), []);
-  const onFind = useCallback((n: number, total: number) => { setFound(n); setFinds(total); }, []);
 
-  const shared = { chapter, setChapter: changeChapter, phase: hover ?? pinned, setHover, togglePin, tab, setTab, theme, setTheme, found, finds };
+  const shared = { chapter, setChapter: changeChapter, phase: hover ?? pinned, setHover, togglePin, tab, setTab, theme, setTheme };
 
   return (
     <BrowserRouter>
@@ -77,7 +74,7 @@ export default function App() {
         <LayerCtx.Provider value="agent">
           <div className="agent-layer" aria-hidden="true" inert><Site /></div>
         </LayerCtx.Provider>
-        <Lens onFind={onFind} />
+        <Lens />
       </SharedCtx.Provider>
     </BrowserRouter>
   );

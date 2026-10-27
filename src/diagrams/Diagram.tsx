@@ -8,7 +8,6 @@ type Anchor = { x: number; y: number; anchor?: 'start' | 'middle' | 'end' };
 export type Spec = {
   title: string;
   desc: string;
-  illustrative?: boolean;
   view: { wide: [number, number]; tall: [number, number] };
   boundaries: { label: string; tallLabelBottom?: boolean; wide: Rect; tall: Rect }[];
   nodes: {
@@ -136,7 +135,6 @@ export function Diagram({ spec, active, uid }: { spec: Spec; active: string | nu
     <figure className="dia">
       <Svg spec={spec} layout="wide" active={active} uid={uid} />
       <Svg spec={spec} layout="tall" active={active} uid={uid} />
-      {spec.illustrative && <figcaption>Illustrative</figcaption>}
     </figure>
   );
 }
