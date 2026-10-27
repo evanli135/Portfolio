@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-// The cursor is the lens. Inside it, the agent layer shows through.
+// On the landing screen the cursor is the lens, and the agent layer shows through it.
+// Below the hero it goes away and the normal cursor returns.
 // On touch screens it rests mid-screen and moves to wherever you touch.
 export function Lens() {
   const ring = useRef<HTMLDivElement>(null);
@@ -10,7 +11,9 @@ export function Lens() {
     const agent = document.querySelector<HTMLElement>('.agent-layer');
     const human = document.querySelector<HTMLElement>('.human-layer');
     if (!agent || !human) return;
-    const radius = () => (innerWidth < 640 ? 64 : 90);
+    const radius = () => (innerWidth < 640 ? 44 : 60);
+    const hero = document.querySelector<HTMLElement>('.human-layer .hero');
+    const root = document.documentElement;
     let x = innerWidth / 2;
     let y = innerHeight * 0.55;
     let frame = 0;
@@ -25,6 +28,11 @@ export function Lens() {
 
     const update = () => {
       frame = 0;
+      const box = hero?.getBoundingClientRect();
+      const on = !!box && y >= box.top && y <= box.bottom;
+      root.toggleAttribute('data-lens', on);
+      if (ring.current) ring.current.style.display = on ? '' : 'none';
+      if (!on) { agent.style.clipPath = 'circle(0px at -500px -500px)'; return; }
       const r = radius();
       agent.style.clipPath = `circle(${r}px at ${x}px ${y + scrollY}px)`;
       if (ring.current) {
@@ -52,6 +60,7 @@ export function Lens() {
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
       cancelAnimationFrame(frame);
+      root.removeAttribute('data-lens');
     };
   }, []);
 

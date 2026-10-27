@@ -60,6 +60,7 @@ export function Hero() {
           <AgentOnly className="note-photo">640 × 640 · 1 face · no hidden text</AgentOnly>
         </span>
         <AgentOnly className="note-h1">h1 · 2 tokens · 1 of 1</AgentOnly>
+        <AgentOnly className="note-egg"><Text>TODO(evan): something worth finding</Text></AgentOnly>
         <div className="field" aria-hidden="true" data-prov="untrusted" data-prov-label="untrusted input, drawn and never written">
           {FIELD.map((l) => (
             <span key={l.key} className={`lane ${l.side}`} style={l.style}>

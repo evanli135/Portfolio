@@ -284,7 +284,6 @@ a:hover { color: var(--acc); }
   .ch-dia { margin-top: 28px; }
   .ch-big { margin: 0 0 14px; font-size: clamp(3.4rem, 18vw, 6rem); text-align: left; }
   .chapter.no-dia { display: flex; flex-direction: column-reverse; }
-  .note-egg { display: none; }
 }
 
 /* Diagrams */
@@ -377,7 +376,7 @@ a:hover { color: var(--acc); }
 .ic-fill { fill: currentColor; }
 /* The lens is the cursor. */
 @media (pointer: fine) {
-  html, html * { cursor: none !important; }
+  html[data-lens], html[data-lens] * { cursor: none !important; }
 }
 .lens {
   position: fixed;
@@ -385,7 +384,7 @@ a:hover { color: var(--acc); }
   left: 0;
   z-index: 30;
   pointer-events: none;
-  --r: 90px;
+  --r: 60px;
   /* The lens always draws in the agent layer's colors. */
   --bg: #011817;
   --ink: #82f3e2;
@@ -501,10 +500,9 @@ a:hover { color: var(--acc); }
 }
 .facts { top: 96px; left: clamp(16px, 3vw, 40px); }
 .note-h1 { top: 14px; right: 16px; }
-.note-ch { top: -30px; left: 0; }
 .note-photo { left: 0; bottom: -26px; }
 .human-layer { overflow-x: clip; }
-.note-egg { left: clamp(16px, 3vw, 40px); bottom: 220px; }
+.note-egg { left: var(--m); top: calc(100% + 14px); }
 
 @media (max-width: 640px) {
   .hero { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto; padding-top: 18px; }
@@ -521,7 +519,7 @@ a:hover { color: var(--acc); }
   .corner-links .long { display: none; }
   .corner-links .short { display: block; width: 18px; height: 18px; }
   .theme { width: 32px; height: 32px; }
-  .lens { --r: 64px; }
+  .lens { --r: 44px; }
   .lens .lens-hud, .lens[data-flip] .lens-hud { left: 50%; right: auto; top: calc(var(--r) + 8px); transform: translateX(-50%); }
 }
 

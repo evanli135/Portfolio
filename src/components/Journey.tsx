@@ -3,7 +3,7 @@ import { categories, type Entry } from '../data';
 import { Diagram } from '../diagrams/Diagram';
 import * as specs from '../diagrams/specs';
 import { useId, useLayer, useShared } from '../layer';
-import { AgentOnly, Text } from './Text';
+import { Text } from './Text';
 
 // A pinned index on the side; the open section's entries scroll as a normal page.
 
@@ -31,7 +31,6 @@ function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: 
   };
   const when = entry.meta;
   const spec = entry.diagram ? specs[entry.diagram] : null;
-  const words = entry.body?.flat().map((s) => s.text).join('').split(/\s+/).length ?? 0;
   const tab = layer === 'human' ? 0 : -1;
   const work = catId === 'work';
   const sub = work ? entry.title : catId === 'coursework' ? (entry.org ?? '').split(' · ')[1] : entry.org;
@@ -44,11 +43,7 @@ function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: 
         {(work ? entry.org : entry.title) && <h2 className="ch-title">{work ? entry.org : entry.title}</h2>}
         {sub && <p className="ch-sub">{sub}</p>}
         <div className="ch-text" data-prov="trusted" data-prov-label="authored by Evan">
-          {entry.body && (
-            <AgentOnly className="note-ch">
-              {entry.body.length} {entry.body.length === 1 ? 'sentence' : 'sentences'} · {words} words{phases.size ? ` · ${phases.size} linked to the diagram` : ''}
-            </AgentOnly>
-          )}
+
           {entry.body?.map((segs, i) => (
             <p key={i}>
               {segs.map((s, j) =>
@@ -147,7 +142,6 @@ export function Journey() {
             </button>
           ))}
         </nav>
-        <AgentOnly className="note-egg"><Text>TODO(evan): something worth finding</Text></AgentOnly>
       </aside>
 
       <div className="j-main" id={id('j-panel')} role="tabpanel" aria-labelledby={id(`tab-${cat.id}`)}>
