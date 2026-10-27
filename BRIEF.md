@@ -56,8 +56,11 @@ Diagrams are hand-built inline SVG with `role="img"`, `<title>`, `<desc>`. Flat,
 
 - 2026-10-27: Audit of the old site. Title was "Vite + React + TS", Vite favicon, no meta/OG tags, dark-only (theme toggle was a no-op), 45 MB `.mov` in the bundle. Lighthouse mobile 87 / 92 / 100 / 83, desktop 100 / 94 / 100 / 83.
 - 2026-10-27: Rebuilt on branch `rebuild-trust-boundary` as one PR for Evan's review. Old sections (About, Skills grid, Coursework cards, embedded PDF viewers, star background, Contact) replaced by the structure below, pending Evan's yes.
-- 2026-10-27: Structure: name + line + links; Work (ACE, Vestmark, Keysight); Writing; Record; Person.
-- 2026-10-27: Palette: paper and ink neutrals, one vermilion accent. Type: Instrument Serif for the name and headings, IBM Plex Mono for labels and diagrams, system sans for body.
+- 2026-10-27: First pass (long single scroll, serif type) rejected by Hannah as generic. Replaced.
+- 2026-10-27: Structure follows the ending of hannahgwimpy.com: a hero, then one record view split by section (Research, Work, Projects, Writing, Education, Coursework, Skills, Otherwise) with a big index on the left and entries on the right. Order carries the through line: ACE first, then Vestmark, then Keysight. Sections deep-link by hash (`/#coursework`).
+- 2026-10-27: Coursework, LoreBoard, Mario City kept. Portrait kept, grayscale, in a solid (trusted) frame.
+- 2026-10-27: Visual language is the trust boundary, used literally: the name sits inside a dashed boundary and dashed accent inputs arrive and stop at its edge (CSS transforms and opacity only; frozen at the stop under reduced motion). In the index, the open section is solid and the others are outlines.
+- 2026-10-27: Type: Big Shoulders Display (condensed, industrial) for the name, index, and entry titles; IBM Plex Sans for body; IBM Plex Mono for meta and diagrams. Palette: paper and ink neutrals, one vermilion accent. Nothing shared with Hannah's wide grotesk and serif.
 - 2026-10-27: Drafts in `src/posts` are listed only in dev builds.
 - 2026-10-27: Prerendering proposed, not built. Waiting on Evan.
 - 2026-10-27: Signature interaction (agent's-eye lens) pitched, not built.

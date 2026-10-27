@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { links } from '../data';
 
 type Theme = 'auto' | 'light' | 'dark';
@@ -22,22 +21,11 @@ function applyTheme(t: Theme) {
   } catch { /* storage blocked */ }
 }
 
-/** Fixed top-right: the five links once the header scrolls away, and the theme setting. */
+/** Fixed top-right: the five links and the theme setting, reachable from anywhere. */
 export function Corner() {
   const [theme, setTheme] = useState<Theme>(readTheme);
   const [open, setOpen] = useState(false);
-  const [showLinks, setShowLinks] = useState(false);
   const menu = useRef<HTMLDivElement>(null);
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    const header = document.getElementById('top-links');
-    if (!header) { setShowLinks(true); return; }
-    const io = new IntersectionObserver(([e]) => setShowLinks(!e.isIntersecting));
-    io.observe(header);
-    return () => io.disconnect();
-  }, [pathname]);
-
   useEffect(() => {
     if (!open) return;
     const close = (e: PointerEvent | KeyboardEvent) => {
@@ -53,9 +41,9 @@ export function Corner() {
 
   return (
     <div className="corner">
-      <nav className={`corner-links${showLinks ? ' shown' : ''}`} aria-label="Quick links" aria-hidden={!showLinks}>
+      <nav className="corner-links" aria-label="Links">
         {links.map((l) => (
-          <a key={l.label} href={l.href} tabIndex={showLinks ? 0 : -1}>{l.label}</a>
+          <a key={l.label} href={l.href}>{l.label}</a>
         ))}
       </nav>
       <div className="settings" ref={menu}>
