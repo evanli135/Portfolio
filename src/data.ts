@@ -12,10 +12,10 @@ export type Entry = {
   meta?: string; // dates · place
   diagram?: 'matrix' | 'ace' | 'vestmark' | 'keysight';
   body?: Segment[][]; // paragraphs
-  bullets?: [string, string][];
   code?: string;
   list?: string; // one plain line of fragments
   paper?: { venue: string; title: string; byline: string; href: string };
+  courses?: { code: string; name: string; topics: string }[];
   links?: Link[];
 };
 
@@ -164,25 +164,21 @@ export const categories: Category[] = [
         title: 'Northeastern University',
         org: 'B.S. in Computer Science, Concentration in Systems',
         meta: '2023 to May 2027 · Boston, MA · GPA 3.83',
+        courses: [
+          { code: 'CS 7610', name: 'Foundations of Distributed Systems (Graduate)', topics: 'Raft, Paxos, leader election, failure detection, GFS, Spanner, Spark' },
+          { code: 'CS 3650', name: 'Computer Systems', topics: 'x86 assembly, linkers, virtual memory, page tables, POSIX threads, race analysis' },
+          { code: 'CY 2550', name: 'Foundations of Cybersecurity', topics: 'AES, RSA, signatures, SQL injection, XSS, CSRF, password cracking, scanning' },
+          { code: 'CS 3000', name: 'Data Structures and Algorithms', topics: 'Divide and conquer, dynamic programming, greedy, graph algorithms' },
+          { code: 'CS 3200', name: 'Introduction to Databases', topics: 'SQL, normalization, transactions, isolation, MongoDB' },
+          { code: 'DS 3000', name: 'Foundations of Data Science', topics: 'Pandas, NumPy, Matplotlib, regression, classification' },
+          { code: 'CS 3500', name: 'Object-Oriented Design', topics: 'Observer, Strategy, MVC, Factory in Java, JUnit, test-driven development' },
+          { code: 'CS 4700', name: 'Network Fundamentals', topics: 'TCP/IP, congestion control, sockets, firewalls, NAT, DNS' },
+          { code: 'CS 3800', name: 'Theory of Computation', topics: 'Automata, CFGs, Turing machines, P vs. NP' },
+          { code: 'CS 3520', name: 'GUI Programming', topics: 'Event models, layout, state, rendering' },
+          { code: 'CS 4610', name: 'Robotics Programming', topics: 'Kinematics, sensor fusion, PID, ROS' },
+        ],
         // TODO(evan): confirm concentration wording and that the GPA is current
       },
-    ],
-  },
-  {
-    id: 'coursework',
-    label: 'Coursework',
-    entries: [
-      { title: 'Foundations of Distributed Systems', org: 'CS 7610 · Graduate', bullets: [['Consensus', 'Raft, Paxos, leader election, failure detection'], ['Systems Read', 'GFS, HDFS, Spanner, Spark'], ['Built In', 'C, C++, Rust, Docker']] },
-      { title: 'Computer Systems', org: 'CS 3650', bullets: [['Low Level', 'x86 assembly, calling conventions, linkers'], ['Memory', 'Stack, heap, virtual memory, page tables'], ['Concurrency', 'POSIX threads, semaphores, race analysis']] },
-      { title: 'Foundations of Cybersecurity', org: 'CY 2550', bullets: [['Crypto', 'AES, RSA, hashing, signatures'], ['Web Attacks', 'SQL injection, XSS, CSRF, and defenses'], ['Offense', 'Password cracking, scanning, basic exploits']] },
-      { title: 'Data Structures and Algorithms', org: 'CS 3000', bullets: [['Paradigms', 'Divide and conquer, dynamic programming, greedy'], ['Graphs', 'BFS, DFS, Dijkstra, Bellman-Ford, MSTs']] },
-      { title: 'Introduction to Databases', org: 'CS 3200', bullets: [['Relational', 'SQL, normalization, transactions, isolation'], ['NoSQL', 'MongoDB and when to prefer it']] },
-      { title: 'Foundations of Data Science', org: 'DS 3000', bullets: [['Tools', 'Pandas, NumPy, Matplotlib'], ['ML', 'Regression, classification, evaluation']] },
-      { title: 'Object-Oriented Design', org: 'CS 3500', bullets: [['Patterns', 'Observer, Strategy, MVC, Factory in Java'], ['Testing', 'JUnit, test-driven development']] },
-      { title: 'Network Fundamentals', org: 'CS 4700', list: 'TCP/IP, congestion control, sockets, firewalls, NAT, DNS' },
-      { title: 'Theory of Computation', org: 'CS 3800', list: 'Automata, CFGs, Turing machines, P vs. NP' },
-      { title: 'GUI Programming', org: 'CS 3520', list: 'Event models, layout, state, rendering' },
-      { title: 'Robotics Programming', org: 'CS 4610', list: 'Kinematics, sensor fusion, PID, ROS' },
     ],
   },
   {
@@ -207,7 +203,6 @@ export const categories: Category[] = [
         body: [p('Fantasy and science fiction about war, technology, and what progress costs. Industrial empires, chivalric orders, and nomadic hunters, told from six points of view across enemy lines.')],
         links: [{ label: 'Read an Excerpt (PDF)', href: '/blades-in-blue-excerpt.pdf' }],
       },
-      { title: 'Outside Work', body: [p('TODO(evan): interests, things he makes or loves outside work.')] },
     ],
   },
 ];

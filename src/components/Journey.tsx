@@ -59,13 +59,23 @@ function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: 
               )}
             </p>
           ))}
-          {entry.bullets && (
-            <dl className="bullets">
-              {entry.bullets.map(([k, v]) => <div key={k}><dt>{k}</dt><dd><Text>{v}</Text></dd></div>)}
-            </dl>
-          )}
+
           {entry.list && <p className="ch-list"><Text>{entry.list}</Text></p>}
           {entry.code && <code className="code">{entry.code}</code>}
+          {entry.courses && (
+            <>
+              <h3 className="courses-h">Coursework</h3>
+              <ul className="courses">
+                {entry.courses.map((c) => (
+                  <li key={c.code}>
+                    <span className="c-code">{c.code}</span>
+                    <span className="c-name">{c.name}</span>
+                    <span className="c-topics"><Text>{c.topics}</Text></span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
           {entry.paper && (
             <a className="paper" href={entry.paper.href} tabIndex={tab} data-prov="untrusted" data-prov-label="peer-reviewed, leaves the site">
               <span className="paper-venue">{entry.paper.venue}</span>

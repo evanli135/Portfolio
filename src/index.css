@@ -231,6 +231,12 @@ a:hover { color: var(--acc); }
 .ch-links { display: flex; flex-wrap: wrap; gap: 6px 20px; font: 500 0.8125rem var(--mono); }
 .ch-dia .dia { margin: 0; }
 .ch-list { margin: 0; }
+.courses-h { margin: 32px 0 6px; font: 500 0.75rem var(--mono); color: var(--acc); text-transform: none; }
+.courses { margin: 0; padding: 0; list-style: none; }
+.courses li { display: grid; grid-template-columns: 5.5em 1fr; gap: 0 14px; padding: 10px 0; border-top: 1px solid var(--rule); }
+.c-code { grid-row: span 2; font: 400 0.75rem / 1.9 var(--mono); color: var(--muted); }
+.c-name { font-weight: 600; }
+.c-topics { font-size: 0.875rem; color: var(--muted); }
 .paper {
   display: grid;
   gap: 6px;
@@ -246,10 +252,6 @@ a:hover { color: var(--acc); }
 .paper-go { margin-top: 4px; font: 500 0.8125rem var(--mono); color: var(--ink); }
 .paper:hover { background: transparent; }
 .paper:hover .paper-go { color: var(--acc); }
-.bullets { margin: 4px 0 0; }
-.bullets div { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 3px 0; }
-.bullets dt { font: 400 0.75rem / 1.9 var(--mono); color: var(--muted); }
-.bullets dd { margin: 0; }
 .code {
   display: inline-block;
   margin: 4px 0 14px;
@@ -495,7 +497,6 @@ a:hover { color: var(--acc); }
   .fence { --name: 43vw; }
   .lane.r { display: none; }
   .facts { top: 150px; }
-  .bullets div { grid-template-columns: 1fr; gap: 0; padding: 5px 0; }
   .corner { top: 8px; right: 8px; gap: 2px; }
   .corner-links { gap: 2px; padding: 0; background: none; }
   .corner-links a { display: grid; place-items: center; width: 32px; height: 32px; background: var(--bg); }

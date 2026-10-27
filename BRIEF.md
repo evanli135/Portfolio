@@ -85,3 +85,4 @@ Diagrams are hand-built inline SVG with `role="img"`, `<title>`, `<desc>`. Flat,
 - 2026-10-27: On phones the corner links are symbols (page, GitHub mark, LinkedIn square, envelope) with full names for screen readers, so no full-width bar covers the content; the vertical index is sized to fit a small phone.
 - 2026-10-27: The lens lives only on the landing screen (radius 60px, 44px on phones). Below the hero it disappears and the normal cursor returns, and the agent copy renders only the hero.
 - 2026-10-27: Big outlined year and course-number posters removed; Projects carry no dates. Every section uses one entry template (optional date line, title, mono subtitle, body) with one text column and the same type sizes; a diagram, when present, takes the right column. GPA moved into Education's meta line.
+- 2026-10-27: Coursework folded into Education as a compact list under Northeastern (course number, name, topics). Outside Work removed; Otherwise holds Blades in Blue.
