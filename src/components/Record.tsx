@@ -1,26 +1,10 @@
 import { useEffect, useState } from 'react';
 import { categories, links, site, type Category } from '../data';
-import { posts } from '../posts';
 import { EntryView } from './EntryView';
+import { Text } from './Text';
 import portrait from '../assets/portrait.jpg';
 
-// Posts join the Writing category; drafts only appear in dev builds.
-const all: Category[] = categories.map((c) =>
-  c.id !== 'writing'
-    ? c
-    : {
-        ...c,
-        entries: [
-          ...posts.map((p) => ({
-            title: p.title,
-            org: p.draft ? 'Draft' : 'Essay',
-            meta: p.draft ? undefined : p.date,
-            links: [{ label: 'Read', href: `/writing/${p.slug}` }],
-          })),
-          ...c.entries,
-        ],
-      },
-);
+const all: Category[] = categories;
 
 const fromHash = () => {
   const id = window.location.hash.slice(1);
@@ -58,11 +42,11 @@ export function Record() {
               onClick={() => pick(c.id)}
             >
               <span className="ix-word">{c.label}</span>
-              <sup>{c.entries.length}</sup>
+              <sup data-prov="tool" data-prov-label="counted">{c.entries.length}</sup>
             </button>
           ))}
         </nav>
-        <img className="portrait" src={portrait} alt="Evan Li" width={560} height={581} loading="lazy" />
+        <span className="portrait-wrap" data-prov="trusted" data-prov-label="first-party photo"><img className="portrait" src={portrait} alt="Evan Li" width={640} height={640} loading="lazy" /></span>
       </div>
 
       <div className="rec-panel" id="rec-panel" role="tabpanel" aria-labelledby={`tab-${cat.id}`}>
@@ -70,12 +54,15 @@ export function Record() {
           <span>{String(all.indexOf(cat) + 1).padStart(2, '0')}</span> {cat.label}
         </h2>
         <div className="entries" key={cat.id}>
-          {cat.entries.map((e, i) => <EntryView key={e.title} entry={e} uid={`${cat.id}-${i}`} />)}
+          {cat.entries.map((e) => <EntryView key={e.title} entry={e} />)}
         </div>
       </div>
 
       <footer className="rec-foot">
         {links.slice(0, 2).map((l) => <a key={l.label} href={l.href}>{l.label} ↗</a>)}
+        <span className="lens-only" data-prov="tool" data-prov-label="only the lens sees this">
+          <Text>TODO(evan): something worth finding</Text>
+        </span>
         <a href={`mailto:${site.email}`}>{site.email}</a>
       </footer>
     </section>

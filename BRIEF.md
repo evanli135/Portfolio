@@ -12,7 +12,7 @@ He is job hunting on a deadline, so the plain facts (what he does, the paper, r√
 
 Every project is about the boundary between an AI agent and the real systems it touches: designing it (ACE, NDSS 2026), shipping it into production (Vestmark), attacking it (Keysight).
 
-This is carried by order, diagrams, and interaction. It is never written out. No section labels that explain the concept ("Design / Ship / Break"), no summary lines ("I build the controls between agents and real systems"). The only explanatory copy allowed is one plain line under his name, 6 words or fewer, written by Evan.
+This is carried by order, diagrams, and interaction. It is never written out. No section labels that explain the concept ("Design / Ship / Break"), no summary lines ("I build the controls between agents and real systems"). The one explicit statement is the line under his name: "Designing, shipping, and breaking agent guardrails." (Hannah's call, 2026-10-27; it overrides the earlier no-explaining rule for that line only.)
 
 ## Visual system: the trust boundary
 
@@ -60,7 +60,12 @@ Diagrams are hand-built inline SVG with `role="img"`, `<title>`, `<desc>`. Flat,
 - 2026-10-27: Structure follows the ending of hannahgwimpy.com: a hero, then one record view split by section (Research, Work, Projects, Writing, Education, Coursework, Skills, Otherwise) with a big index on the left and entries on the right. Order carries the through line: ACE first, then Vestmark, then Keysight. Sections deep-link by hash (`/#coursework`).
 - 2026-10-27: Coursework, LoreBoard, Mario City kept. Portrait kept, grayscale, in a solid (trusted) frame.
 - 2026-10-27: Visual language is the trust boundary, used literally: the name sits inside a dashed boundary and dashed accent inputs arrive and stop at its edge (CSS transforms and opacity only; frozen at the stop under reduced motion). In the index, the open section is solid and the others are outlines.
-- 2026-10-27: Type: Big Shoulders Display (condensed, industrial) for the name, index, and entry titles; IBM Plex Sans for body; IBM Plex Mono for meta and diagrams. Palette: paper and ink neutrals, one vermilion accent. Nothing shared with Hannah's wide grotesk and serif.
+- 2026-10-27: Second round from Hannah: no essay post; Research folded into Work; Work in chronological order (Matrix Origin, ACE, Vestmark, Keysight); Blades in Blue moved to Otherwise; no grades or "Upcoming" in Coursework; Network Fundamentals is CS 4700; hero meta is hometown, base, and next city; boundary label around the name removed.
+- 2026-10-27: Narrative: between the hero and the record, a scroll story walks the work one chapter per screen with a big year readout and each job's diagram (pinned and crossfading on wide screens, stacked on phones). The record's Work entries then carry one line each.
+- 2026-10-27: Agent's-eye lens built (Step 4): a corner toggle; on desktop a ring follows the cursor and reveals each element's provenance (authored, untrusted or external, computed) in the diagram styles, with a found count; on touch it shows everything. Labels describe provenance only, never instructions.
+- 2026-10-27: Palette returns to the old site's: deep blue-black with teal in dark, pale teal-white with deep teal in light. Teal is the single accent.
+- 2026-10-27: Copy style: Title Case for titles, orgs, subtitles, and bullet labels; bullet details are fragments without periods; body text is full sentences.
+- 2026-10-27: Type: Big Shoulders Display (condensed, industrial) for the name, index, and entry titles; IBM Plex Sans for body; IBM Plex Mono for meta and diagrams. Nothing shared with Hannah's wide grotesk and serif.
 - 2026-10-27: Drafts in `src/posts` are listed only in dev builds.
 - 2026-10-27: Prerendering proposed, not built. Waiting on Evan.
 - 2026-10-27: Signature interaction (agent's-eye lens) pitched, not built.

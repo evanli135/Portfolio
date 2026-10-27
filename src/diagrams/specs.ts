@@ -2,6 +2,33 @@ import type { Spec } from './Diagram';
 
 // Node ids double as phase ids; data.ts segments reference them.
 
+export const matrix: Spec = {
+  title: 'NL-to-SQL evaluation loop (illustrative)',
+  desc: 'A question goes to a model, which writes a SQL query that runs against a database. An evaluation harness compares the result to the expected one and feeds the score back to the model. No boundaries yet.',
+  illustrative: true,
+  view: { wide: [760, 250], tall: [360, 500] },
+  boundaries: [],
+  nodes: [
+    { id: 'question', label: 'Question', sub: 'plain English', kind: 'trusted', wide: { x: 16, y: 60, w: 130, h: 56 }, tall: { x: 110, y: 10, w: 140, h: 52 } },
+    { id: 'model', label: 'Model', kind: 'trusted', wide: { x: 196, y: 60, w: 130, h: 56 }, tall: { x: 110, y: 100, w: 140, h: 52 } },
+    { id: 'sql', label: 'SQL query', kind: 'trusted', wide: { x: 376, y: 60, w: 130, h: 56 }, tall: { x: 110, y: 190, w: 140, h: 52 } },
+    { id: 'db', label: 'Database', sub: 'live', kind: 'trusted', wide: { x: 556, y: 60, w: 150, h: 56 }, tall: { x: 110, y: 280, w: 140, h: 52 } },
+    { id: 'eval', label: 'Eval harness', sub: 'expected vs. actual', kind: 'trusted', wide: { x: 286, y: 176, w: 200, h: 56 }, tall: { x: 90, y: 410, w: 180, h: 56 } },
+  ],
+  edges: [
+    { kind: 'flow', wide: [[146, 88], [196, 88]], tall: [[180, 62], [180, 100]] },
+    { kind: 'flow', wide: [[326, 88], [376, 88]], tall: [[180, 152], [180, 190]] },
+    { kind: 'flow', wide: [[506, 88], [556, 88]], tall: [[180, 242], [180, 280]] },
+    { kind: 'flow', wide: [[631, 116], [631, 204], [486, 204]], tall: [[180, 332], [180, 410]] },
+    {
+      kind: 'flow',
+      wide: [[286, 204], [261, 204], [261, 116]],
+      tall: [[90, 438], [40, 438], [40, 126], [110, 126]],
+      label: { text: 'Score', wide: { x: 214, y: 168 }, tall: { x: 46, y: 300 } },
+    },
+  ],
+};
+
 export const ace: Spec = {
   title: 'ACE architecture',
   desc: 'A trusted user query becomes an abstract plan, then a concrete plan over installed apps that is statically checked, then execution with barriers between apps, all inside one enforcement boundary. Third-party apps sit outside. Their poisoned descriptions and poisoned outputs stop at the boundary.',

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { links } from '../data';
+import { Lens } from './Lens';
 
 type Theme = 'auto' | 'light' | 'dark';
 const THEMES: Theme[] = ['auto', 'light', 'dark'];
@@ -43,9 +44,17 @@ export function Corner() {
     <div className="corner">
       <nav className="corner-links" aria-label="Links">
         {links.map((l) => (
-          <a key={l.label} href={l.href}>{l.label}</a>
+          <a
+            key={l.label}
+            href={l.href}
+            data-prov={l.href.startsWith('/') ? 'trusted' : 'untrusted'}
+            data-prov-label={l.href.startsWith('/') ? 'first-party file' : l.href.startsWith('mailto') ? 'opens your mail' : 'leaves the site'}
+          >
+            {l.label}
+          </a>
         ))}
       </nav>
+      <Lens />
       <div className="settings" ref={menu}>
         <button className="gear" aria-label="Theme" aria-expanded={open} onClick={() => setOpen(!open)}>
           <svg viewBox="0 0 20 20" aria-hidden="true">

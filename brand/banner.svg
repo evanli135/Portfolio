@@ -3,31 +3,31 @@
     @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=block');
     .display { font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; text-transform: uppercase; }
     .mono { font-family: 'IBM Plex Mono', monospace; font-size: 28px; }
-    .box { fill: #f7f5ef; stroke: #161513; stroke-width: 2.5; }
-    .flow { fill: none; stroke: #161513; stroke-width: 2.5; }
-    .atk { fill: none; stroke: #b3370f; stroke-width: 2.5; stroke-dasharray: 10 8; }
-    .bar { stroke: #161513; stroke-width: 5; }
+    .box { fill: #0b181c; stroke: #e4eeec; stroke-width: 2.5; }
+    .flow { fill: none; stroke: #e4eeec; stroke-width: 2.5; }
+    .atk { fill: none; stroke: #2dd4bf; stroke-width: 2.5; stroke-dasharray: 10 8; }
+    .bar { stroke: #e4eeec; stroke-width: 5; }
   </style>
   <defs>
-    <marker id="h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 1L9 5L0 9" fill="#161513" /></marker>
+    <marker id="h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 1L9 5L0 9" fill="#e4eeec" /></marker>
   </defs>
-  <rect width="1584" height="396" fill="#efece4" />
+  <rect width="1584" height="396" fill="#061013" />
   <!-- Bottom-left 400x200 stays empty: LinkedIn puts the profile photo there. -->
-  <text x="64" y="170" class="display" font-size="150" fill="#161513">Evan Li</text>
+  <text x="64" y="170" class="display" font-size="150" fill="#e4eeec">Evan Li</text>
 
-  <rect x="560" y="70" width="770" height="250" fill="none" stroke="#161513" stroke-width="2" stroke-dasharray="10 8" />
-  <text x="584" y="112" class="mono" fill="#5d5950">Enforced by ACE</text>
+  <rect x="560" y="70" width="770" height="250" fill="none" stroke="#e4eeec" stroke-width="2" stroke-dasharray="10 8" />
+  <text x="584" y="112" class="mono" fill="#8ea4a4">Enforced by ACE</text>
   <rect class="box" x="590" y="160" width="210" height="100" />
   <rect class="box" x="840" y="160" width="210" height="100" />
   <rect class="box" x="1090" y="160" width="210" height="100" />
-  <text x="695" y="220" class="mono" text-anchor="middle" fill="#161513">Abstract</text>
-  <text x="945" y="220" class="mono" text-anchor="middle" fill="#161513">Concrete</text>
-  <text x="1195" y="220" class="mono" text-anchor="middle" fill="#161513">Execute</text>
+  <text x="695" y="220" class="mono" text-anchor="middle" fill="#e4eeec">Abstract</text>
+  <text x="945" y="220" class="mono" text-anchor="middle" fill="#e4eeec">Concrete</text>
+  <text x="1195" y="220" class="mono" text-anchor="middle" fill="#e4eeec">Execute</text>
   <path class="flow" d="M800 210H836" marker-end="url(#h)" />
   <path class="flow" d="M1050 210H1086" marker-end="url(#h)" />
 
-  <rect x="1390" y="160" width="150" height="100" fill="none" stroke="#b3370f" stroke-width="2.5" stroke-dasharray="10 8" />
-  <text x="1465" y="220" class="mono" text-anchor="middle" fill="#b3370f">Apps</text>
+  <rect x="1390" y="160" width="150" height="100" fill="none" stroke="#2dd4bf" stroke-width="2.5" stroke-dasharray="10 8" />
+  <text x="1465" y="220" class="mono" text-anchor="middle" fill="#2dd4bf">Apps</text>
   <path class="flow" d="M1300 210H1386" marker-end="url(#h)" />
   <path class="atk" d="M1465 160V36H700V70" />
   <path class="bar" d="M684 70H716" />

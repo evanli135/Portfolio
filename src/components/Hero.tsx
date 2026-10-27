@@ -17,10 +17,9 @@ export function Hero() {
         {site.meta.map((m) => <span key={m}>{m}</span>)}
       </div>
       <div className="hero-main">
-        <div className="fence">
-          <span className="fence-label">evanli.org</span>
+        <div className="fence" data-prov="trusted" data-prov-label="enforcement point">
           <h1>{site.name}</h1>
-          <div className="lanes" aria-hidden="true">
+          <div className="lanes" aria-hidden="true" data-prov="untrusted" data-prov-label="untrusted input">
             {LANES.map((l) => (
               <span key={l.at} className="lane" style={{ '--at': l.at, '--delay': l.delay } as React.CSSProperties}>
                 <span className="pkt" />
