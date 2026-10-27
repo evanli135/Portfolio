@@ -60,7 +60,12 @@ export function Corner() {
   const [past, setPast] = useState(false);
   useEffect(() => {
     let frame = 0;
-    const check = () => { frame = 0; setPast(scrollY > innerHeight * 0.8); };
+    // Appears only once the hero's box has fully left the top of the screen.
+    const check = () => {
+      frame = 0;
+      const fence = document.querySelector('.human-layer .fence');
+      setPast(!!fence && fence.getBoundingClientRect().bottom < 56);
+    };
     const onScroll = () => { if (!frame) frame = requestAnimationFrame(check); };
     check();
     window.addEventListener('scroll', onScroll, { passive: true });
