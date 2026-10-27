@@ -1,45 +1,34 @@
-import { useEffect, useRef, useState } from 'react';
 import { links } from '../data';
-import { Lens } from './Lens';
+import { useShared, type Theme } from '../layer';
 
-type Theme = 'auto' | 'light' | 'dark';
-const THEMES: Theme[] = ['auto', 'light', 'dark'];
+const NEXT: Record<Theme, Theme> = { auto: 'light', light: 'dark', dark: 'auto' };
+const NAME: Record<Theme, string> = { auto: 'Theme: follows your system', light: 'Theme: sun', dark: 'Theme: moon' };
 
-function readTheme(): Theme {
-  try {
-    const t = localStorage.getItem('theme');
-    if (t === 'light' || t === 'dark') return t;
-  } catch { /* storage blocked */ }
-  return 'auto';
+function ThemeIcon({ theme }: { theme: Theme }) {
+  if (theme === 'light')
+    return (
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <circle cx="10" cy="10" r="3.6" className="ic-fill" />
+        <path className="ic-line" d="M10 1.5v2.4M10 16.1v2.4M1.5 10h2.4M16.1 10h2.4M4 4l1.7 1.7M14.3 14.3L16 16M4 16l1.7-1.7M14.3 5.7L16 4" />
+      </svg>
+    );
+  if (theme === 'dark')
+    return (
+      <svg viewBox="0 0 20 20" aria-hidden="true">
+        <path className="ic-fill" d="M15.6 12.6A6.6 6.6 0 0 1 7.4 4.4a6.6 6.6 0 1 0 8.2 8.2z" />
+      </svg>
+    );
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden="true">
+      <circle cx="10" cy="10" r="6.6" className="ic-line" />
+      <path className="ic-fill" d="M10 3.4a6.6 6.6 0 0 0 0 13.2z" />
+    </svg>
+  );
 }
 
-function applyTheme(t: Theme) {
-  if (t === 'auto') document.documentElement.removeAttribute('data-theme');
-  else document.documentElement.setAttribute('data-theme', t);
-  try {
-    if (t === 'auto') localStorage.removeItem('theme');
-    else localStorage.setItem('theme', t);
-  } catch { /* storage blocked */ }
-}
-
-/** Fixed top-right: the five links and the theme setting, reachable from anywhere. */
+/** Fixed top-right: the five links, what the lens has found, and sun / moon. */
 export function Corner() {
-  const [theme, setTheme] = useState<Theme>(readTheme);
-  const [open, setOpen] = useState(false);
-  const menu = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!open) return;
-    const close = (e: PointerEvent | KeyboardEvent) => {
-      if (e instanceof KeyboardEvent ? e.key === 'Escape' : !menu.current?.contains(e.target as Node)) setOpen(false);
-    };
-    window.addEventListener('pointerdown', close);
-    window.addEventListener('keydown', close);
-    return () => {
-      window.removeEventListener('pointerdown', close);
-      window.removeEventListener('keydown', close);
-    };
-  }, [open]);
-
+  const { theme, setTheme, found, finds } = useShared();
   return (
     <div className="corner">
       <nav className="corner-links" aria-label="Links">
@@ -54,29 +43,14 @@ export function Corner() {
           </a>
         ))}
       </nav>
-      <Lens />
-      <div className="settings" ref={menu}>
-        <button className="gear" aria-label="Theme" aria-expanded={open} onClick={() => setOpen(!open)}>
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <rect x="3.5" y="3.5" width="13" height="13" className="gear-dash" />
-            <rect x="7.5" y="7.5" width="5" height="5" className="gear-solid" />
-          </svg>
-        </button>
-        {open && (
-          <div className="menu" role="radiogroup" aria-label="Theme">
-            {THEMES.map((t) => (
-              <button
-                key={t}
-                role="radio"
-                aria-checked={theme === t}
-                onClick={() => { setTheme(t); applyTheme(t); }}
-              >
-                {t[0].toUpperCase() + t.slice(1)}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+      {finds > 0 && (
+        <span className="found" role="img" aria-label={`${found} of ${finds} found`}>
+          {Array.from({ length: finds }, (_, i) => <i key={i} className={i < found ? 'on' : ''} />)}
+        </span>
+      )}
+      <button className="theme" aria-label={NAME[theme]} onClick={() => setTheme(NEXT[theme])}>
+        <ThemeIcon theme={theme} />
+      </button>
     </div>
   );
 }

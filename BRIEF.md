@@ -69,3 +69,8 @@ Diagrams are hand-built inline SVG with `role="img"`, `<title>`, `<desc>`. Flat,
 - 2026-10-27: Drafts in `src/posts` are listed only in dev builds.
 - 2026-10-27: Prerendering proposed, not built. Waiting on Evan.
 - 2026-10-27: Signature interaction (agent's-eye lens) pitched, not built.
+- 2026-10-27: Third round from Hannah ("not creative enough"). The lens is now the only view and the cursor: the site renders twice, the page as a person reads it and the same page as an agent reads it (tokenized text, outlined headings, a halftone photo, a provenance tag on every element, page facts it computed), and the agent copy shows only inside the lens. On touch the lens rests mid-screen and moves to your finger. A tally in the corner fills as the lens finds the eight agent-only notes.
+- 2026-10-27: Hero fills the screen: EVAN / LI stacked inside the boundary, 36 dashed lanes of untrusted inputs hitting its top and right edges, each lane a faint dashed track, and the tagline top right. (A live blocked count was tried and cut as too busy.)
+- 2026-10-27: Theme control is one icon that cycles: half circle (follow system), sun, moon.
+- 2026-10-27: Inside the lens, untrusted inputs turn amber against the agent layer's teal. This is the one place a second accent appears.
+- 2026-10-27: Below the hero, one section: a slim index column (Work, Projects, Education, Coursework, Skills, Otherwise) and the open section played as its own pinned scroll journey, one entry per screen, with a progress rail under the index. Every section carries its label, Work included. Screens with a diagram show it on the right; the rest show their readout (year or course number) as an outlined poster.

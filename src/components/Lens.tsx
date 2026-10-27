@@ -1,70 +1,81 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
-const R = 150; // lens radius in px
-
-// The agent's-eye view: what this page is made of, by provenance.
-// Labels name where content comes from. They never address the reader or a model.
-export function Lens() {
-  const [on, setOn] = useState(false);
-  const [seen, setSeen] = useState(0);
-  const [total, setTotal] = useState(0);
+// The cursor is the lens. Inside it, the agent layer shows through.
+// On touch screens it rests mid-screen and moves to wherever you touch.
+export function Lens({ onFind }: { onFind: (found: number, total: number) => void }) {
   const ring = useRef<HTMLDivElement>(null);
-  const found = useRef(new Set<Element>());
+  const hud = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (!on) { root.removeAttribute('data-lens'); return; }
-    root.setAttribute('data-lens', 'on');
-    const all = () => Array.from(document.querySelectorAll('[data-prov]'));
-    setTotal(all().length);
-    const mark = (el: Element) => {
-      el.classList.add('seen');
-      if (!found.current.has(el)) { found.current.add(el); setSeen(found.current.size); }
+    const agent = document.querySelector<HTMLElement>('.agent-layer');
+    const human = document.querySelector<HTMLElement>('.human-layer');
+    if (!agent || !human) return;
+    const found = new Set<string>();
+    const radius = () => (innerWidth < 640 ? 96 : 150);
+    let x = innerWidth / 2;
+    let y = innerHeight * 0.55;
+    let frame = 0;
+
+    const describe = (el: Element | null) => {
+      if (!el || !human.contains(el)) return '';
+      const prov = el.closest('[data-prov]');
+      const tag = el.closest('a') ? 'link' : el.closest('button') ? 'button' : el.closest('svg') ? 'diagram' : el.closest('img') ? 'image' : el.closest('h1,h2,h3') ? 'heading' : 'text';
+      const label = prov?.getAttribute('data-prov-label');
+      return label ? `${tag} · ${label}` : tag;
     };
 
-    const fine = matchMedia('(pointer: fine)').matches;
-    if (!fine) { all().forEach(mark); }
-
-    let frame = 0;
-    let x = -999, y = -999;
     const update = () => {
       frame = 0;
-      if (ring.current) ring.current.style.transform = `translate(${x - R}px, ${y - R}px)`;
-      for (const el of all()) {
-        const r = el.getBoundingClientRect();
-        const dx = Math.max(r.left - x, 0, x - r.right);
-        const dy = Math.max(r.top - y, 0, y - r.bottom);
-        if (dx * dx + dy * dy < R * R) mark(el); else el.classList.remove('seen');
+      const r = radius();
+      agent.style.clipPath = `circle(${r}px at ${x}px ${y + scrollY}px)`;
+      if (ring.current) {
+        const over = !!document.elementFromPoint(x, y)?.closest('a, button');
+        ring.current.style.transform = `translate(${x}px, ${y}px) scale(${over ? 0.86 : 1})`;
+        ring.current.style.setProperty('--r', `${r}px`);
+        ring.current.toggleAttribute('data-flip', x > innerWidth * 0.6);
       }
+      if (hud.current) hud.current.textContent = describe(document.elementFromPoint(x, y));
+      const items = agent.querySelectorAll('.find');
+      items.forEach((el) => {
+        const b = el.getBoundingClientRect();
+        const dx = Math.max(b.left - x, 0, x - b.right);
+        const dy = Math.max(b.top - y, 0, y - b.bottom);
+        const visible = el.checkVisibility?.({ visibilityProperty: true, opacityProperty: true }) ?? true;
+        if (visible && b.width && dx * dx + dy * dy < r * r * 0.5) found.add(el.getAttribute('data-find') ?? '');
+      });
+      onFind(found.size, new Set(Array.from(items, (el) => el.getAttribute('data-find'))).size);
     };
-    const move = (e: PointerEvent) => { x = e.clientX; y = e.clientY; if (!frame) frame = requestAnimationFrame(update); };
-    const scroll = () => { if (!frame) frame = requestAnimationFrame(update); };
-    const key = (e: KeyboardEvent) => e.key === 'Escape' && setOn(false);
-    if (fine) {
-      window.addEventListener('pointermove', move);
-      window.addEventListener('scroll', scroll, { passive: true });
-    }
-    window.addEventListener('keydown', key);
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const move = (e: PointerEvent) => { x = e.clientX; y = e.clientY; schedule(); };
+    const touch = (e: TouchEvent) => { const t = e.touches[0]; if (t) { x = t.clientX; y = t.clientY; schedule(); } };
+
+    window.addEventListener('pointermove', move, { passive: true });
+    window.addEventListener('pointerdown', move, { passive: true });
+    window.addEventListener('touchmove', touch, { passive: true });
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    const mo = new MutationObserver(schedule);
+    mo.observe(agent, { subtree: true, childList: true });
+    schedule();
     return () => {
       window.removeEventListener('pointermove', move);
-      window.removeEventListener('scroll', scroll);
-      window.removeEventListener('keydown', key);
+      window.removeEventListener('pointerdown', move);
+      window.removeEventListener('touchmove', touch);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      mo.disconnect();
       cancelAnimationFrame(frame);
-      all().forEach((el) => el.classList.remove('seen'));
-      root.removeAttribute('data-lens');
     };
-  }, [on]);
+  }, [onFind]);
 
   return (
-    <>
-      <button className="lens-btn" aria-label="Agent's-eye view" aria-pressed={on} onClick={() => setOn(!on)}>
-        <svg viewBox="0 0 20 20" aria-hidden="true">
-          <circle cx="10" cy="10" r="7" className="gear-dash" />
-          <circle cx="10" cy="10" r="2.2" className="lens-dot" />
-        </svg>
-        {on && <span className="lens-count">{seen}/{total}</span>}
-      </button>
-      {on && <div className="lens-ring" ref={ring} aria-hidden="true" />}
-    </>
+    <div className="lens" ref={ring} aria-hidden="true">
+      <svg className="lens-svg" viewBox="-100 -100 200 200">
+        <circle r="99" className="lens-edge" />
+        <path d="M0 -99V-84M0 84V99M-99 0H-84M84 0H99" className="lens-tick" />
+        <path d="M-5 0H5M0 -5V5" className="lens-cross" />
+      </svg>
+      <span className="lens-hud" ref={hud} />
+    </div>
   );
 }
