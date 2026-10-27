@@ -275,9 +275,9 @@ a:hover { color: var(--acc); }
 }
 @media (max-width: 899px), (max-height: 639px) {
   .journey { grid-template-columns: 52px minmax(0, 1fr); }
-  .j-side { height: 100vh; padding: 96px 0 24px; gap: 0; align-items: center; border-right: 1px solid var(--rule); }
-  .index { flex-direction: column; gap: 18px; }
-  .index button { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 1.4rem; letter-spacing: 0.03em; }
+  .j-side { height: 100vh; padding: 52px 0 16px; gap: 0; align-items: center; border-right: 1px solid var(--rule); }
+  .index { flex-direction: column; gap: 12px; }
+  .index button { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 1.15rem; letter-spacing: 0.03em; }
   .index button[aria-selected='true']::before { width: 4px; height: 14px; margin: 0 0 8px; }
   .chapter, .chapter.has-dia, .chapter.no-dia, .chapter.solo { display: block; padding: 40px 16px 40px 20px; }
   .chapter:first-child { padding-top: 48px; }
@@ -361,6 +361,7 @@ a:hover { color: var(--acc); }
   font: 500 0.75rem var(--mono);
 }
 .corner-links a { text-decoration: none; }
+.corner-links .short { display: none; }
 .theme {
   display: grid;
   place-items: center;
@@ -507,15 +508,19 @@ a:hover { color: var(--acc); }
 
 @media (max-width: 640px) {
   .hero { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto; padding-top: 18px; }
-  .hero-meta { padding-top: 96px; }
+  .hero-meta { padding-top: 52px; }
   .line { grid-area: 2 / 1; align-self: end; justify-self: start; text-align: left; margin: 0 0 28px; max-width: 16ch; }
   .fence { grid-area: 4 / 1; justify-self: start; }
   .fence { --name: 43vw; }
   .lane.r { display: none; }
   .facts { top: 150px; }
   .bullets div { grid-template-columns: 1fr; gap: 0; padding: 5px 0; }
-  .corner { left: 12px; flex-wrap: wrap; justify-content: flex-end; }
-  .corner-links { order: 3; flex: 1 0 100%; justify-content: space-between; gap: 8px; padding: 7px 10px; font-size: 0.6875rem; }
+  .corner { top: 8px; right: 8px; gap: 2px; }
+  .corner-links { gap: 2px; padding: 0; background: none; }
+  .corner-links a { display: grid; place-items: center; width: 32px; height: 32px; background: var(--bg); }
+  .corner-links .long { display: none; }
+  .corner-links .short { display: block; width: 18px; height: 18px; }
+  .theme { width: 32px; height: 32px; }
   .lens { --r: 64px; }
   .lens .lens-hud, .lens[data-flip] .lens-hud { left: 50%; right: auto; top: calc(var(--r) + 8px); transform: translateX(-50%); }
 }

@@ -82,3 +82,4 @@ Diagrams are hand-built inline SVG with `role="img"`, `<title>`, `<desc>`. Flat,
 - 2026-10-27: The name's box uses one margin on every side, measured from the ink (each side's padding subtracts the typeface's own bearing). The photo matches LI's cap height and lines up with EVAN's right edge.
 - 2026-10-27: Sections scroll normally (one-at-a-time pinning removed); the index stays pinned beside them. Diagram highlights are scoped per entry.
 - 2026-10-27: Text and diagram are paired by numbers: each linked phrase carries a small teal number and the matching diagram node shows the same number, so the link reads without hovering. Hovering either one highlights both. Lens radius is 90px on desktop and 64px on phones.
+- 2026-10-27: On phones the corner links are symbols (page, GitHub mark, LinkedIn square, envelope) with full names for screen readers, so no full-width bar covers the content; the vertical index is sized to fit a small phone.
