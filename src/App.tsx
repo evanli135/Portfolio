@@ -1,19 +1,18 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { NotFound } from "./pages/NotFound";
-import { ThemeProvider } from "./components/ThemeContext"; // or wherever you put it
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { PostPage } from './pages/PostPage';
+import { NotFound } from './pages/NotFound';
+import { Corner } from './components/Corner';
 
-function App() {
+export default function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Home />}/>
-          <Route path="*" element={<NotFound />}/>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
-  )
+    <BrowserRouter>
+      <Corner />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="writing/:slug" element={<PostPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App

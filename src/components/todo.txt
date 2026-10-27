@@ -1,6 +1,0 @@
-Todo List (in the following order):
-- Add Rain for light mode
-- Fix hrefs
-- Finish Projects Section
-- Add all skills (and make sure they have icons)
-- Add a picture
