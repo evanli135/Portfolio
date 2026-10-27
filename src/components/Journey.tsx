@@ -32,7 +32,7 @@ function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: 
     <article className={`chapter${spec ? ' has-dia' : ''}`}>
       <div className="ch-read">
         {when && <p className="ch-num">{when}</p>}
-        <h2 className="ch-title">{work ? entry.org : entry.title}</h2>
+        {(work ? entry.org : entry.title) && <h2 className="ch-title">{work ? entry.org : entry.title}</h2>}
         {sub && <p className="ch-sub">{sub}</p>}
         <div className="ch-text" data-prov="trusted" data-prov-label="authored by Evan">
 
@@ -60,17 +60,16 @@ function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: 
             </p>
           ))}
 
-          {entry.list && <p className="ch-list"><Text>{entry.list}</Text></p>}
           {entry.code && <code className="code">{entry.code}</code>}
-          {entry.courses && (
+          {entry.rows && (
             <>
-              <h3 className="courses-h">Coursework</h3>
-              <ul className="courses">
-                {entry.courses.map((c) => (
-                  <li key={c.code}>
-                    <span className="c-code">{c.code}</span>
-                    <span className="c-name">{c.name}</span>
-                    <span className="c-topics"><Text>{c.topics}</Text></span>
+              {entry.rowsTitle && <h3 className="courses-h">{entry.rowsTitle}</h3>}
+              <ul className={`courses${entry.rows.some((r) => r.tag) ? '' : ' untagged'}`}>
+                {entry.rows.map((r) => (
+                  <li key={r.name}>
+                    {r.tag && <span className="c-code">{r.tag}</span>}
+                    <span className="c-name">{r.name}</span>
+                    <span className="c-topics"><Text>{r.detail}</Text></span>
                   </li>
                 ))}
               </ul>

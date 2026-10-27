@@ -264,10 +264,11 @@ a:hover { color: var(--acc); }
 .ch-links { display: flex; flex-wrap: wrap; gap: 6px 20px; font: 500 0.8125rem var(--mono); }
 .ch-dia { margin-top: 36px; max-width: 920px; }
 .ch-dia .dia { margin: 0; }
-.ch-list { margin: 0; }
 .courses-h { margin: 32px 0 6px; font: 500 0.75rem var(--mono); color: var(--acc); text-transform: none; }
 .courses { margin: 0; padding: 0; list-style: none; }
 .courses li { display: grid; grid-template-columns: 5.5em 1fr; gap: 0 14px; padding: 10px 0; border-top: 1px solid var(--rule); }
+.courses.untagged li { grid-template-columns: 1fr; }
+.courses.untagged li:first-child { border-top: 0; padding-top: 0; }
 .c-code { grid-row: span 2; font: 400 0.75rem / 1.9 var(--mono); color: var(--muted); }
 .c-name { font-weight: 600; }
 .c-topics { font-size: 0.875rem; color: var(--muted); }

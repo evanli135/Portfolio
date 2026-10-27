@@ -13,9 +13,9 @@ export type Entry = {
   diagram?: 'matrix' | 'ace' | 'vestmark' | 'keysight';
   body?: Segment[][]; // paragraphs
   code?: string;
-  list?: string; // one plain line of fragments
   paper?: { venue: string; title: string; byline: string; href: string };
-  courses?: { code: string; name: string; topics: string }[];
+  rowsTitle?: string;
+  rows?: { tag?: string; name: string; detail: string }[]; // a compact list, like coursework
   links?: Link[];
 };
 
@@ -164,18 +164,19 @@ export const categories: Category[] = [
         title: 'Northeastern University',
         org: 'B.S. in Computer Science, Concentration in Systems',
         meta: '2023 to May 2027 · Boston, MA · GPA 3.83',
-        courses: [
-          { code: 'CS 7610', name: 'Foundations of Distributed Systems (Graduate)', topics: 'Raft, Paxos, leader election, failure detection, GFS, Spanner, Spark' },
-          { code: 'CS 3650', name: 'Computer Systems', topics: 'x86 assembly, linkers, virtual memory, page tables, POSIX threads, race analysis' },
-          { code: 'CY 2550', name: 'Foundations of Cybersecurity', topics: 'AES, RSA, signatures, SQL injection, XSS, CSRF, password cracking, scanning' },
-          { code: 'CS 3000', name: 'Data Structures and Algorithms', topics: 'Divide and conquer, dynamic programming, greedy, graph algorithms' },
-          { code: 'CS 3200', name: 'Introduction to Databases', topics: 'SQL, normalization, transactions, isolation, MongoDB' },
-          { code: 'DS 3000', name: 'Foundations of Data Science', topics: 'Pandas, NumPy, Matplotlib, regression, classification' },
-          { code: 'CS 3500', name: 'Object-Oriented Design', topics: 'Observer, Strategy, MVC, Factory in Java, JUnit, test-driven development' },
-          { code: 'CS 4700', name: 'Network Fundamentals', topics: 'TCP/IP, congestion control, sockets, firewalls, NAT, DNS' },
-          { code: 'CS 3800', name: 'Theory of Computation', topics: 'Automata, CFGs, Turing machines, P vs. NP' },
-          { code: 'CS 3520', name: 'GUI Programming', topics: 'Event models, layout, state, rendering' },
-          { code: 'CS 4610', name: 'Robotics Programming', topics: 'Kinematics, sensor fusion, PID, ROS' },
+        rowsTitle: 'Coursework',
+        rows: [
+          { tag: 'CS 7610', name: 'Foundations of Distributed Systems (Graduate)', detail: 'Raft, Paxos, leader election, failure detection, GFS, Spanner, Spark' },
+          { tag: 'CS 3650', name: 'Computer Systems', detail: 'x86 assembly, linkers, virtual memory, page tables, POSIX threads, race analysis' },
+          { tag: 'CY 2550', name: 'Foundations of Cybersecurity', detail: 'AES, RSA, signatures, SQL injection, XSS, CSRF, password cracking, scanning' },
+          { tag: 'CS 3000', name: 'Data Structures and Algorithms', detail: 'Divide and conquer, dynamic programming, greedy, graph algorithms' },
+          { tag: 'CS 3200', name: 'Introduction to Databases', detail: 'SQL, normalization, transactions, isolation, MongoDB' },
+          { tag: 'DS 3000', name: 'Foundations of Data Science', detail: 'Pandas, NumPy, Matplotlib, regression, classification' },
+          { tag: 'CS 3500', name: 'Object-Oriented Design', detail: 'Observer, Strategy, MVC, Factory in Java, JUnit, test-driven development' },
+          { tag: 'CS 4700', name: 'Network Fundamentals', detail: 'TCP/IP, congestion control, sockets, firewalls, NAT, DNS' },
+          { tag: 'CS 3800', name: 'Theory of Computation', detail: 'Automata, CFGs, Turing machines, P vs. NP' },
+          { tag: 'CS 3520', name: 'GUI Programming', detail: 'Event models, layout, state, rendering' },
+          { tag: 'CS 4610', name: 'Robotics Programming', detail: 'Kinematics, sensor fusion, PID, ROS' },
         ],
         // TODO(evan): confirm concentration wording and that the GPA is current
       },
@@ -185,12 +186,17 @@ export const categories: Category[] = [
     id: 'skills',
     label: 'Skills',
     entries: [
-      { title: 'Languages', list: 'Python, TypeScript, C, C++, Rust, Java, Ruby' },
-      { title: 'Agents', list: 'LangChain, Mastra, MCP, AWS Bedrock, RAG' },
-      { title: 'Systems', list: 'Distributed systems, operating systems, networks' },
-      { title: 'Infrastructure', list: 'PostgreSQL, Redis, MongoDB, Docker, Kubernetes, AWS' },
-      { title: 'Observability', list: 'OpenTelemetry, Grafana, Dynatrace, Wireshark' },
-      { title: 'Web', list: 'React, Node.js, Django, FastAPI, Rails' },
+      {
+        title: '',
+        rows: [
+          { name: 'Languages', detail: 'Python, TypeScript, C, C++, Rust, Java, Ruby' },
+          { name: 'Agents', detail: 'LangChain, Mastra, MCP, AWS Bedrock, RAG' },
+          { name: 'Systems', detail: 'Distributed systems, operating systems, networks' },
+          { name: 'Infrastructure', detail: 'PostgreSQL, Redis, MongoDB, Docker, Kubernetes, AWS' },
+          { name: 'Observability', detail: 'OpenTelemetry, Grafana, Dynatrace, Wireshark' },
+          { name: 'Web', detail: 'React, Node.js, Django, FastAPI, Rails' },
+        ],
+      },
     ],
   },
   {

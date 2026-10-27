@@ -94,3 +94,4 @@ Diagrams are hand-built inline SVG with `role="img"`, `<title>`, `<desc>`. Flat,
 - 2026-10-27: Once the name's box has fully scrolled off the top, "EVAN LI" fades into the top left; clicking it returns to the top.
 - 2026-10-27: Light mode draws the dark sky's colors inverted (filter: invert), at 90% strength, so the stars read on a light ground.
 - 2026-10-27: Work diagrams sit below their text (up to 920px wide), not beside it.
+- 2026-10-27: Skills uses the same compact list as Coursework (one row per group: name, then tools), replacing six full-size entries.
