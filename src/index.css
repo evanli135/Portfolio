@@ -253,8 +253,8 @@ a:hover { color: var(--acc); }
 }
 .chapter:first-child { padding-top: 88px; }
 .chapter:last-child { border-bottom: 0; padding-bottom: 120px; }
-/* Every entry shares one text column; a diagram, when there is one, takes the right. */
-.chapter { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0 4vw; align-items: center; }
+/* Every entry is one column: text, then its diagram below. */
+.chapter { grid-template-columns: minmax(0, 1fr); }
 .ch-read { max-width: 62ch; }
 .ch-num { margin: 0 0 10px; font: 500 0.75rem var(--mono); color: var(--acc); }
 .ch-title { margin: 6px 0 0; font: 800 clamp(2rem, 3.2vw, 3rem) / 0.92 var(--display); text-transform: uppercase; }
@@ -262,6 +262,7 @@ a:hover { color: var(--acc); }
 .ch-text { position: relative; margin-top: 22px; max-width: 54ch; }
 .ch-text p { margin: 0 0 0.8em; }
 .ch-links { display: flex; flex-wrap: wrap; gap: 6px 20px; font: 500 0.8125rem var(--mono); }
+.ch-dia { margin-top: 36px; max-width: 920px; }
 .ch-dia .dia { margin: 0; }
 .ch-list { margin: 0; }
 .courses-h { margin: 32px 0 6px; font: 500 0.75rem var(--mono); color: var(--acc); text-transform: none; }
