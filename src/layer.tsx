@@ -9,8 +9,6 @@ export const useLayer = () => useContext(LayerCtx);
 export type Theme = 'auto' | 'light' | 'dark';
 
 export type Shared = {
-  chapter: number;
-  setChapter: (i: number) => void;
   phase: string | null; // highlighted diagram phase (hover, else pinned)
   setHover: (p: string | null) => void;
   togglePin: (p: string | null) => void;

@@ -211,27 +211,23 @@ a:hover { color: var(--acc); }
 .agent-layer .portrait { mix-blend-mode: normal; }
 
 .j-main { position: relative; min-width: 0; }
-.stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+.entries { animation: enter 0.3s ease-out both; }
+@keyframes enter { from { opacity: 0; transform: translateY(10px); } }
 .chapter {
-  position: absolute;
-  inset: 0;
   display: grid;
-  align-content: safe center;
-  padding: 120px clamp(20px, 3vw, 48px) 40px;
-  opacity: 0;
-  transform: translateY(18px);
-  visibility: hidden;
-  transition: opacity 0.45s ease, transform 0.45s ease, visibility 0s 0.45s;
+  padding: 72px clamp(20px, 3vw, 48px);
+  border-bottom: 1px solid var(--rule);
 }
-.chapter.on { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
+.chapter:first-child { padding-top: 88px; }
+.chapter:last-child { border-bottom: 0; padding-bottom: 120px; }
 .chapter.has-dia { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0 4vw; align-items: center; }
 .chapter.no-dia { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 0 4vw; align-items: center; }
-.has-dia .has-dia .ch-title { font-size: clamp(1.8rem, 2.8vw, 2.6rem); }
+.has-dia .ch-title { font-size: clamp(1.8rem, 2.8vw, 2.6rem); }
 .has-dia .ch-text { font-size: 0.9375rem; }
 .ch-big {
   margin: 0;
   justify-self: end;
-  font: 900 clamp(6rem, 15vw, 17rem) / 0.8 var(--display);
+  font: 900 clamp(4.5rem, 10vw, 11rem) / 0.8 var(--display);
   color: transparent;
   -webkit-text-stroke: 1.5px var(--ink);
   text-align: right;
@@ -277,20 +273,17 @@ a:hover { color: var(--acc); }
   background: var(--raise);
   font: 400 0.8125rem var(--mono);
 }
-.steps { margin-top: -100vh; min-height: 100vh; }
-.step { height: var(--step); }
 @media (max-width: 899px), (max-height: 639px) {
   .journey { grid-template-columns: 52px minmax(0, 1fr); }
   .j-side { height: 100vh; padding: 96px 0 24px; gap: 0; align-items: center; border-right: 1px solid var(--rule); }
   .index { flex-direction: column; gap: 18px; }
   .index button { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 1.4rem; letter-spacing: 0.03em; }
   .index button[aria-selected='true']::before { width: 4px; height: 14px; margin: 0 0 8px; }
-  .stage { position: static; height: auto; overflow: visible; }
-  .chapter, .chapter.has-dia, .chapter.no-dia, .chapter.solo { position: static; display: block; opacity: 1; transform: none; visibility: visible; padding: 40px 16px 40px 20px; border-bottom: 1px solid var(--rule); }
+  .chapter, .chapter.has-dia, .chapter.no-dia, .chapter.solo { display: block; padding: 40px 16px 40px 20px; }
+  .chapter:first-child { padding-top: 48px; }
   .ch-dia { margin-top: 28px; }
   .ch-big { margin: 0 0 14px; font-size: clamp(3.4rem, 18vw, 6rem); text-align: left; }
   .chapter.no-dia { display: flex; flex-direction: column-reverse; }
-  .steps { display: none; }
   .note-egg { display: none; }
 }
 
@@ -309,7 +302,28 @@ a:hover { color: var(--acc); }
 .dia-node rect { fill: var(--raise); stroke: var(--ink); stroke-width: 1.5; }
 .dia-node.untrusted rect { stroke: var(--acc); stroke-dasharray: 5 4; fill: var(--bg); }
 .dia-node.untrusted text { fill: var(--acc); }
-.dia-node.on rect { stroke-width: 2.5; }
+.dia-node.on rect { stroke: var(--acc); stroke-width: 2.5; fill: var(--acc-soft); }
+.dia-mark circle { fill: var(--acc); stroke: var(--bg); stroke-width: 2; }
+.dia-svg .dia-mark text { font: 600 10.5px var(--mono); fill: var(--bg); }
+.seg {
+  text-decoration: underline solid var(--acc);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.28em;
+  transition: background-color 0.2s;
+}
+.seg.on { background: var(--acc-soft); }
+.mark {
+  display: inline-grid;
+  place-items: center;
+  width: 1.35em;
+  height: 1.35em;
+  margin-left: 0.25em;
+  border-radius: 50%;
+  background: var(--acc);
+  color: var(--bg);
+  font: 600 0.625rem / 1 var(--mono);
+  vertical-align: 0.45em;
+}
 .dia-badge rect { fill: var(--bg); stroke: var(--ink); stroke-width: 1; }
 .dia-badge text { font-size: 10.5px; }
 .dia-edge path { fill: none; stroke: var(--ink); stroke-width: 1.5; }
@@ -370,7 +384,7 @@ a:hover { color: var(--acc); }
   left: 0;
   z-index: 30;
   pointer-events: none;
-  --r: 150px;
+  --r: 90px;
   /* The lens always draws in the agent layer's colors. */
   --bg: #011817;
   --ink: #82f3e2;
@@ -502,7 +516,7 @@ a:hover { color: var(--acc); }
   .bullets div { grid-template-columns: 1fr; gap: 0; padding: 5px 0; }
   .corner { left: 12px; flex-wrap: wrap; justify-content: flex-end; }
   .corner-links { order: 3; flex: 1 0 100%; justify-content: space-between; gap: 8px; padding: 7px 10px; font-size: 0.6875rem; }
-  .lens { --r: 96px; }
+  .lens { --r: 64px; }
   .lens .lens-hud, .lens[data-flip] .lens-hud { left: 50%; right: auto; top: calc(var(--r) + 8px); transform: translateX(-50%); }
 }
 

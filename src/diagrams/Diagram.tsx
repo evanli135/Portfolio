@@ -41,7 +41,9 @@ function blockedBar(pts: Pt[]) {
     : `M${x2 - BAR} ${y2}H${x2 + BAR}`;
 }
 
-function Svg({ spec, layout, active, uid }: { spec: Spec; layout: Layout; active: string | null; uid: string }) {
+type Marks = Record<string, number>;
+
+function Svg({ spec, layout, active, uid, marks }: { spec: Spec; layout: Layout; active: string | null; uid: string; marks: Marks }) {
   const [vw, vh] = spec.view[layout];
   const tid = `${uid}-${layout}-t`;
   const did = `${uid}-${layout}-d`;
@@ -106,6 +108,12 @@ function Svg({ spec, layout, active, uid }: { spec: Spec; layout: Layout; active
             {n.sub && (
               <text className="dia-sub" x={r.x + r.w / 2} y={top + lines.length * 15} textAnchor="middle">{n.sub}</text>
             )}
+            {marks[n.id] && (
+              <g className="dia-mark">
+                <circle cx={r.x} cy={r.y} r={9} />
+                <text x={r.x} y={r.y + 3.5} textAnchor="middle">{marks[n.id]}</text>
+              </g>
+            )}
             {n.badge && (
               <g className="dia-badge">
                 <rect x={r.x + r.w - 84} y={r.y - 10} width={80} height={20} rx={10} />
@@ -130,11 +138,12 @@ function Svg({ spec, layout, active, uid }: { spec: Spec; layout: Layout; active
   );
 }
 
-export function Diagram({ spec, active, uid }: { spec: Spec; active: string | null; uid: string }) {
+/** `marks` numbers the nodes that the text links to, so the pairing reads without hovering. */
+export function Diagram({ spec, active, uid, marks = {} }: { spec: Spec; active: string | null; uid: string; marks?: Marks }) {
   return (
     <figure className="dia">
-      <Svg spec={spec} layout="wide" active={active} uid={uid} />
-      <Svg spec={spec} layout="tall" active={active} uid={uid} />
+      <Svg spec={spec} layout="wide" active={active} uid={uid} marks={marks} />
+      <Svg spec={spec} layout="tall" active={active} uid={uid} marks={marks} />
     </figure>
   );
 }

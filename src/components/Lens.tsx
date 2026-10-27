@@ -10,7 +10,7 @@ export function Lens() {
     const agent = document.querySelector<HTMLElement>('.agent-layer');
     const human = document.querySelector<HTMLElement>('.human-layer');
     if (!agent || !human) return;
-    const radius = () => (innerWidth < 640 ? 96 : 150);
+    const radius = () => (innerWidth < 640 ? 64 : 90);
     let x = innerWidth / 2;
     let y = innerHeight * 0.55;
     let frame = 0;

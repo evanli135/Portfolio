@@ -34,7 +34,6 @@ function Site() {
 }
 
 export default function App() {
-  const [chapter, setChapter] = useState(0);
   const [hover, setHover] = useState<string | null>(null);
   const [pinned, setPinned] = useState<string | null>(null);
   const [tab, setTabState] = useState(fromHash);
@@ -58,12 +57,13 @@ export default function App() {
 
   const setTab = useCallback((id: string) => {
     setTabState(id);
+    setHover(null);
+    setPinned(null);
     if (window.location.hash) history.replaceState(null, '', window.location.pathname);
   }, []);
-  const changeChapter = useCallback((i: number) => { setChapter(i); setHover(null); setPinned(null); }, []);
   const togglePin = useCallback((p: string | null) => setPinned((cur) => (p === cur ? null : p)), []);
 
-  const shared = { chapter, setChapter: changeChapter, phase: hover ?? pinned, setHover, togglePin, tab, setTab, theme, setTheme };
+  const shared = { phase: hover ?? pinned, setHover, togglePin, tab, setTab, theme, setTheme };
 
   return (
     <BrowserRouter>

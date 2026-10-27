@@ -1,14 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { categories, type Entry } from '../data';
 import { Diagram } from '../diagrams/Diagram';
 import * as specs from '../diagrams/specs';
 import { useId, useLayer, useShared } from '../layer';
 import { AgentOnly, Text } from './Text';
 
-// Every section is its own scroll journey: one entry per screen. Wide screens pin
-// the stage and crossfade entries as you scroll; phones stack them.
-
-const STEP: Record<string, string> = { work: '100vh', coursework: '55vh' };
+// A pinned index on the side; the open section's entries scroll as a normal page.
 
 /** The big outlined poster: a course number or the latest year, when there is one. */
 function poster(catId: string, e: Entry) {
@@ -17,11 +14,17 @@ function poster(catId: string, e: Entry) {
   return years ? years[years.length - 1] : null;
 }
 
-function Chapter({ catId, entry, index, on }: { catId: string; entry: Entry; index: number; on: boolean }) {
+function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: number }) {
   const layer = useLayer();
   const { phase, setHover, togglePin } = useShared();
-  const shown = on ? phase : null;
-  const phases = new Set(entry.body?.flat().map((s) => s.phase).filter(Boolean));
+  // Phases are scoped to this entry, since two diagrams can share a phase name.
+  const key = `${catId}${index}:`;
+  const shown = phase?.startsWith(key) ? phase.slice(key.length) : null;
+  const hover = (p: string | null) => setHover(p && key + p);
+  const pin = (p: string | null) => togglePin(p && key + p);
+  const order = [...new Set(entry.body?.flat().map((s) => s.phase).filter((p): p is string => !!p))];
+  const phases = new Set(order);
+  const marks = Object.fromEntries(order.map((p, i) => [p, i + 1]));
   const phaseAt = (target: EventTarget) => {
     const id = (target as Element).closest?.('[data-phase]')?.getAttribute('data-phase');
     return id && phases.has(id) ? id : null;
@@ -29,13 +32,13 @@ function Chapter({ catId, entry, index, on }: { catId: string; entry: Entry; ind
   const when = entry.meta;
   const spec = entry.diagram ? specs[entry.diagram] : null;
   const words = entry.body?.flat().map((s) => s.text).join('').split(/\s+/).length ?? 0;
-  const tab = on && layer === 'human' ? 0 : -1;
+  const tab = layer === 'human' ? 0 : -1;
   const work = catId === 'work';
   const sub = work ? entry.title : catId === 'coursework' ? (entry.org ?? '').split(' · ')[1] : entry.org;
   const big = spec ? null : poster(catId, entry);
 
   return (
-    <article className={`chapter${on ? ' on' : ''}${spec ? ' has-dia' : big ? ' no-dia' : ' solo'}`} aria-hidden={!on || undefined}>
+    <article className={`chapter${spec ? ' has-dia' : big ? ' no-dia' : ' solo'}`}>
       <div className="ch-read">
         {when && <p className="ch-num">{when}</p>}
         {(work ? entry.org : entry.title) && <h2 className="ch-title">{work ? entry.org : entry.title}</h2>}
@@ -54,13 +57,14 @@ function Chapter({ catId, entry, index, on }: { catId: string; entry: Entry; ind
                     key={j}
                     className={`seg${shown === s.phase ? ' on' : ''}`}
                     tabIndex={tab}
-                    onPointerEnter={() => setHover(s.phase!)}
-                    onPointerLeave={() => setHover(null)}
-                    onFocus={() => setHover(s.phase!)}
-                    onBlur={() => setHover(null)}
-                    onClick={() => togglePin(s.phase!)}
+                    onPointerEnter={() => hover(s.phase!)}
+                    onPointerLeave={() => hover(null)}
+                    onFocus={() => hover(s.phase!)}
+                    onBlur={() => hover(null)}
+                    onClick={() => pin(s.phase!)}
                   >
                     <Text>{s.text}</Text>
+                    <sup className="mark" aria-hidden="true">{marks[s.phase]}</sup>
                   </span>
                 ) : (
                   <Text key={j}>{s.text}</Text>
@@ -100,11 +104,11 @@ function Chapter({ catId, entry, index, on }: { catId: string; entry: Entry; ind
           className="ch-dia"
           data-prov="trusted"
           data-prov-label={entry.paper ? 'drawn from the paper' : 'generic, nothing confidential'}
-          onPointerOver={(e) => e.pointerType === 'mouse' && setHover(phaseAt(e.target))}
-          onPointerLeave={() => setHover(null)}
-          onClick={(e) => togglePin(phaseAt(e.target))}
+          onPointerOver={(e) => e.pointerType === 'mouse' && hover(phaseAt(e.target))}
+          onPointerLeave={() => hover(null)}
+          onClick={(e) => pin(phaseAt(e.target))}
         >
-          <Diagram spec={spec} active={shown} uid={`${layer}-${catId}-${index}`} />
+          <Diagram spec={spec} active={shown} uid={`${layer}-${catId}-${index}`} marks={marks} />
         </div>
       )}
     </article>
@@ -114,31 +118,19 @@ function Chapter({ catId, entry, index, on }: { catId: string; entry: Entry; ind
 export function Journey() {
   const layer = useLayer();
   const id = useId();
-  const { tab, setTab, chapter, setChapter } = useShared();
+  const { tab, setTab } = useShared();
   const cat = categories.find((c) => c.id === tab) ?? categories[0];
-  const steps = useRef<(HTMLDivElement | null)[]>([]);
   const section = useRef<HTMLElement>(null);
   const focusable = layer === 'human' ? 0 : -1;
 
-  useEffect(() => {
-    if (layer !== 'human') return;
-    const io = new IntersectionObserver(
-      (es) => es.forEach((e) => e.isIntersecting && setChapter(Number((e.target as HTMLElement).dataset.i))),
-      { rootMargin: '-50% 0px -50% 0px' },
-    );
-    steps.current.forEach((s) => s && io.observe(s));
-    return () => io.disconnect();
-  }, [layer, cat.id, setChapter]);
-
   const pick = (next: string) => {
     setTab(next);
-    setChapter(0);
     const top = section.current?.getBoundingClientRect().top ?? 0;
     if (top < 0 || top > innerHeight * 0.5) section.current?.scrollIntoView();
   };
 
   return (
-    <section className="journey" ref={section} aria-label="Sections" style={{ '--step': STEP[cat.id] ?? '80vh' } as React.CSSProperties}>
+    <section className="journey" ref={section} aria-label="Sections">
       <aside className="j-side">
         <nav className="index" role="tablist" aria-label="Sections">
           {categories.map((c) => (
@@ -159,13 +151,8 @@ export function Journey() {
       </aside>
 
       <div className="j-main" id={id('j-panel')} role="tabpanel" aria-labelledby={id(`tab-${cat.id}`)}>
-        <div className="stage">
-          {cat.entries.map((e, i) => (
-            <Chapter key={`${cat.id}-${e.title}`} catId={cat.id} entry={e} index={i} on={i === chapter} />
-          ))}
-        </div>
-        <div className="steps" aria-hidden="true">
-          {cat.entries.map((e, i) => <div key={`${cat.id}-${e.title}`} className="step" data-i={i} ref={(el) => { steps.current[i] = el; }} />)}
+        <div className="entries" key={cat.id}>
+          {cat.entries.map((e, i) => <Chapter key={`${cat.id}-${e.title}`} catId={cat.id} entry={e} index={i} />)}
         </div>
       </div>
 
