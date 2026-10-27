@@ -220,32 +220,17 @@ a:hover { color: var(--acc); }
 }
 .chapter:first-child { padding-top: 88px; }
 .chapter:last-child { border-bottom: 0; padding-bottom: 120px; }
-.chapter.has-dia { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0 4vw; align-items: center; }
-.chapter.no-dia { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 0 4vw; align-items: center; }
-.has-dia .ch-title { font-size: clamp(1.8rem, 2.8vw, 2.6rem); }
-.has-dia .ch-text { font-size: 0.9375rem; }
-.ch-big {
-  margin: 0;
-  justify-self: end;
-  font: 900 clamp(4.5rem, 10vw, 11rem) / 0.8 var(--display);
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ink);
-  text-align: right;
-  text-transform: uppercase;
-}
-.agent-layer .ch-big { -webkit-text-stroke-color: var(--acc); }
+/* Every entry shares one text column; a diagram, when there is one, takes the right. */
+.chapter { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 0 4vw; align-items: center; }
 .ch-read { max-width: 62ch; }
 .ch-num { margin: 0 0 10px; font: 500 0.75rem var(--mono); color: var(--acc); }
-.ch-title { margin: 6px 0 0; font: 800 clamp(2.2rem, 3.8vw, 3.4rem) / 0.92 var(--display); text-transform: uppercase; }
+.ch-title { margin: 6px 0 0; font: 800 clamp(2rem, 3.2vw, 3rem) / 0.92 var(--display); text-transform: uppercase; }
 .ch-sub { margin: 8px 0 0; font: 400 0.75rem / 1.5 var(--mono); color: var(--muted); max-width: 52ch; }
 .ch-text { position: relative; margin-top: 22px; max-width: 54ch; }
 .ch-text p { margin: 0 0 0.8em; }
-.has-dia .ch-text p:first-child { color: var(--muted); }
 .ch-links { display: flex; flex-wrap: wrap; gap: 6px 20px; font: 500 0.8125rem var(--mono); }
 .ch-dia .dia { margin: 0; }
-.ch-list { color: var(--muted); }
-.chapter.solo { grid-template-columns: minmax(0, 1fr); }
-.solo .ch-read { max-width: 72ch; }
+.ch-list { margin: 0; }
 .paper {
   display: grid;
   gap: 6px;
@@ -279,11 +264,9 @@ a:hover { color: var(--acc); }
   .index { flex-direction: column; gap: 12px; }
   .index button { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 1.15rem; letter-spacing: 0.03em; }
   .index button[aria-selected='true']::before { width: 4px; height: 14px; margin: 0 0 8px; }
-  .chapter, .chapter.has-dia, .chapter.no-dia, .chapter.solo { display: block; padding: 40px 16px 40px 20px; }
+  .chapter, .chapter.has-dia { display: block; padding: 40px 16px 40px 20px; }
   .chapter:first-child { padding-top: 48px; }
   .ch-dia { margin-top: 28px; }
-  .ch-big { margin: 0 0 14px; font-size: clamp(3.4rem, 18vw, 6rem); text-align: left; }
-  .chapter.no-dia { display: flex; flex-direction: column-reverse; }
 }
 
 /* Diagrams */

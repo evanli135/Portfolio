@@ -7,13 +7,6 @@ import { Text } from './Text';
 
 // A pinned index on the side; the open section's entries scroll as a normal page.
 
-/** The big outlined poster: a course number or the latest year, when there is one. */
-function poster(catId: string, e: Entry) {
-  if (catId === 'coursework') return (e.org ?? '').split(' · ')[0];
-  const years = (e.meta ?? '').match(/\d{4}/g);
-  return years ? years[years.length - 1] : null;
-}
-
 function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: number }) {
   const layer = useLayer();
   const { phase, setHover, togglePin } = useShared();
@@ -33,14 +26,13 @@ function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: 
   const spec = entry.diagram ? specs[entry.diagram] : null;
   const tab = layer === 'human' ? 0 : -1;
   const work = catId === 'work';
-  const sub = work ? entry.title : catId === 'coursework' ? (entry.org ?? '').split(' · ')[1] : entry.org;
-  const big = spec ? null : poster(catId, entry);
+  const sub = work ? entry.title : entry.org;
 
   return (
-    <article className={`chapter${spec ? ' has-dia' : big ? ' no-dia' : ' solo'}`}>
+    <article className={`chapter${spec ? ' has-dia' : ''}`}>
       <div className="ch-read">
         {when && <p className="ch-num">{when}</p>}
-        {(work ? entry.org : entry.title) && <h2 className="ch-title">{work ? entry.org : entry.title}</h2>}
+        <h2 className="ch-title">{work ? entry.org : entry.title}</h2>
         {sub && <p className="ch-sub">{sub}</p>}
         <div className="ch-text" data-prov="trusted" data-prov-label="authored by Evan">
 
@@ -93,7 +85,6 @@ function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: 
           )}
         </div>
       </div>
-      {big && <p className="ch-big" aria-hidden="true">{big}</p>}
       {spec && (
         <div
           className="ch-dia"

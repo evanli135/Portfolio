@@ -10,7 +10,6 @@ export type Entry = {
   title: string;
   org?: string;
   meta?: string; // dates · place
-  aside?: string; // short value shown large on the right (a grade, a status)
   diagram?: 'matrix' | 'ace' | 'vestmark' | 'keysight';
   body?: Segment[][]; // paragraphs
   bullets?: [string, string][];
@@ -147,14 +146,11 @@ export const categories: Category[] = [
       {
         title: 'LoreBoard',
         org: 'Agentic Text Editor',
-        meta: 'Apr 2025 to Present',
-        aside: 'In Progress',
         body: [p('A writing app that uses an LLM to track characters (how they look, how they talk, who they know) so a story world stays consistent as it grows. Python, LangChain, Django, React.')],
       },
       {
         title: 'Mario City',
         org: 'Sustainability Exhibit',
-        meta: 'Mar to May 2024',
         body: [p('A miniature city of 3D-printed electronics on Arduino, run from a web frontend. Kids manage it and learn resource conservation by playing. C++, Arduino, JavaScript.')],
         links: [{ label: 'GitHub', href: 'https://github.com/evanli135/Mario-City' }],
       },
@@ -167,8 +163,7 @@ export const categories: Category[] = [
       {
         title: 'Northeastern University',
         org: 'B.S. in Computer Science, Concentration in Systems',
-        meta: '2023 to May 2027 · Boston, MA',
-        aside: '3.83',
+        meta: '2023 to May 2027 · Boston, MA · GPA 3.83',
         // TODO(evan): confirm concentration wording and that the GPA is current
       },
     ],
@@ -194,17 +189,12 @@ export const categories: Category[] = [
     id: 'skills',
     label: 'Skills',
     entries: [
-      {
-        title: '',
-        bullets: [
-          ['Languages', 'Python, TypeScript, C, C++, Rust, Java, Ruby'],
-          ['Agents', 'LangChain, Mastra, MCP, AWS Bedrock, RAG'],
-          ['Systems', 'Distributed systems, operating systems, networks'],
-          ['Infrastructure', 'PostgreSQL, Redis, MongoDB, Docker, Kubernetes, AWS'],
-          ['Observability', 'OpenTelemetry, Grafana, Dynatrace, Wireshark'],
-          ['Web', 'React, Node.js, Django, FastAPI, Rails'],
-        ],
-      },
+      { title: 'Languages', list: 'Python, TypeScript, C, C++, Rust, Java, Ruby' },
+      { title: 'Agents', list: 'LangChain, Mastra, MCP, AWS Bedrock, RAG' },
+      { title: 'Systems', list: 'Distributed systems, operating systems, networks' },
+      { title: 'Infrastructure', list: 'PostgreSQL, Redis, MongoDB, Docker, Kubernetes, AWS' },
+      { title: 'Observability', list: 'OpenTelemetry, Grafana, Dynatrace, Wireshark' },
+      { title: 'Web', list: 'React, Node.js, Django, FastAPI, Rails' },
     ],
   },
   {
