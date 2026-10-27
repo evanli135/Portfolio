@@ -4,6 +4,7 @@ import { Home } from './pages/Home';
 import { NotFound } from './pages/NotFound';
 import { Corner } from './components/Corner';
 import { Lens } from './components/Lens';
+import { Sky } from './components/Sky';
 import { LayerCtx, SharedCtx, type Theme } from './layer';
 import { categories } from './data';
 
@@ -68,6 +69,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <SharedCtx.Provider value={shared}>
+        <Sky />
         <LayerCtx.Provider value="human">
           <div className="human-layer"><Site /></div>
         </LayerCtx.Provider>
