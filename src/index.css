@@ -9,10 +9,12 @@
   --acc-soft: rgba(8, 82, 76, 0.1);
   --grain: 0.025;
   --duo: #8fbfb8;
-  --star-teal: #0f9488;
-  --sky: 0.55;
-  --star-blue: #2563eb;
-  --star-magenta: #c026d3;
+  /* Light mode draws the dark sky's colors, inverted, so the stars read on a light ground. */
+  --star-teal: #2dd4bf;
+  --sky: 0.9;
+  --sky-filter: invert(1);
+  --star-blue: #60a5fa;
+  --star-magenta: #d946ef;
   --display: 'Big Shoulders Display', 'Arial Narrow', Impact, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --sans: 'IBM Plex Sans', ui-sans-serif, -apple-system, system-ui, sans-serif;
@@ -31,6 +33,7 @@
     --grain: 0.05;
     --duo: #4b958c;
     --sky: 1;
+    --sky-filter: none;
     --star-teal: #2dd4bf;
     --star-blue: #60a5fa;
     --star-magenta: #d946ef;
@@ -49,6 +52,7 @@
   --grain: 0.05;
   --duo: #4b958c;
   --sky: 1;
+  --sky-filter: none;
   --star-teal: #2dd4bf;
   --star-blue: #60a5fa;
   --star-magenta: #d946ef;
@@ -84,12 +88,12 @@ body::before {
 }
 
 /* Sky: fixed, behind everything, never repainted on scroll. */
-.sky { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; opacity: var(--sky); }
+.sky { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; opacity: var(--sky); filter: var(--sky-filter); }
 .sky-teal { fill: var(--star-teal); }
 .sky-blue { fill: var(--star-blue); }
 .sky-magenta { fill: var(--star-magenta); }
 .sky .glow { filter: url(#sky-glow); }
-.sky-line { fill: none; stroke: var(--ink); stroke-width: 0.6; stroke-opacity: 0.14; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+.sky-line { fill: none; stroke: #e4eeec; stroke-width: 0.6; stroke-opacity: 0.14; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
 .sky .tw { animation: twinkle ease-in-out infinite alternate; }
 @keyframes twinkle { to { opacity: 0.08; } }
 
@@ -115,12 +119,20 @@ a:hover { color: var(--acc); }
   overflow: hidden;
 }
 .hero-meta {
-  grid-area: 1 / 1;
   display: flex;
-  flex-direction: column;
-  font: 400 0.75rem / 1.6 var(--mono);
+  flex-wrap: wrap;
+  gap: 2px 0;
+  /* Takes the name's width instead of setting it, so it wraps rather than widening the box. */
+  width: 0;
+  min-width: calc(100% - var(--name) * 0.08);
+  margin: calc(var(--m) * 0.55 - var(--name) * 0.043) calc(var(--name) * 0.034) 0 calc(var(--name) * 0.046);
+  padding-top: calc(var(--m) * 0.55);
+  border-top: 1px dashed var(--rule);
+  font: 400 clamp(0.6875rem, 0.85vw, 0.8125rem) / 1.5 var(--mono);
   color: var(--muted);
 }
+.hero-meta span:not(:last-child)::after { content: '·'; margin: 0 0.8em; }
+.name-wrap { position: relative; }
 .line {
   grid-area: 1 / 2 / 3 / 3;
   align-self: start;
@@ -138,7 +150,7 @@ a:hover { color: var(--acc); }
   /* One margin, measured from the ink: each side subtracts the letters' own bearing. */
   --name: min(39vh, 30vw);
   --m: calc(var(--name) * 0.115);
-  padding: calc(var(--m) - var(--name) * 0.006) calc(var(--m) - var(--name) * 0.034) calc(var(--m) - var(--name) * 0.043) calc(var(--m) - var(--name) * 0.046);
+  padding: calc(var(--m) - var(--name) * 0.006) calc(var(--m) - var(--name) * 0.034) calc(var(--m) * 0.75) calc(var(--m) - var(--name) * 0.046);
   border: 1.5px dashed var(--ink);
 }
 .hero h1 {
@@ -220,8 +232,8 @@ a:hover { color: var(--acc); }
 .index button[aria-selected='true']::before { content: ''; align-self: center; width: 14px; height: 4px; margin-right: 8px; background: var(--acc); }
 .portrait-wrap {
   position: absolute;
-  right: var(--m);
-  bottom: var(--m);
+  right: calc(var(--name) * 0.034);
+  bottom: calc(var(--name) * 0.043);
   z-index: 1;
   height: calc(var(--name) * 0.79); /* cap height of LI */
   aspect-ratio: 1;
@@ -380,6 +392,24 @@ a:hover { color: var(--acc); }
 .theme svg { width: 18px; height: 18px; }
 .ic-line { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
 .ic-fill { fill: currentColor; }
+/* The name moves to the top left once the landing scrolls away. */
+.brand {
+  position: fixed;
+  top: 14px;
+  left: clamp(16px, 3vw, 40px);
+  z-index: 10;
+  font: 900 1.5rem / 1 var(--display);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.brand.shown { opacity: 1; transform: none; pointer-events: auto; }
+.brand:hover { color: var(--acc); }
+
 /* The lens is the cursor. */
 @media (pointer: fine) {
   html[data-lens], html[data-lens] * { cursor: none !important; }
@@ -508,11 +538,12 @@ a:hover { color: var(--acc); }
 .note-h1 { top: 14px; right: 16px; }
 .note-photo { left: 0; bottom: -26px; }
 .human-layer { overflow-x: clip; }
-.note-egg { left: var(--m); top: calc(100% + 14px); }
+.note-egg { left: var(--m); top: -26px; }
 
 @media (max-width: 640px) {
   .hero { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto; padding-top: 18px; }
-  .hero-meta { padding-top: 52px; }
+  .hero-meta { flex-direction: column; }
+  .hero-meta span::after { display: none; }
   .line { grid-area: 2 / 1; align-self: end; justify-self: start; text-align: left; margin: 0 0 28px; max-width: 16ch; }
   .fence { grid-area: 4 / 1; justify-self: start; }
   .fence { --name: 43vw; }
@@ -525,6 +556,7 @@ a:hover { color: var(--acc); }
   .corner-links .short { display: block; width: 18px; height: 18px; }
   .theme { width: 32px; height: 32px; }
   .lens { --r: 44px; }
+  .brand { top: 12px; left: 10px; font-size: 1.25rem; }
   .lens .lens-hud, .lens[data-flip] .lens-hud { left: 50%; right: auto; top: calc(var(--r) + 8px); transform: translateX(-50%); }
 }
 

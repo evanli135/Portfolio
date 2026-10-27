@@ -1,4 +1,5 @@
-import { links } from '../data';
+import { useEffect, useState } from 'react';
+import { links, site } from '../data';
 import { useShared, type Theme } from '../layer';
 
 const NEXT: Record<Theme, Theme> = { auto: 'light', light: 'dark', dark: 'auto' };
@@ -56,7 +57,21 @@ function LinkIcon({ label }: { label: string }) {
 /** Fixed top-right: the links and sun / moon. */
 export function Corner() {
   const { theme, setTheme } = useShared();
+  const [past, setPast] = useState(false);
+  useEffect(() => {
+    let frame = 0;
+    const check = () => { frame = 0; setPast(scrollY > innerHeight * 0.8); };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(check); };
+    check();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame); };
+  }, []);
   return (
+    <>
+    <a className={`brand${past ? ' shown' : ''}`} href="#" tabIndex={past ? 0 : -1} aria-hidden={!past}
+      onClick={(e) => { e.preventDefault(); scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }}>
+      {site.name}
+    </a>
     <div className="corner">
       <nav className="corner-links" aria-label="Links">
         {links.map((l) => (
@@ -77,5 +92,6 @@ export function Corner() {
         <ThemeIcon theme={theme} />
       </button>
     </div>
+    </>
   );
 }

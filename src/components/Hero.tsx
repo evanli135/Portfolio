@@ -45,20 +45,22 @@ export function Hero() {
 
   return (
     <header className="hero">
-      <div className="hero-meta" data-prov="trusted" data-prov-label="where he's from">
-        {site.meta.map((m) => <span key={m}><Text>{m}</Text></span>)}
-      </div>
       {agent && <PageFacts />}
       <p className="line" data-prov="trusted" data-prov-label="the one line that explains itself"><Text>{site.line}</Text></p>
       <div className="fence" data-prov="trusted" data-prov-label="enforcement point">
-        <h1>
-          <span>Evan</span>
-          <span>Li</span>
-        </h1>
-        <span className="portrait-wrap" data-prov="trusted" data-prov-label="first-party photo">
-          <img className="portrait" src={portrait} alt="Evan Li" width={640} height={640} />
-          <AgentOnly className="note-photo">640 × 640 · 1 face · no hidden text</AgentOnly>
-        </span>
+        <div className="name-wrap">
+          <h1>
+            <span>Evan</span>
+            <span>Li</span>
+          </h1>
+          <span className="portrait-wrap" data-prov="trusted" data-prov-label="first-party photo">
+            <img className="portrait" src={portrait} alt="Evan Li" width={640} height={640} />
+            <AgentOnly className="note-photo">640 × 640 · 1 face · no hidden text</AgentOnly>
+          </span>
+        </div>
+        <p className="hero-meta" data-prov="trusted" data-prov-label="where he's from">
+          {site.meta.map((m) => <span key={m}><Text>{m}</Text></span>)}
+        </p>
         <AgentOnly className="note-h1">h1 · 2 tokens · 1 of 1</AgentOnly>
         <AgentOnly className="note-egg"><Text>TODO(evan): something worth finding</Text></AgentOnly>
         <div className="field" aria-hidden="true" data-prov="untrusted" data-prov-label="untrusted input, drawn and never written">
