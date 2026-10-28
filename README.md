@@ -1,15 +1,16 @@
 # Evan Li's Developer Portfolio
-
-Hi, my name is Evan Li and this is the developer portfolio, illustrating my ambitions as an engineer and computer scientist while also 
+Hi, my name is Evan Li and this is the developer portfolio, illustrating my ambitions as an engineer and scientist while also 
 displaying my programming skills, technical experience, academic research and personal projects.
 
 # Portfolio Tech Stack
 This portfolio was made using TypeScript, React.js, and TailwindCSS.
+Credit to @https://github.com/hannahgwimpy for the assistance with UX design.
 
-# TLDR
-- First author of a peer reviewed LLM paper
-- Worked as a artificial intelligence research intern at the Khoury Privacy and Security Lab for 8 months, and for MatrixOrigin for 2 months
-- Skilled with developer tools including GitHub, Docker, Postman, and IDE/Text Editors including VS Code, Visual Studio, Intellij, and Arduino
-- For Frontend: HTML + CSS, JavaScript/TypeScript, React.js, TailwindCSS
-- For Backend: Node.js + Express, Python + Django, Java + Spring, C++, SQL, MongoDB
-- Passionate about systems programming and the application of artificial intelligence for research and security
+##  TLDR
+Systems Engineer, specializing in Agentic AI, and ___ in distributed systems, networking, concurrency, and system security.
+
+- First authored peer reviewed AI System Security Paper (Accepted @NDSS2026), 70 citations to date
+- Interned as an NLP Engineer for Matrix Origin, an AI startup focusing on data platforms for agents, engineered NL-to-SQL pipelines for 12 weeks
+- Co-op'd at Khoury Network and Distributed Security Lab, one of Northeastern's System Research Groups, Red Teamed and Blue Teamed AI Systems for 6 months
+- Co-op'd at Vestmark Advisory Solutions, a wealth firm, developed agentic financial advisory services for 6 months  
+- Interned at Keysight Technologies, an electronics and test equipment manufacturer, developed an MCP service for testing platforms for 12 weeks
