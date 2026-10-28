@@ -540,7 +540,6 @@ a:hover { color: var(--acc); }
 .note-h1 { top: 14px; right: 16px; }
 .note-photo { left: 0; bottom: -26px; }
 .human-layer { overflow-x: clip; }
-.note-egg { left: var(--m); top: -26px; }
 
 @media (max-width: 640px) {
   .hero { grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto; padding-top: 18px; }

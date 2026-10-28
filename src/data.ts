@@ -31,7 +31,6 @@ export const site = {
 };
 
 export const links: Link[] = [
-  // TODO(evan): replace public/evan-li-resume.pdf with the final PDF (current file is the old résumé)
   { label: 'Résumé', href: '/evan-li-resume.pdf' },
   { label: 'GitHub', href: 'https://github.com/evanli135' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/evan-li-ff/' },
@@ -47,10 +46,9 @@ export const categories: Category[] = [
     label: 'Work',
     entries: [
       {
-        // TODO(evan): confirm title (old site said R&D Test Systems Engineer)
-        title: 'R&D Test Systems Engineer',
+        title: 'Software Engineer, R&D Networks',
         org: 'Keysight Technologies',
-        meta: 'Jun to Aug 2026',
+        meta: 'Jun to Aug 2026 · Calabasas, CA',
         diagram: 'keysight',
         body: [
           p('The way to know a firewall holds is to attack it.'),
@@ -63,14 +61,13 @@ export const categories: Category[] = [
             t('an MCP service that lets agents drive physical test chassis', 'mcp'),
             t('.'),
           ],
-          p('TODO(evan): the result, one sentence.'),
+          p('The MCP service beat the prior MCP baseline by 41% on utility benchmarks.'),
         ],
       },
       {
-        // TODO(evan): confirm title (old site said Agentic Software Engineer)
-        title: 'Agentic Software Engineer',
+        title: 'Software Engineer, Agentic AI',
         org: 'Vestmark',
-        meta: 'Jan to Jun 2026',
+        meta: 'Jan to Jun 2026 · Cambridge, MA',
         diagram: 'vestmark',
         body: [
           p('Financial advisory agents propose portfolio changes and handle client data.'),
@@ -83,13 +80,13 @@ export const categories: Category[] = [
             t('memory, retrieval, persistence, and observability layers', 'execute'),
             t(' under the agent pipelines.'),
           ],
-          p('TODO(evan): the result, one sentence.'),
+          p('Parallelizing the agent tooling cut API latency by 67%.'),
         ],
       },
       {
-        title: 'Distributed Systems Security Researcher',
-        org: 'Northeastern Privacy & Security Lab',
-        meta: 'Jan to Jul 2025',
+        title: 'Agentic AI Security Researcher',
+        org: 'Khoury Network and Distributed Systems Security Lab',
+        meta: 'Jan to Jun 2025 · Boston, MA',
         diagram: 'ace',
         body: [
           p('Apps installed into an LLM agent can hijack it, through a poisoned description while it plans or a poisoned output while it runs.'),
@@ -112,9 +109,9 @@ export const categories: Category[] = [
         },
       },
       {
-        title: 'NLP Engineer',
+        title: 'NLP Engineering Intern',
         org: 'Matrix Origin',
-        meta: 'Jul to Sep 2024',
+        meta: 'Jul to Sep 2024 · San Francisco, CA',
         diagram: 'matrix',
         body: [
           p('A model that turns a plain-English question into SQL is easy to demo and hard to trust.'),
@@ -162,8 +159,8 @@ export const categories: Category[] = [
     entries: [
       {
         title: 'Northeastern University',
-        org: 'B.S. in Computer Science, Concentration in Systems',
-        meta: '2023 to May 2027 · Boston, MA · GPA 3.83',
+        org: 'B.S. in Computer Science, Systems Engineering Concentration',
+        meta: 'Sep 2023 to May 2027 · Boston, MA · GPA 3.84',
         rowsTitle: 'Coursework',
         rows: [
           { tag: 'CS 7610', name: 'Foundations of Distributed Systems (Graduate)', detail: 'Raft, Paxos, leader election, failure detection, GFS, Spanner, Spark' },
@@ -178,7 +175,6 @@ export const categories: Category[] = [
           { tag: 'CS 3520', name: 'GUI Programming', detail: 'Event models, layout, state, rendering' },
           { tag: 'CS 4610', name: 'Robotics Programming', detail: 'Kinematics, sensor fusion, PID, ROS' },
         ],
-        // TODO(evan): confirm concentration wording and that the GPA is current
       },
     ],
   },
@@ -189,12 +185,11 @@ export const categories: Category[] = [
       {
         title: '',
         rows: [
-          { name: 'Languages', detail: 'Python, TypeScript, C, C++, Rust, Java, Ruby' },
-          { name: 'Agents', detail: 'LangChain, Mastra, MCP, AWS Bedrock, RAG' },
-          { name: 'Systems', detail: 'Distributed systems, operating systems, networks' },
-          { name: 'Infrastructure', detail: 'PostgreSQL, Redis, MongoDB, Docker, Kubernetes, AWS' },
-          { name: 'Observability', detail: 'OpenTelemetry, Grafana, Dynatrace, Wireshark' },
-          { name: 'Web', detail: 'React, Node.js, Django, FastAPI, Rails' },
+          { name: 'AI Security', detail: 'Prompt injection defense, multi-agent threat modeling, context sandboxing, information flow control' },
+          { name: 'Languages', detail: 'Python, C, Rust, C++, TypeScript, JavaScript, SQL, Bash, Ruby, Java' },
+          { name: 'AI/ML', detail: 'LangChain, Mastra, MCP, agent orchestration, LLM evaluation, prompt engineering, scikit-learn' },
+          { name: 'Infrastructure', detail: 'Docker, Kubernetes, Linux, AWS, PostgreSQL, MongoDB, Redis, OpenTelemetry, CI/CD' },
+          { name: 'Frameworks', detail: 'React, FastAPI, Ruby on Rails, Django, Express, Pandas, NumPy, Tailwind CSS' },
         ],
       },
     ],

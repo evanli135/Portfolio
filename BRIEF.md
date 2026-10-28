@@ -95,3 +95,4 @@ Diagrams are hand-built inline SVG with `role="img"`, `<title>`, `<desc>`. Flat,
 - 2026-10-27: Light mode draws the dark sky's colors inverted (filter: invert), at 90% strength, so the stars read on a light ground.
 - 2026-10-27: Work diagrams sit below their text (up to 920px wide), not beside it.
 - 2026-10-27: Skills uses the same compact list as Coursework (one row per group: name, then tools), replacing six full-size entries.
+- 2026-10-27: Evan's final résumé is in. From it: titles (Software Engineer, R&D Networks at Keysight; Software Engineer, Agentic AI at Vestmark; Agentic AI Security Researcher at the Khoury Network and Distributed Systems Security Lab, Jan to Jun 2025; NLP Engineering Intern at Matrix Origin), locations, results (Keysight MCP service +41% over the prior baseline on utility benchmarks; Vestmark API latency -67%), Systems Engineering Concentration, GPA 3.84, and the Skills list. No TODO(evan) remains; the empty easter-egg slot was removed.
