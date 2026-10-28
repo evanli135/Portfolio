@@ -79,6 +79,7 @@ function Chapter({ catId, entry, index }: { catId: string; entry: Entry; index: 
             <a className="paper" href={entry.paper.href} tabIndex={tab} data-prov="untrusted" data-prov-label="peer-reviewed, leaves the site">
               <span className="paper-venue">{entry.paper.venue}</span>
               <span className="paper-title">{entry.paper.title}</span>
+              {entry.paper.note && <span className="paper-note">{entry.paper.note}</span>}
               <span className="paper-by">{entry.paper.byline}</span>
               <span className="paper-go">Read the paper ↗</span>
             </a>

@@ -13,7 +13,7 @@ export type Entry = {
   diagram?: 'matrix' | 'ace' | 'vestmark' | 'keysight';
   body?: Segment[][]; // paragraphs
   code?: string;
-  paper?: { venue: string; title: string; byline: string; href: string };
+  paper?: { venue: string; title: string; byline: string; note?: string; href: string };
   rowsTitle?: string;
   rows?: { tag?: string; name: string; detail: string }[]; // a compact list, like coursework
   links?: Link[];
@@ -105,6 +105,7 @@ export const categories: Category[] = [
           venue: 'NDSS 2026',
           title: 'ACE: A Security Architecture for LLM-Integrated App Systems',
           byline: 'Co-first author with Tushin Mallick and Evan Rose · with William Robertson, Alina Oprea, Cristina Nita-Rotaru',
+          note: 'Top-4 security venue · 77+ citations',
           href: 'https://arxiv.org/abs/2504.20984',
         },
       },
@@ -160,7 +161,7 @@ export const categories: Category[] = [
       {
         title: 'Northeastern University',
         org: 'B.S. in Computer Science, Systems Engineering Concentration',
-        meta: 'Sep 2023 to May 2027 · Boston, MA · GPA 3.84',
+        meta: 'Sep 2023 to May 2027 · Boston, MA · GPA 3.81',
         rowsTitle: 'Coursework',
         rows: [
           { tag: 'CS 7610', name: 'Foundations of Distributed Systems (Graduate)', detail: 'Raft, Paxos, leader election, failure detection, GFS, Spanner, Spark' },
