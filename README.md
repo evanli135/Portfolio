@@ -4,7 +4,7 @@ displaying my programming skills, technical experience, academic research and pe
 
 # Portfolio Tech Stack
 This portfolio was made using TypeScript, React.js, and TailwindCSS.
-Credit to @https://github.com/hannahgwimpy for the assistance with UX design.
+Credit to https://github.com/hannahgwimpy for the assistance with UX design.
 
 ##  TLDR
 
