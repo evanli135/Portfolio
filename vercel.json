@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/scholar",
+      "destination": "https://scholar.google.com/citations?user=u3mSq6gAAAAJ",
+      "permanent": false
+    }
+  ]
+}
