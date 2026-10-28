@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .bg { fill: #f4f9f9 } .ink { fill: #12252b } .acc { stroke: #127368 }
+    @media (prefers-color-scheme: dark) { .bg { fill: #061013 } .ink { fill: #e4eeec } .acc { stroke: #2dd4bf } }
+  </style>
+  <rect class="bg" width="32" height="32" rx="6" />
+  <rect class="acc" x="5" y="5" width="22" height="22" fill="none" stroke-width="2.5" stroke-dasharray="4 3" />
+  <rect class="ink" x="11" y="11" width="10" height="10" />
+</svg>
