@@ -26,7 +26,7 @@ export const site = {
   line: 'Designing, shipping, and breaking agent guardrails.',
   meta: ['From Westchester, NY', 'Based in Boston, MA', 'Incoming San Francisco, CA'],
   school: 'Northeastern CS, May 2027',
-  url: 'https://evanli.org/',
+  url: 'https://www.evanli.org/',
   email: 'evanlie.737@gmail.com',
 };
 
