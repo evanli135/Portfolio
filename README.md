@@ -8,11 +8,8 @@ Credit to https://github.com/hannahgwimpy for the assistance with UX design.
 
 ##  TLDR
 
-### PITCH
 Systems Engineer, specializing in Agentic AI, and experienced in distributed systems, networking, concurrency, and system security.
 
-
-### EXPERIENCE
 - First authored peer reviewed AI System Security Paper (Accepted @NDSS2026), 70 citations to date
 - Interned as an NLP Engineer for Matrix Origin, an AI startup focusing on data platforms for agents, engineered NL-to-SQL pipelines for 12 weeks
 - Co-op'd at Khoury Network and Distributed Security Lab, one of Northeastern's System Research Groups, Red Teamed and Blue Teamed AI Systems for 6 months
